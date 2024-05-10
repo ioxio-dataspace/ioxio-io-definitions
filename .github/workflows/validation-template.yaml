@@ -1,0 +1,22 @@
+name: Validate definitions
+
+on:
+  workflow_call:
+
+jobs:
+  Validate:
+    name: Validate definitions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 🐍
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install definition tooling
+        run: pip install ioxio-data-product-definition-tooling
+
+      - name: Run validation
+        run: validate-definitions ./DataProducts

@@ -1,0 +1,10 @@
+name: Validate definitions
+
+on:
+  pull_request:
+    types: [opened, synchronize, edited]
+
+jobs:
+  Test:
+    name: Validate definitions
+    uses: ./.github/workflows/validation-template.yaml

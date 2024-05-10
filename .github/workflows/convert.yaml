@@ -1,0 +1,56 @@
+name: Convert definitions
+
+on:
+  push:
+    branches: ["main"]
+jobs:
+  Test:
+    name: Run validation
+    uses: ./.github/workflows/validation-template.yaml
+  Convert:
+    name: Convert definitions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 🐍
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install python dependencies
+        run: pip install pre-commit ioxio-data-product-definition-tooling
+
+      - name: Generate definitions
+        run: convert-definitions src DataProducts
+
+      - name: Commit and push
+        run: |
+          git status
+
+          if [[ -z $(git status -s) ]]; then
+            echo "No changes detected"
+          else
+            set -x
+            git config --local user.name "${BOT_NAME}"
+            git config --local user.email "${BOT_EMAIL}"
+
+            git fetch --depth=1
+            git checkout "${BRANCH}"
+
+            git add .
+            # format files if necessary
+            pre-commit run --all-files || true
+
+            git add .
+            # run validation one more time. this time exit on error
+            pre-commit run --all-files
+
+            git commit -m "Convert definitions" -a
+            git push https://${GITHUB_ACTOR}:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH}
+          fi
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+          BOT_NAME: github-actions[bot]
+          BOT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
