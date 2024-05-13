@@ -1,7 +1,17 @@
-# Data Product Definitions template
+# IOXIO.IO Dataspace Definitions
 
-This repository contains a minimal set of resources that are necessary to get started
-with defining your own Data Product Definitions.
+This repository contains Data Product definitions for the
+[IOXIO.io Dataspace](https://ioxio.io).
+
+Specification for describing data product definitions can be found in
+[./DataProducts/README.md](./DataProducts/README.md).
+
+To view these definitions in a more human readable format instead of the raw technical
+format in this repository, you can check these resources:
+
+- [Definitions viewer](https://definitions.ioxio.io)
+- [API docs](https://docs.ioxio.io)
+- [Swagger UI](https://gateway.ioxio.io/docs)
 
 # Repo structure
 
