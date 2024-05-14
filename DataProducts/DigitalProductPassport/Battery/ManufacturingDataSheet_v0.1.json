@@ -1,0 +1,1100 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Battery Manufacturing Data Sheet",
+    "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542)",
+    "version": "0.1.2"
+  },
+  "paths": {
+    "/DigitalProductPassport/Battery/ManufacturingDataSheet_v0.1": {
+      "post": {
+        "summary": "Battery Manufacturing Data Sheet",
+        "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542)",
+        "operationId": "request_DigitalProductPassport_Battery_ManufacturingDataSheet_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufacturingDataSheetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturingDataSheetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "BatteryCategory": {
+        "type": "string",
+        "enum": [
+          "stationary energy storage",
+          "industrial battery",
+          "lmt battery",
+          "electric vehicle battery"
+        ],
+        "title": "BatteryCategory"
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "ExpectedLifetime": {
+        "properties": {
+          "cycleLife": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cycle Life",
+            "description": "Minimum number of cycles the battery can be recharged to at least 80% of initial capacity",
+            "examples": [5000]
+          },
+          "referenceTest": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Test",
+            "description": "The details of the reference test used for defining the expected lifetime",
+            "examples": ["Accelerated cycle life testing"]
+          },
+          "cycleRate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cycle Rate",
+            "description": "The C-rate used in the cycle life test",
+            "examples": ["1C"]
+          }
+        },
+        "type": "object",
+        "title": "ExpectedLifetime"
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LegalConformity": {
+        "properties": {
+          "batteryActCompliance": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Act Compliance",
+            "description": "The indicator if the battery complies with the requirements of the battery act or not",
+            "examples": [true]
+          },
+          "requirementConformity": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Requirement Conformity",
+            "description": "The compliance of the battery with other legal and standard requirements",
+            "examples": [["ROHS", "CE HSE", "IEC62619"]]
+          },
+          "conformityDeclaration": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "pattern": "^https://"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Conformity Declaration",
+            "description": "The link to the EU declaration of conformity documentation",
+            "examples": ["https://example.com/EUdeclaration"]
+          }
+        },
+        "type": "object",
+        "required": ["requirementConformity"],
+        "title": "LegalConformity"
+      },
+      "ManufacturerInformation": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "The registered trade name of the manufacturer company",
+            "examples": ["Battery Manufacturer A"]
+          },
+          "streetName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Street Name",
+            "description": "The street address of the manufacturer's headquarters",
+            "examples": ["Example Street 100"]
+          },
+          "postalCode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Postal Code",
+            "description": "The postal code of the manufacturer's headquarters",
+            "examples": ["75034"]
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "The city of the manufacturer's headquarters",
+            "examples": ["Seattle"]
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "The country code of the manufacturer's headquarters location in Alpha-3 format",
+            "examples": ["USA"]
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "pattern": "^https://"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Website",
+            "description": "The website of the manufacturer",
+            "examples": ["https://example.com/"]
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "The email address of the manufacturer",
+            "examples": ["info@example.com"]
+          }
+        },
+        "type": "object",
+        "title": "ManufacturerInformation"
+      },
+      "ManufacturingDataSheetRequest": {
+        "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 150,
+            "title": "Product",
+            "description": "The product code used for identifying the product type",
+            "examples": ["sodium-ion-75kWh"]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Id",
+            "description": "The unique identifier of the product",
+            "examples": ["660e8400-e29b-41d4-a716-446655440000"]
+          }
+        },
+        "type": "object",
+        "required": ["product", "id"],
+        "title": "ManufacturingDataSheetRequest"
+      },
+      "ManufacturingDataSheetResponse": {
+        "properties": {
+          "productName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Name",
+            "description": "The official sales name of the product",
+            "examples": ["Battery Model A"]
+          },
+          "batteryModel": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Model",
+            "description": "The model of the battery",
+            "examples": ["Z37-310-76"]
+          },
+          "batteryCategory": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BatteryCategory"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Category",
+            "description": "The category of the battery based on its intended use",
+            "examples": ["industrial battery"]
+          },
+          "manufacturerInformation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManufacturerInformation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manufacturer Information",
+            "description": "The details of the battery manufacturer"
+          },
+          "manufacturingLocation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManufacturingLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manufacturing Location",
+            "description": "The details of the location of the battery manufacturing plant"
+          },
+          "manufacturingDate": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manufacturing Date",
+            "description": "The date of manufacture using month and year",
+            "examples": ["2023-07"]
+          },
+          "weight": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weight",
+            "description": "The total net weight of the product in kilograms (kg)",
+            "examples": [450.0]
+          },
+          "capacity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capacity",
+            "description": "The total number of ampere-hours (Ah) that can be withdrawn from a fully charged battery under reference conditions",
+            "examples": [100.0]
+          },
+          "power": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power",
+            "description": "The original power capability of the battery in Watts",
+            "examples": [25000.0]
+          },
+          "cellType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cell Type",
+            "description": "The type of cells used in the battery pack",
+            "examples": ["sodium-ion"]
+          },
+          "resistance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resistance",
+            "description": "The internal resistance of the battery pack in ohms (Ω)",
+            "examples": [0]
+          },
+          "roundTripEfficiency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RoundTripEfficiency"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Round Trip Efficiency",
+            "description": "The details of the round trip energy efficiency in energy storages"
+          },
+          "voltageLevels": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoltageLevels"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Voltage Levels",
+            "description": "The details of the voltage levels of the battery"
+          },
+          "temperatureRange": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TemperatureRange"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature Range",
+            "description": "The details of the acceptable environment temperature values for the battery"
+          },
+          "expectedLifetime": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExpectedLifetime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Lifetime",
+            "description": "The details of the battery lifetime"
+          },
+          "materialComposition": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MaterialComposition"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material Composition",
+            "description": "The details of the material composition of the battery"
+          },
+          "recycledContent": {
+            "items": {
+              "$ref": "#/components/schemas/RecycledContent"
+            },
+            "type": "array",
+            "title": "Recycled Content",
+            "description": "The recycled content information present in the battery"
+          },
+          "renewableContent": {
+            "items": {
+              "$ref": "#/components/schemas/RenewableContent"
+            },
+            "type": "array",
+            "title": "Renewable Content",
+            "description": "The renewable content information present in the battery"
+          },
+          "extinguishingAgents": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Extinguishing Agents",
+            "description": "The type of the fire extinguishing agents that can be used for the battery",
+            "examples": [["foam", "carbon dioxide"]]
+          },
+          "legalConformity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LegalConformity"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Conformity",
+            "description": "The details of the conformity of the battery with the legal and harmonized standards"
+          },
+          "warranty": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Warranty",
+            "description": "The date when the battery warranty expires",
+            "examples": ["2028-07"]
+          }
+        },
+        "type": "object",
+        "required": ["recycledContent", "renewableContent", "extinguishingAgents"],
+        "title": "ManufacturingDataSheetResponse"
+      },
+      "ManufacturingLocation": {
+        "properties": {
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "The country code of the battery manufacturing location in Alpha-3 format",
+            "examples": ["DEU"]
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "The city of the battery manufacturing location",
+            "examples": ["Hamburg"]
+          }
+        },
+        "type": "object",
+        "title": "ManufacturingLocation"
+      },
+      "MaterialComposition": {
+        "properties": {
+          "chemistry": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Chemistry",
+            "description": "The chemical composition of the battery",
+            "examples": [["Sodium", "Cobalt"]]
+          },
+          "hazardousSubstances": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Hazardous Substances",
+            "description": "The hazardous substances present in the battery",
+            "examples": [["Sulphuric acid"]]
+          },
+          "criticalRawMaterials": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Critical Raw Materials",
+            "description": "The critical raw materials present in the battery in a concentration of more than 0.1% weight by weight",
+            "examples": [["Cobalt"]]
+          }
+        },
+        "type": "object",
+        "required": ["chemistry", "hazardousSubstances", "criticalRawMaterials"],
+        "title": "MaterialComposition"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "RecycledContent": {
+        "properties": {
+          "substanceName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Substance Name",
+            "description": "The name of the substance that has recycled content",
+            "examples": ["Cobalt"]
+          },
+          "recyclingRate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recycling Rate",
+            "description": "The amount of recycled content in the substance in percentage (%) by weight",
+            "examples": [8.5]
+          }
+        },
+        "type": "object",
+        "title": "RecycledContent"
+      },
+      "RenewableContent": {
+        "properties": {
+          "substanceName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Substance Name",
+            "description": "The name of the substance that has renewable content",
+            "examples": ["Ligning"]
+          },
+          "proportion": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Proportion",
+            "description": "The share of the renewable content present in the battery in percentage (%) by weight",
+            "examples": [2.0]
+          }
+        },
+        "type": "object",
+        "title": "RenewableContent"
+      },
+      "RoundTripEfficiency": {
+        "properties": {
+          "initialEnergyEfficiency": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Initial Energy Efficiency",
+            "description": "The initial round trip energy efficiency of a battery in percentage (%)",
+            "examples": [75.0]
+          },
+          "degradedEnergyEfficiency": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Degraded Energy Efficiency",
+            "description": "The round trip energy efficiency of an energy storage battery in percentage (%) at 50% of expected cycle life",
+            "examples": [60.0]
+          }
+        },
+        "type": "object",
+        "title": "RoundTripEfficiency"
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "TemperatureRange": {
+        "properties": {
+          "minimumTemperature": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": -100.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minimum Temperature",
+            "description": "The minimum environment temperature the battery can withstand in Celsius degrees",
+            "examples": [-40.0]
+          },
+          "maximumTemperature": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": -100.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum Temperature",
+            "description": "The maximum environment temperature the battery can withstand in Celsius degrees",
+            "examples": [50.0]
+          }
+        },
+        "type": "object",
+        "title": "TemperatureRange"
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "VoltageLevels": {
+        "properties": {
+          "nominalVoltage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal Voltage",
+            "description": "The average voltage the battery output when fully charged",
+            "examples": [550.0]
+          },
+          "maximumVoltage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum Voltage",
+            "description": "The highest level the battery voltage can reach",
+            "examples": [620.0]
+          },
+          "minimumVoltage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minimum Voltage",
+            "description": "The lowest level the battery voltage can reach",
+            "examples": [180.0]
+          }
+        },
+        "type": "object",
+        "title": "VoltageLevels"
+      }
+    }
+  }
+}
