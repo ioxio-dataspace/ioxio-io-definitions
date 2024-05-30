@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -19,11 +19,11 @@ repos:
         args: ["--fix=crlf"]
         files: \.bat$
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.10.0.1
     hooks:
       - id: shellcheck
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.5.0
+    rev: 0.6.0
     hooks:
       - id: data-product-definition-converter
         # TODO: convert only the file that was changed
@@ -39,22 +39,22 @@ repos:
     hooks:
       - id: prettier
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 24.4.2
     hooks:
       - id: black
         language_version: python3
   - repo: https://github.com/ioxiocom/openapi-to-fastapi
-    rev: 0.14.0
+    rev: 0.16.0
     hooks:
       - id: openapi-validator
         files: ".*?DataProducts/.*?json$"
         args: ["--path", "./DataProducts"]
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.5.0
+    rev: 0.6.0
     hooks:
       - id: data-product-definition-validator
         files: ".*?DataProducts/.*?json$"
