@@ -319,8 +319,9 @@
           "modelYear": {
             "anyOf": [
               {
-                "type": "string",
-                "pattern": "^\\d{4}$"
+                "type": "integer",
+                "maximum": 2500.0,
+                "minimum": 1900.0
               },
               {
                 "type": "null"
@@ -328,7 +329,7 @@
             ],
             "title": "Model year",
             "description": "The model year of the equipment",
-            "examples": ["2023"]
+            "examples": [2023]
           },
           "manufacturerInformation": {
             "anyOf": [
@@ -339,7 +340,7 @@
                 "type": "null"
               }
             ],
-            "title": "Manufacturer Information",
+            "title": "Manufacturer information",
             "description": "The details of the manufacturer"
           },
           "powerSource": {
@@ -370,10 +371,10 @@
               }
             ],
             "title": "Fuel volume",
-            "description": "The maximum fuel volume stored in litres (l)",
+            "description": "The maximum fuel volume stored in the tank litres (l)",
             "examples": [3000.0]
           },
-          "gasVolume": {
+          "gasAmount": {
             "anyOf": [
               {
                 "type": "number"
@@ -382,8 +383,8 @@
                 "type": "null"
               }
             ],
-            "title": "Gas volume",
-            "description": "The maximum gas volume in kilograms (kg)",
+            "title": "Gas amount",
+            "description": "The maximum gas amount stored in the tank in kilograms (kg)",
             "examples": [50.0]
           },
           "expectedRange": {
@@ -396,14 +397,14 @@
               }
             ],
             "title": "Expected range",
-            "description": "The expected range with fully charged or refilled in kilometers (km)",
+            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers (km)",
             "examples": [300.0]
           },
           "netVehicleMass": {
             "type": "number",
             "title": "Net vehicle mass",
             "description": "The mass of the machine when unloaded in kilograms (kg)",
-            "examples": [450.0]
+            "examples": [4000.0]
           },
           "maxLoadCapacity": {
             "type": "number",

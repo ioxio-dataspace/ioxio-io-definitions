@@ -96,16 +96,17 @@ class CargoHandlingEquipmentDataSheetResponse(CamelCaseModel):
         description="The model of the equipment",
         examples=["Model X 1234"],
     )
-    model_year: Optional[str] = Field(
+    model_year: Optional[int] = Field(
         None,
         title="Model year",
         description="The model year of the equipment",
-        pattern=r"^\d{4}$",
-        examples=["2023"],
+        ge=1900,
+        le=2500,
+        examples=[2023],
     )
     manufacturer_information: Optional[ManufacturerInformation] = Field(
         None,
-        title="Manufacturer Information",
+        title="Manufacturer information",
         description="The details of the manufacturer",
     )
     power_source: PowerSource = Field(
@@ -122,27 +123,27 @@ class CargoHandlingEquipmentDataSheetResponse(CamelCaseModel):
     fuel_volume: Optional[float] = Field(
         None,
         title="Fuel volume",
-        description="The maximum fuel volume stored in litres (l)",
+        description="The maximum fuel volume stored in the tank litres (l)",
         examples=[3000.0],
     )
-    gas_volume: Optional[float] = Field(
+    gas_amount: Optional[float] = Field(
         None,
-        title="Gas volume",
-        description="The maximum gas volume in kilograms (kg)",
+        title="Gas amount",
+        description="The maximum gas amount stored in the tank in kilograms (kg)",
         examples=[50.0],
     )
     expected_range: Optional[float] = Field(
         None,
         title="Expected range",
-        description="The expected range with fully charged or refilled in kilometers "
-        "(km)",
+        description="The expected range with fully charged batteries and/or refilled "
+        "tank in kilometers (km)",
         examples=[300.0],
     )
     net_vehicle_mass: float = Field(
         ...,
         title="Net vehicle mass",
         description="The mass of the machine when unloaded in kilograms (kg)",
-        examples=[450.0],
+        examples=[4000.0],
     )
     max_load_capacity: float = Field(
         ...,
