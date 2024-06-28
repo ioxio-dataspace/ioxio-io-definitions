@@ -6,12 +6,12 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/DigitalProductPassport/CargoHandlingEquipment/OperationalStatus_v0.1": {
+    "/CargoHandlingEquipment/OperationalStatus_v0.1": {
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
         "summary": "Cargo Handling Equipment Operational Status",
         "description": "General operational status data of a cargo handling equipment operating in a port",
-        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_OperationalStatus_v0_1",
+        "operationId": "request_CargoHandlingEquipment_OperationalStatus_v0_1",
         "parameters": [
           {
             "name": "x-consent-token",
