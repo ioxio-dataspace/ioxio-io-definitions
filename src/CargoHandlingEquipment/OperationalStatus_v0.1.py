@@ -32,7 +32,7 @@ class Location(CamelCaseModel):
     )
 
 
-class CargoHandlingEquipmentOperationalStatusResponse(CamelCaseModel):
+class OperationalStatusResponse(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
@@ -80,7 +80,7 @@ class CargoHandlingEquipmentOperationalStatusResponse(CamelCaseModel):
     )
 
 
-class CargoHandlingEquipmentOperationalStatusRequest(CamelCaseModel):
+class OperationalStatusRequest(CamelCaseModel):
     id: str = Field(
         ...,
         max_length=40,
@@ -106,7 +106,7 @@ DEFINITION = DataProductDefinition(
     title="Cargo Handling Equipment Operational Status",
     description="General operational status data of a cargo handling equipment "
     "operating in a port",
-    request=CargoHandlingEquipmentOperationalStatusRequest,
-    response=CargoHandlingEquipmentOperationalStatusResponse,
+    request=OperationalStatusRequest,
+    response=OperationalStatusResponse,
     tags=["Cargo handling equipment", "Port", "Freight terminal", "Logistics"],
 )

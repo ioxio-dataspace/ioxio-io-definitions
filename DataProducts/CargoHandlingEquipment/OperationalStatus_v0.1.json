@@ -61,7 +61,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CargoHandlingEquipmentOperationalStatusRequest"
+                "$ref": "#/components/schemas/OperationalStatusRequest"
               }
             }
           }
@@ -72,7 +72,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CargoHandlingEquipmentOperationalStatusResponse"
+                  "$ref": "#/components/schemas/OperationalStatusResponse"
                 }
               }
             }
@@ -202,118 +202,6 @@
         "type": "object",
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
-      },
-      "CargoHandlingEquipmentOperationalStatusRequest": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Id",
-            "description": "The unique identifier of the product",
-            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
-          },
-          "time": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601. If data on the requested time doesn't exist return data with the closest time. If the time is not given return data with the latest available time.",
-            "examples": ["2023-04-12T23:20:50Z"]
-          }
-        },
-        "type": "object",
-        "required": ["id"],
-        "title": "CargoHandlingEquipmentOperationalStatusRequest"
-      },
-      "CargoHandlingEquipmentOperationalStatusResponse": {
-        "properties": {
-          "time": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601.",
-            "examples": ["2023-04-12T23:20:50Z"]
-          },
-          "operationalState": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OperationalState"
-              }
-            ],
-            "title": "Operational state",
-            "description": "The state of operation of the equipment",
-            "examples": ["running"]
-          },
-          "fuelLevel": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fuel level",
-            "description": "The percent of fuel left in the tank (%)",
-            "examples": [75.0]
-          },
-          "gasLevel": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Gas level",
-            "description": "The percent of gas left in the tank (%)",
-            "examples": [75.0]
-          },
-          "chargeLevel": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Charge level",
-            "description": "The percent of the remaining capacity of the equipment batteries (%)",
-            "examples": [75.0]
-          },
-          "location": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Location"
-              }
-            ],
-            "description": "The location of the equipment in GPS coordinates"
-          }
-        },
-        "type": "object",
-        "required": ["operationalState", "location"],
-        "title": "CargoHandlingEquipmentOperationalStatusResponse"
       },
       "DataSourceError": {
         "properties": {
@@ -463,6 +351,118 @@
         "type": "string",
         "enum": ["running", "idle", "charging", "refilling"],
         "title": "OperationalState"
+      },
+      "OperationalStatusRequest": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Id",
+            "description": "The unique identifier of the product",
+            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
+          },
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601. If data on the requested time doesn't exist return data with the closest time. If the time is not given return data with the latest available time.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "OperationalStatusRequest"
+      },
+      "OperationalStatusResponse": {
+        "properties": {
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "operationalState": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OperationalState"
+              }
+            ],
+            "title": "Operational state",
+            "description": "The state of operation of the equipment",
+            "examples": ["running"]
+          },
+          "fuelLevel": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fuel level",
+            "description": "The percent of fuel left in the tank (%)",
+            "examples": [75.0]
+          },
+          "gasLevel": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gas level",
+            "description": "The percent of gas left in the tank (%)",
+            "examples": [75.0]
+          },
+          "chargeLevel": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Charge level",
+            "description": "The percent of the remaining capacity of the equipment batteries (%)",
+            "examples": [75.0]
+          },
+          "location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Location"
+              }
+            ],
+            "description": "The location of the equipment in GPS coordinates"
+          }
+        },
+        "type": "object",
+        "required": ["operationalState", "location"],
+        "title": "OperationalStatusResponse"
       },
       "RateLimitExceeded": {
         "properties": {
