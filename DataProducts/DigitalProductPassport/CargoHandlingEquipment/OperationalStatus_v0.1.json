@@ -212,20 +212,41 @@
             "description": "The unique identifier of the product",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
-          "statusTime": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Status time",
-            "description": "The time of the equipment's status in the desired country in RFC 3339 format following ISO 8601",
-            "examples": ["2023-04-12T23:20:50.520000"]
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601. If data on the requested time doesn't exist return data with the closest time. If the time is not given return data with the latest available time.",
+            "examples": ["2023-04-12T23:20:50Z"]
           }
         },
         "type": "object",
-        "required": ["id", "statusTime"],
+        "required": ["id"],
         "title": "CargoHandlingEquipmentOperationalStatusRequest"
       },
       "CargoHandlingEquipmentOperationalStatusResponse": {
         "properties": {
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
           "operationalState": {
             "allOf": [
               {
@@ -239,7 +260,9 @@
           "fuelLevel": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -247,12 +270,14 @@
             ],
             "title": "Fuel level",
             "description": "The percent of fuel left in the tank (%)",
-            "examples": [0.0]
+            "examples": [75.0]
           },
           "gasLevel": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -260,20 +285,22 @@
             ],
             "title": "Gas level",
             "description": "The percent of gas left in the tank (%)",
-            "examples": [0.0]
+            "examples": [75.0]
           },
-          "stateOfCharge": {
+          "chargeLevel": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "State of charge",
+            "title": "Charge level",
             "description": "The percent of the remaining capacity of the equipment batteries (%)",
-            "examples": [0.0]
+            "examples": [75.0]
           },
           "location": {
             "allOf": [

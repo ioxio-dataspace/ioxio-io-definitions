@@ -33,6 +33,15 @@ class Location(CamelCaseModel):
 
 
 class CargoHandlingEquipmentOperationalStatusResponse(CamelCaseModel):
+    time: Optional[datetime.datetime] = Field(
+        None,
+        title="Time",
+        description="The time of the equipment's status in RFC 3339 format following "
+        "ISO 8601.",
+        examples=[
+            datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
+        ],
+    )
     operational_state: OperationalState = Field(
         ...,
         title="Operational state",
@@ -43,20 +52,26 @@ class CargoHandlingEquipmentOperationalStatusResponse(CamelCaseModel):
         None,
         title="Fuel level",
         description="The percent of fuel left in the tank (%)",
-        examples=[0.0],
+        ge=0.0,
+        le=100.0,
+        examples=[75.0],
     )
     gas_level: Optional[float] = Field(
         None,
         title="Gas level",
         description="The percent of gas left in the tank (%)",
-        examples=[0.0],
+        ge=0.0,
+        le=100.0,
+        examples=[75.0],
     )
-    state_of_charge: Optional[float] = Field(
+    charge_level: Optional[float] = Field(
         None,
-        title="State of charge",
+        title="Charge level",
         description="The percent of the remaining capacity of the equipment batteries "
         "(%)",
-        examples=[0.0],
+        ge=0.0,
+        le=100.0,
+        examples=[75.0],
     )
     location: Location = Field(
         ...,
@@ -73,12 +88,16 @@ class CargoHandlingEquipmentOperationalStatusRequest(CamelCaseModel):
         description="The unique identifier of the product",
         examples=["71b51878-8a00-11ee-b9d1-0242ac120002"],
     )
-    status_time: datetime.datetime = Field(
-        ...,
-        title="Status time",
-        description="The time of the equipment's status in the desired country in RFC "
-        "3339 format following ISO 8601",
-        examples=[datetime.datetime(2023, 4, 12, 23, 20, 50, 520000)],
+    time: Optional[datetime.datetime] = Field(
+        None,
+        title="Time",
+        description="The time of the equipment's status in RFC 3339 format following "
+        "ISO 8601. If data on the requested time doesn't exist return data with the "
+        "closest time. If the time is not given return data with the latest available "
+        "time.",
+        examples=[
+            datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
+        ],
     )
 
 
