@@ -350,14 +350,14 @@
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "The start time of the metric period in the desired country in RFC 3339 format following ISO 8601",
+            "description": "The start time of the metric period in RFC 3339 format following ISO 8601",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
             "title": "End time",
-            "description": "The end time of the metric period in the desired country in RFC 3339 format following ISO 8601",
+            "description": "The end time of the metric period in RFC 3339 format following ISO 8601",
             "examples": ["2023-05-12T23:20:50Z"]
           }
         },

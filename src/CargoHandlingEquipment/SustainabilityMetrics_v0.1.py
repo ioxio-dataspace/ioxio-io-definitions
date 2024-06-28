@@ -41,8 +41,8 @@ class SustainabilityRequest(CamelCaseModel):
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
-        description="The start time of the metric period in the desired country in RFC "
-        "3339 format following ISO 8601",
+        description="The start time of the metric period in RFC 3339 format following "
+        "ISO 8601",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -50,8 +50,8 @@ class SustainabilityRequest(CamelCaseModel):
     end_time: datetime.datetime = Field(
         ...,
         title="End time",
-        description="The end time of the metric period in the desired country in RFC "
-        "3339 format following ISO 8601",
+        description="The end time of the metric period in RFC 3339 format following "
+        "ISO 8601",
         examples=[
             datetime.datetime(2023, 5, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
