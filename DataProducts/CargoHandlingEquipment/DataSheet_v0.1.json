@@ -61,7 +61,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CargoHandlingEquipmentDataSheetRequest"
+                "$ref": "#/components/schemas/DataSheetRequest"
               }
             }
           }
@@ -72,7 +72,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CargoHandlingEquipmentDataSheetResponse"
+                  "$ref": "#/components/schemas/DataSheetResponse"
                 }
               }
             }
@@ -276,7 +276,7 @@
         "type": "object",
         "title": "Batteries"
       },
-      "CargoHandlingEquipmentDataSheetRequest": {
+      "DataSheetRequest": {
         "properties": {
           "product": {
             "type": "string",
@@ -295,9 +295,9 @@
         },
         "type": "object",
         "required": ["product", "id"],
-        "title": "CargoHandlingEquipmentDataSheetRequest"
+        "title": "DataSheetRequest"
       },
-      "CargoHandlingEquipmentDataSheetResponse": {
+      "DataSheetResponse": {
         "properties": {
           "type": {
             "allOf": [
@@ -422,7 +422,7 @@
           "netVehicleMass",
           "maxLoadCapacity"
         ],
-        "title": "CargoHandlingEquipmentDataSheetResponse"
+        "title": "DataSheetResponse"
       },
       "DataSourceError": {
         "properties": {

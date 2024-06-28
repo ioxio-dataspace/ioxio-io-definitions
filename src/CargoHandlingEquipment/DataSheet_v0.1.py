@@ -82,7 +82,7 @@ class Batteries(CamelCaseModel):
     )
 
 
-class CargoHandlingEquipmentDataSheetResponse(CamelCaseModel):
+class DataSheetResponse(CamelCaseModel):
     type: EquipmentType = Field(
         ...,
         title="Type",
@@ -154,7 +154,7 @@ class CargoHandlingEquipmentDataSheetResponse(CamelCaseModel):
     )
 
 
-class CargoHandlingEquipmentDataSheetRequest(CamelCaseModel):
+class DataSheetRequest(CamelCaseModel):
     product: str = Field(
         ...,
         max_length=150,
@@ -176,7 +176,7 @@ DEFINITION = DataProductDefinition(
     title="Cargo Handling Equipment Data Sheet",
     description="General as-built data of a cargo handling equipment operating in a "
     "port",
-    request=CargoHandlingEquipmentDataSheetRequest,
-    response=CargoHandlingEquipmentDataSheetResponse,
+    request=DataSheetRequest,
+    response=DataSheetResponse,
     tags=["Cargo handling equipment", "Port", "Freight terminal", "Logistics"],
 )
