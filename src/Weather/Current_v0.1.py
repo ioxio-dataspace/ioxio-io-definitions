@@ -3,7 +3,7 @@ from pydantic import Field
 
 
 class WeatherCurrentRequest(CamelCaseModel):
-    lat: float = Field(
+    latitude: float = Field(
         ...,
         title="Latitude",
         description="The latitude coordinate of the desired location",
@@ -11,7 +11,7 @@ class WeatherCurrentRequest(CamelCaseModel):
         le=90.0,
         examples=[60.192059],
     )
-    lon: float = Field(
+    longitude: float = Field(
         ...,
         title="Longitude",
         description="The longitude coordinate of the desired location",
@@ -22,37 +22,48 @@ class WeatherCurrentRequest(CamelCaseModel):
 
 
 class WeatherCurrentResponse(CamelCaseModel):
+    temperature: float = Field(
+        ...,
+        title="Temperature",
+        description="Current temperature in Celsius (°C)",
+        examples=[17.3],
+        ge=-273.15,
+    )
     humidity: float = Field(
         ...,
-        title="Current relative air humidity in %",
+        title="Humidity",
+        description="Current relative air humidity (%)",
+        ge=0.0,
+        le=100.0,
         examples=[72],
     )
     pressure: float = Field(
         ...,
-        title="Current air pressure in hPa",
+        title="Pressure",
+        description="Current air pressure (hPa)",
+        ge=0.0,
         examples=[1007],
-    )
-    rain: bool = Field(
-        ..., title="Rain status", description="If it's currently raining or not."
-    )
-    temp: float = Field(
-        ...,
-        title="Current temperature in Celsius",
-        examples=[17.3],
-        ge=-273.15,
     )
     wind_speed: float = Field(
         ...,
-        title="Current wind speed in m/s",
+        title="Wind speed",
+        description="Current wind speed (m/s)",
         examples=[2.1],
-        ge=0,
+        ge=0.0,
     )
     wind_direction: float = Field(
         ...,
-        title="Current wind direction in meteorological wind direction degrees",
-        ge=0,
-        le=360,
+        title="Wind direction",
+        description="Current wind direction in meteorological wind direction degrees",
+        ge=0.0,
+        le=360.0,
         examples=[220.0],
+    )
+    rain: bool = Field(
+        ...,
+        title="Rain",
+        description="Is it currently raining?",
+        examples=[False],
     )
 
 
