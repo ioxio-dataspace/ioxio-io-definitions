@@ -62,22 +62,22 @@ class Batteries(CamelCaseModel):
     )
     capacity: Optional[float] = Field(
         None,
-        title="Capacity",
-        description="The total number of ampere-hours (Ah) that can be withdrawn from "
+        title="Capacity (Ah)",
+        description="The total number of ampere-hours that can be withdrawn from "
         "a fully charged battery under reference conditions",
         examples=[225.0],
     )
     nominal_voltage: Optional[float] = Field(
         None,
-        title="Nominal voltage",
+        title="Nominal voltage (v)",
         description="The average voltage of the battery it is rated to provide under "
         "typical operating conditions",
         examples=[12.0],
     )
     power: Optional[float] = Field(
         None,
-        title="Power",
-        description="The power of the battery in use in the machine in kilowatts (kW)",
+        title="Power (kW)",
+        description="The power of the battery in use in the machine in kilowatts",
         examples=[75.0],
     )
 
@@ -122,34 +122,34 @@ class DataSheetResponse(CamelCaseModel):
     )
     fuel_volume: Optional[float] = Field(
         None,
-        title="Fuel volume",
-        description="The maximum fuel volume stored in the tank litres (l)",
+        title="Fuel volume (l)",
+        description="The maximum fuel volume stored in the tank litres",
         examples=[3000.0],
     )
     gas_amount: Optional[float] = Field(
         None,
-        title="Gas amount",
-        description="The maximum gas amount stored in the tank in kilograms (kg)",
+        title="Gas amount (kg)",
+        description="The maximum gas amount stored in the tank in kilograms",
         examples=[50.0],
     )
     expected_range: Optional[float] = Field(
         None,
-        title="Expected range",
+        title="Expected range (km)",
         description="The expected range with fully charged batteries and/or refilled "
-        "tank in kilometers (km)",
+        "tank in kilometers",
         examples=[300.0],
     )
     net_vehicle_mass: float = Field(
         ...,
-        title="Net vehicle mass",
-        description="The mass of the machine when unloaded in kilograms (kg)",
+        title="Net vehicle mass (kg)",
+        description="The mass of the machine when unloaded in kilograms",
         examples=[4000.0],
     )
     max_load_capacity: float = Field(
         ...,
-        title="Max load capacity",
+        title="Max load capacity (kg)",
         description="The maximum weight that the machine can be loaded with or carry "
-        "in kilograms (kg)",
+        "in kilograms",
         examples=[6000.0],
     )
 
@@ -165,7 +165,7 @@ class DataSheetRequest(CamelCaseModel):
     id: str = Field(
         ...,
         max_length=40,
-        title="Id",
+        title="ID",
         description="The unique identifier of the product",
         examples=["71b51878-8a00-11ee-b9d1-0242ac120002"],
     )

@@ -242,8 +242,8 @@
                 "type": "null"
               }
             ],
-            "title": "Capacity",
-            "description": "The total number of ampere-hours (Ah) that can be withdrawn from a fully charged battery under reference conditions",
+            "title": "Capacity (Ah)",
+            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
             "examples": [225.0]
           },
           "nominalVoltage": {
@@ -255,7 +255,7 @@
                 "type": "null"
               }
             ],
-            "title": "Nominal voltage",
+            "title": "Nominal voltage (v)",
             "description": "The average voltage of the battery it is rated to provide under typical operating conditions",
             "examples": [12.0]
           },
@@ -268,8 +268,8 @@
                 "type": "null"
               }
             ],
-            "title": "Power",
-            "description": "The power of the battery in use in the machine in kilowatts (kW)",
+            "title": "Power (kW)",
+            "description": "The power of the battery in use in the machine in kilowatts",
             "examples": [75.0]
           }
         },
@@ -288,7 +288,7 @@
           "id": {
             "type": "string",
             "maxLength": 40,
-            "title": "Id",
+            "title": "ID",
             "description": "The unique identifier of the product",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           }
@@ -370,8 +370,8 @@
                 "type": "null"
               }
             ],
-            "title": "Fuel volume",
-            "description": "The maximum fuel volume stored in the tank litres (l)",
+            "title": "Fuel volume (l)",
+            "description": "The maximum fuel volume stored in the tank litres",
             "examples": [3000.0]
           },
           "gasAmount": {
@@ -383,8 +383,8 @@
                 "type": "null"
               }
             ],
-            "title": "Gas amount",
-            "description": "The maximum gas amount stored in the tank in kilograms (kg)",
+            "title": "Gas amount (kg)",
+            "description": "The maximum gas amount stored in the tank in kilograms",
             "examples": [50.0]
           },
           "expectedRange": {
@@ -396,20 +396,20 @@
                 "type": "null"
               }
             ],
-            "title": "Expected range",
-            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers (km)",
+            "title": "Expected range (km)",
+            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers",
             "examples": [300.0]
           },
           "netVehicleMass": {
             "type": "number",
-            "title": "Net vehicle mass",
-            "description": "The mass of the machine when unloaded in kilograms (kg)",
+            "title": "Net vehicle mass (kg)",
+            "description": "The mass of the machine when unloaded in kilograms",
             "examples": [4000.0]
           },
           "maxLoadCapacity": {
             "type": "number",
-            "title": "Max load capacity",
-            "description": "The maximum weight that the machine can be loaded with or carry in kilograms (kg)",
+            "title": "Max load capacity (kg)",
+            "description": "The maximum weight that the machine can be loaded with or carry in kilograms",
             "examples": [6000.0]
           }
         },
