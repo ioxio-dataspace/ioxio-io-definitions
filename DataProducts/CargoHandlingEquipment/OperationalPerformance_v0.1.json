@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Cargo Handling Equipment Operational Performance",
+    "title": "Cargo handling equipment operational performance",
     "description": "General operational status data of a mobile work machine operating in a port",
     "version": "0.1.0"
   },
@@ -9,7 +9,7 @@
     "/CargoHandlingEquipment/OperationalPerformance_v0.1": {
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
-        "summary": "Cargo Handling Equipment Operational Performance",
+        "summary": "Cargo handling equipment operational performance",
         "description": "General operational status data of a mobile work machine operating in a port",
         "operationId": "request_CargoHandlingEquipment_OperationalPerformance_v0_1",
         "parameters": [
@@ -203,41 +203,23 @@
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
       },
-      "CargoMoveType": {
-        "type": "string",
-        "enum": ["pick", "place"],
-        "title": "CargoMoveType"
-      },
       "CargoMoves": {
         "properties": {
-          "type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CargoMoveType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Type",
-            "description": "The type of the cargo moves operated with the equipment",
-            "examples": ["pick"]
-          },
-          "count": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Count",
-            "description": "The number of cargo moves operated with the equipment",
+          "pick": {
+            "type": "integer",
+            "title": "Number of pick moves",
+            "description": "Count of pick moves the cargo handling equipment has performed during the time period",
             "examples": [52]
+          },
+          "place": {
+            "type": "integer",
+            "title": "Number of place moves",
+            "description": "Count of place moves the cargo handling equipment has performed during the time period",
+            "examples": [53]
           }
         },
         "type": "object",
+        "required": ["pick", "place"],
         "title": "CargoMoves"
       },
       "DataSourceError": {
@@ -331,41 +313,23 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "HoistMoveType": {
-        "type": "string",
-        "enum": ["lift", "fall"],
-        "title": "HoistMoveType"
-      },
       "HoistMoves": {
         "properties": {
-          "type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/HoistMoveType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Type",
-            "description": "The type of the hoist moves operated with the equipment",
-            "examples": ["lift"]
-          },
-          "count": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Count",
-            "description": "The number of hoist moves operated with the equipment",
+          "lift": {
+            "type": "integer",
+            "title": "Number of lift moves",
+            "description": "Count of lift moves the cargo handling equipment has performed during the time period",
             "examples": [165]
+          },
+          "fall": {
+            "type": "integer",
+            "title": "Number of fall moves",
+            "description": "Count of fall moves the cargo handling equipment has performed during the time period",
+            "examples": [164]
           }
         },
         "type": "object",
+        "required": ["lift", "fall"],
         "title": "HoistMoves"
       },
       "NotFound": {
@@ -390,7 +354,7 @@
           "id": {
             "type": "string",
             "maxLength": 40,
-            "title": "Id",
+            "title": "ID",
             "description": "The unique identifier of the product",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
@@ -405,7 +369,7 @@
               }
             ],
             "title": "Start time",
-            "description": "The start time of the performance period in RFC 3339 format following ISO 8601",
+            "description": "The start time of the performance period in RFC 3339 format",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
@@ -419,7 +383,7 @@
               }
             ],
             "title": "End time",
-            "description": "The end time of the performance period in the desired country in RFC 3339 format following ISO 8601",
+            "description": "The end time of the performance period in RFC 3339 format",
             "examples": ["2023-05-12T23:20:50Z"]
           }
         },
@@ -431,31 +395,33 @@
         "properties": {
           "runningHours": {
             "type": "number",
-            "title": "Running hours",
-            "description": "The total running hours (h)",
+            "title": "Running hours (h)",
+            "description": "The total running hours",
             "examples": [550.0]
           },
           "distance": {
             "type": "number",
-            "title": "Cumulative distance",
-            "description": "The total distance driven in kilometers (km) ",
+            "title": "Cumulative distance (km)",
+            "description": "The total distance driven in kilometers",
             "examples": [2500.0]
           },
           "cargoMoves": {
-            "items": {
-              "$ref": "#/components/schemas/CargoMoves"
-            },
-            "type": "array",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CargoMoves"
+              }
+            ],
             "title": "Cargo moves",
-            "description": "The details of the cargo handling moves"
+            "description": "Counts of cargo handling moves per type (pick or place)"
           },
           "hoistMoves": {
-            "items": {
-              "$ref": "#/components/schemas/HoistMoves"
-            },
-            "type": "array",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HoistMoves"
+              }
+            ],
             "title": "Hoist moves",
-            "description": "The details of the hoist moves"
+            "description": "Counts of hoist moves per type (lift or fall)"
           },
           "cargoWeightProcessed": {
             "anyOf": [
@@ -466,8 +432,8 @@
                 "type": "null"
               }
             ],
-            "title": "Cargo weight processed",
-            "description": "The total cargo weight processed kilograms (kg)",
+            "title": "Cargo weight processed (kg)",
+            "description": "The total cargo weight processed in kilograms",
             "examples": [75.0]
           }
         },
