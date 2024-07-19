@@ -71,7 +71,7 @@ class WeatherCurrentResponse(CamelCaseModel):
 
 DEFINITION = DataProductDefinition(
     version="0.1.0",
-    title="Current Weather",
+    title="Current weather",
     description="Common data points about the current weather with metric units in a "
     "given location",
     request=WeatherCurrentRequest,

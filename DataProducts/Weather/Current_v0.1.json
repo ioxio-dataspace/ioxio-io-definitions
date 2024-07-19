@@ -1,14 +1,14 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Current Weather",
+    "title": "Current weather",
     "description": "Common data points about the current weather with metric units in a given location",
     "version": "0.1.0"
   },
   "paths": {
     "/Weather/Current_v0.1": {
       "post": {
-        "summary": "Current Weather",
+        "summary": "Current weather",
         "description": "Common data points about the current weather with metric units in a given location",
         "operationId": "request_Weather_Current_v0_1",
         "parameters": [
