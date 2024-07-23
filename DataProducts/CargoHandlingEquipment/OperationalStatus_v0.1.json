@@ -452,11 +452,15 @@
             "examples": [75.0]
           },
           "location": {
-            "allOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/Location"
+              },
+              {
+                "type": "null"
               }
             ],
+            "title": "Location",
             "description": "The location of the equipment in GPS coordinates"
           }
         },

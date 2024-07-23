@@ -73,7 +73,7 @@ class OperationalStatusResponse(CamelCaseModel):
         le=100.0,
         examples=[75.0],
     )
-    location: Location = Field(
+    location: Optional[Location] = Field(
         ...,
         title="Location",
         description="The location of the equipment in GPS coordinates",
