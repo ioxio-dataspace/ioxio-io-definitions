@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Cargo Handling Equipment Operational Status",
+    "title": "Cargo handling equipment operational status",
     "description": "General operational status data of a cargo handling equipment operating in a port",
     "version": "0.1.0"
   },
@@ -9,7 +9,7 @@
     "/CargoHandlingEquipment/OperationalStatus_v0.1": {
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
-        "summary": "Cargo Handling Equipment Operational Status",
+        "summary": "Cargo handling equipment operational status",
         "description": "General operational status data of a cargo handling equipment operating in a port",
         "operationId": "request_CargoHandlingEquipment_OperationalStatus_v0_1",
         "parameters": [
