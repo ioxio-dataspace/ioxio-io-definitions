@@ -451,6 +451,14 @@
             "title": "Precipitation (mm/h)",
             "description": "Current precipitation in millimeters per hour",
             "examples": [120.0]
+          },
+          "visibility": {
+            "type": "number",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Visibility (m)",
+            "description": "Visibility in meters, max value is 10km",
+            "examples": [320.0]
           }
         },
         "type": "object",
@@ -460,7 +468,8 @@
           "pressure",
           "windSpeed",
           "windDirection",
-          "precipitation"
+          "precipitation",
+          "visibility"
         ],
         "title": "WeatherCurrentResponse"
       }
