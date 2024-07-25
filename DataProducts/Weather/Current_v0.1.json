@@ -454,10 +454,10 @@
           },
           "visibility": {
             "type": "number",
-            "maximum": 10000.0,
+            "maximum": 300000.0,
             "minimum": 0.0,
             "title": "Visibility (m)",
-            "description": "Visibility in meters, max value is 10km",
+            "description": "Visibility in meters",
             "examples": [320.0]
           }
         },

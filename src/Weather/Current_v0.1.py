@@ -70,9 +70,9 @@ class WeatherCurrentResponse(CamelCaseModel):
     visibility: float = Field(
         ...,
         title="Visibility (m)",
-        description="Visibility in meters, max value is 10km",
+        description="Visibility in meters",
         ge=0.0,
-        le=10000.0,
+        le=300000.0,
         examples=[320.0],
     )
 
