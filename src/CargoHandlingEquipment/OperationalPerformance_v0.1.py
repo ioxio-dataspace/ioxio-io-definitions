@@ -28,10 +28,10 @@ class HoistMoves(CamelCaseModel):
         description="Count of lift moves the cargo handling equipment has performed during the time period",
         examples=[165],
     )
-    fall: int = Field(
+    lower: int = Field(
         ...,
-        title="Number of fall moves",
-        description="Count of fall moves the cargo handling equipment has performed during the time period",
+        title="Number of lowering moves",
+        description="Count of lowering moves the cargo handling equipment has performed during the time period",
         examples=[164],
     )
 
