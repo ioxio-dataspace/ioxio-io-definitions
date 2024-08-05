@@ -60,9 +60,9 @@ class Batteries(CamelCaseModel):
         ge=0,
         examples=[2],
     )
-    capacity: Optional[float] = Field(
+    nominal_capacity: Optional[float] = Field(
         None,
-        title="Capacity (Ah)",
+        title="Nominal capacity (Ah)",
         description="The total number of ampere-hours that can be withdrawn from "
         "a fully charged battery under reference conditions",
         examples=[225.0],
@@ -173,7 +173,7 @@ class DataSheetRequest(CamelCaseModel):
 
 DEFINITION = DataProductDefinition(
     version="0.1.0",
-    title="Cargo Handling Equipment Data Sheet",
+    title="Cargo handling equipment data sheet",
     description="General as-built data of a cargo handling equipment operating in a "
     "port",
     request=DataSheetRequest,
