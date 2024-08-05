@@ -5,10 +5,10 @@ from pydantic import Field
 
 
 class VehicleTurnaroundTimeRequest(CamelCaseModel):
-    licencePlate: str = Field(
+    vehicleID: str = Field(
         ...,
-        title="Licence plate",
-        description="Licence plate number of the vehicle",
+        title="Identifying number of the vehicle",
+        description="Licence plate number or similar identification number of the vehicle",
         examples=["123-ABC"],
     )
     entryTime: datetime.datetime = Field(

@@ -384,10 +384,10 @@
       },
       "VehicleTurnaroundTimeRequest": {
         "properties": {
-          "licencePlate": {
+          "vehicleID": {
             "type": "string",
-            "title": "Licence plate",
-            "description": "Licence plate number of the vehicle",
+            "title": "Identifying number of the vehicle",
+            "description": "Licence plate number or similar identification number of the vehicle",
             "examples": ["123-ABC"]
           },
           "entryTime": {
@@ -399,7 +399,7 @@
           }
         },
         "type": "object",
-        "required": ["licencePlate", "entryTime"],
+        "required": ["vehicleID", "entryTime"],
         "title": "VehicleTurnaroundTimeRequest"
       },
       "VehicleTurnaroundTimeResponse": {
