@@ -16,16 +16,16 @@ class OperationalState(str, Enum):
 class Location(CamelCaseModel):
     latitude: Optional[float] = Field(
         None,
-        title="Latitude",
-        description="The latitude coordinate of the equipment location",
+        title="Latitude (°)",
+        description="The latitude coordinate of the equipment location in decimal degrees",
         ge=-90.0,
         le=90.0,
         examples=[60.192059],
     )
     longitude: Optional[float] = Field(
         None,
-        title="Longitude",
-        description="The longitude coordinate of the equipment location",
+        title="Longitude (°)",
+        description="The longitude coordinate of the equipment location in decimal degrees",
         ge=-180.0,
         le=180.0,
         examples=[24.945831],
@@ -84,7 +84,7 @@ class OperationalStatusRequest(CamelCaseModel):
     id: str = Field(
         ...,
         max_length=40,
-        title="Id",
+        title="ID",
         description="The unique identifier of the product",
         examples=["71b51878-8a00-11ee-b9d1-0242ac120002"],
     )

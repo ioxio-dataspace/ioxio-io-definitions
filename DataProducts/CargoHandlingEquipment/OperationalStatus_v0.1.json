@@ -307,8 +307,8 @@
                 "type": "null"
               }
             ],
-            "title": "Latitude",
-            "description": "The latitude coordinate of the equipment location",
+            "title": "Latitude (°)",
+            "description": "The latitude coordinate of the equipment location in decimal degrees",
             "examples": [60.192059]
           },
           "longitude": {
@@ -322,8 +322,8 @@
                 "type": "null"
               }
             ],
-            "title": "Longitude",
-            "description": "The longitude coordinate of the equipment location",
+            "title": "Longitude (°)",
+            "description": "The longitude coordinate of the equipment location in decimal degrees",
             "examples": [24.945831]
           }
         },
@@ -357,7 +357,7 @@
           "id": {
             "type": "string",
             "maxLength": 40,
-            "title": "Id",
+            "title": "ID",
             "description": "The unique identifier of the product",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
