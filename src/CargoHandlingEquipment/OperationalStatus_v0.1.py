@@ -36,8 +36,7 @@ class OperationalStatusResponse(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time of the equipment's status in RFC 3339 format following "
-        "ISO 8601.",
+        description="The time of the equipment's status in RFC 3339 format. ",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -91,10 +90,7 @@ class OperationalStatusRequest(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time of the equipment's status in RFC 3339 format following "
-        "ISO 8601. If data on the requested time doesn't exist return data with the "
-        "closest time. If the time is not given return data with the latest available "
-        "time.",
+        description="The time of the equipment's status in RFC 3339 format. If data on the requested time doesn't exist return the latest value.",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],

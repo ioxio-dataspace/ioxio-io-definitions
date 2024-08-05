@@ -372,7 +372,7 @@
               }
             ],
             "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601. If data on the requested time doesn't exist return data with the closest time. If the time is not given return data with the latest available time.",
+            "description": "The time of the equipment's status in RFC 3339 format. If data on the requested time doesn't exist return the latest value.",
             "examples": ["2023-04-12T23:20:50Z"]
           }
         },
@@ -393,7 +393,7 @@
               }
             ],
             "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format following ISO 8601.",
+            "description": "The time of the equipment's status in RFC 3339 format. ",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "operationalState": {
