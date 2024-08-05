@@ -7,7 +7,7 @@ from pydantic import Field
 
 
 class OperationalState(str, Enum):
-    RUNNING = "running"
+    DRIVING = "driving"
     IDLE = "idle"
     CHARGING = "charging"
     REFILLING = "refilling"
@@ -36,7 +36,7 @@ class OperationalStatusResponse(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time of the equipment's status in RFC 3339 format. ",
+        description="The time the status of the equipment was recorded in RFC 3339 format.",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -44,28 +44,28 @@ class OperationalStatusResponse(CamelCaseModel):
     operational_state: OperationalState = Field(
         ...,
         title="Operational state",
-        description="The state of operation of the equipment",
-        examples=[OperationalState.RUNNING],
+        description="The state of operation",
+        examples=[OperationalState.DRIVING],
     )
     fuel_level: Optional[float] = Field(
         None,
-        title="Fuel level",
-        description="The percent of fuel left in the tank (%)",
+        title="Fuel level (%)",
+        description="The percent of fuel left",
         ge=0.0,
         le=100.0,
         examples=[75.0],
     )
     gas_level: Optional[float] = Field(
         None,
-        title="Gas level",
-        description="The percent of gas left in the tank (%)",
+        title="Gas level (%)",
+        description="The percent of gas left",
         ge=0.0,
         le=100.0,
         examples=[75.0],
     )
     charge_level: Optional[float] = Field(
         None,
-        title="Charge level",
+        title="Charge level (%)",
         description="The percent of the remaining capacity of the equipment batteries "
         "(%)",
         ge=0.0,
@@ -75,7 +75,7 @@ class OperationalStatusResponse(CamelCaseModel):
     location: Optional[Location] = Field(
         ...,
         title="Location",
-        description="The location of the equipment in GPS coordinates",
+        description="The location in GPS coordinates",
     )
 
 

@@ -349,7 +349,7 @@
       },
       "OperationalState": {
         "type": "string",
-        "enum": ["running", "idle", "charging", "refilling"],
+        "enum": ["driving", "idle", "charging", "refilling"],
         "title": "OperationalState"
       },
       "OperationalStatusRequest": {
@@ -393,7 +393,7 @@
               }
             ],
             "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format. ",
+            "description": "The time the status of the equipment was recorded in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "operationalState": {
@@ -403,8 +403,8 @@
               }
             ],
             "title": "Operational state",
-            "description": "The state of operation of the equipment",
-            "examples": ["running"]
+            "description": "The state of operation",
+            "examples": ["driving"]
           },
           "fuelLevel": {
             "anyOf": [
@@ -417,8 +417,8 @@
                 "type": "null"
               }
             ],
-            "title": "Fuel level",
-            "description": "The percent of fuel left in the tank (%)",
+            "title": "Fuel level (%)",
+            "description": "The percent of fuel left",
             "examples": [75.0]
           },
           "gasLevel": {
@@ -432,8 +432,8 @@
                 "type": "null"
               }
             ],
-            "title": "Gas level",
-            "description": "The percent of gas left in the tank (%)",
+            "title": "Gas level (%)",
+            "description": "The percent of gas left",
             "examples": [75.0]
           },
           "chargeLevel": {
@@ -447,7 +447,7 @@
                 "type": "null"
               }
             ],
-            "title": "Charge level",
+            "title": "Charge level (%)",
             "description": "The percent of the remaining capacity of the equipment batteries (%)",
             "examples": [75.0]
           },
@@ -461,7 +461,7 @@
               }
             ],
             "title": "Location",
-            "description": "The location of the equipment in GPS coordinates"
+            "description": "The location in GPS coordinates"
           }
         },
         "type": "object",
