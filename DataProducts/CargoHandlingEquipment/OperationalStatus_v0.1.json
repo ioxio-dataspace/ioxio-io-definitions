@@ -418,7 +418,7 @@
               }
             ],
             "title": "Fuel level (%)",
-            "description": "The percent of fuel left as an number value between 0 and 100",
+            "description": "The percent of fuel left as a number value between 0 and 100",
             "examples": [75.0]
           },
           "gasLevel": {
@@ -433,7 +433,7 @@
               }
             ],
             "title": "Gas level (%)",
-            "description": "The percent of gas left as an number value between 0 and 100",
+            "description": "The percent of gas left as a number value between 0 and 100",
             "examples": [75.0]
           },
           "chargeLevel": {

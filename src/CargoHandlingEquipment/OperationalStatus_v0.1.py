@@ -50,7 +50,7 @@ class OperationalStatusResponse(CamelCaseModel):
     fuel_level: Optional[float] = Field(
         None,
         title="Fuel level (%)",
-        description="The percent of fuel left as an number value between 0 and 100",
+        description="The percent of fuel left as a number value between 0 and 100",
         ge=0.0,
         le=100.0,
         examples=[75.0],
@@ -58,7 +58,7 @@ class OperationalStatusResponse(CamelCaseModel):
     gas_level: Optional[float] = Field(
         None,
         title="Gas level (%)",
-        description="The percent of gas left as an number value between 0 and 100",
+        description="The percent of gas left as a number value between 0 and 100",
         ge=0.0,
         le=100.0,
         examples=[75.0],
