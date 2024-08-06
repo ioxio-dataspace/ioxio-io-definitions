@@ -56,22 +56,24 @@ class Batteries(CamelCaseModel):
     count: Optional[int] = Field(
         None,
         title="Count",
-        description="The number of corresponding batteries in use in the machine",
+        description="The number of corresponding batteries in the machine",
         ge=0,
         examples=[2],
     )
     nominal_capacity: Optional[float] = Field(
         None,
         title="Nominal capacity (Ah)",
-        description="The total number of ampere-hours that can be withdrawn from "
+        description="The total number of ampere-hours that can be withdrawn from"
         "a fully charged battery under reference conditions",
+        ge=0,
         examples=[225.0],
     )
     nominal_voltage: Optional[float] = Field(
         None,
         title="Nominal voltage (v)",
-        description="The average voltage of the battery it is rated to provide under "
+        description="The average voltage the battery is rated to provide under typical operating conditions"
         "typical operating conditions",
+        ge=0,
         examples=[12.0],
     )
     power: Optional[float] = Field(
@@ -79,6 +81,7 @@ class Batteries(CamelCaseModel):
         title="Power (kW)",
         description="The power of the battery in use in the machine in kilowatts",
         examples=[75.0],
+        ge=0,
     )
 
 
@@ -104,15 +107,15 @@ class DataSheetResponse(CamelCaseModel):
         le=2500,
         examples=[2023],
     )
-    manufacturer_information: Optional[ManufacturerInformation] = Field(
-        None,
+    manufacturer_information: ManufacturerInformation = Field(
+        ...,
         title="Manufacturer information",
         description="The details of the manufacturer",
     )
     power_source: PowerSource = Field(
         ...,
         title="Power source",
-        description="The power source used for the machine operations",
+        description="The power source used by the machine",
         examples=[PowerSource.ELECTRIC],
     )
     batteries: List[Batteries] = Field(
@@ -123,13 +126,13 @@ class DataSheetResponse(CamelCaseModel):
     fuel_volume: Optional[float] = Field(
         None,
         title="Fuel volume (l)",
-        description="The maximum fuel volume stored in the tank litres",
+        description="The maximum fuel amount in litres",
         examples=[3000.0],
     )
     gas_amount: Optional[float] = Field(
         None,
         title="Gas amount (kg)",
-        description="The maximum gas amount stored in the tank in kilograms",
+        description="The maximum gas amount in kilograms",
         examples=[50.0],
     )
     expected_range: Optional[float] = Field(

@@ -230,39 +230,42 @@
               }
             ],
             "title": "Count",
-            "description": "The number of corresponding batteries in use in the machine",
+            "description": "The number of corresponding batteries in the machine",
             "examples": [2]
           },
           "nominalCapacity": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "minimum": 0.0
               },
               {
                 "type": "null"
               }
             ],
             "title": "Nominal capacity (Ah)",
-            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
+            "description": "The total number of ampere-hours that can be withdrawn froma fully charged battery under reference conditions",
             "examples": [225.0]
           },
           "nominalVoltage": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "minimum": 0.0
               },
               {
                 "type": "null"
               }
             ],
             "title": "Nominal voltage (v)",
-            "description": "The average voltage of the battery it is rated to provide under typical operating conditions",
+            "description": "The average voltage the battery is rated to provide under typical operating conditionstypical operating conditions",
             "examples": [12.0]
           },
           "power": {
             "anyOf": [
               {
-                "type": "number"
+                "type": "number",
+                "minimum": 0.0
               },
               {
                 "type": "null"
@@ -332,12 +335,9 @@
             "examples": [2023]
           },
           "manufacturerInformation": {
-            "anyOf": [
+            "allOf": [
               {
                 "$ref": "#/components/schemas/ManufacturerInformation"
-              },
-              {
-                "type": "null"
               }
             ],
             "title": "Manufacturer information",
@@ -350,7 +350,7 @@
               }
             ],
             "title": "Power source",
-            "description": "The power source used for the machine operations",
+            "description": "The power source used by the machine",
             "examples": ["electric"]
           },
           "batteries": {
@@ -371,7 +371,7 @@
               }
             ],
             "title": "Fuel volume (l)",
-            "description": "The maximum fuel volume stored in the tank litres",
+            "description": "The maximum fuel amount in litres",
             "examples": [3000.0]
           },
           "gasAmount": {
@@ -384,7 +384,7 @@
               }
             ],
             "title": "Gas amount (kg)",
-            "description": "The maximum gas amount stored in the tank in kilograms",
+            "description": "The maximum gas amount in kilograms",
             "examples": [50.0]
           },
           "expectedRange": {
@@ -417,6 +417,7 @@
         "required": [
           "type",
           "model",
+          "manufacturerInformation",
           "powerSource",
           "batteries",
           "netVehicleMass",
