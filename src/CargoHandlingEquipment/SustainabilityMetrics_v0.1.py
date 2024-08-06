@@ -26,7 +26,7 @@ class SustainabilityResponse(CamelCaseModel):
         description="The total cumulative electricity consumption of the equipment in "
         "kilowatt hours",
         ge=0.0,
-        examples=[1000.0],
+        examples=[560.0],
     )
 
 
@@ -63,5 +63,12 @@ DEFINITION = DataProductDefinition(
     "cargo handling equipment operations",
     request=SustainabilityRequest,
     response=SustainabilityResponse,
-    tags=["Cargo handling equipment", "Sustainability", "Emissions"],
+    tags=[
+        "Cargo handling equipment",
+        "Sustainability",
+        "Emissions",
+        "Port",
+        "Freight terminal",
+        "Logistics",
+    ],
 )

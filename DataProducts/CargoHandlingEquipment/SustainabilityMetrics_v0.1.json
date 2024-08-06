@@ -8,7 +8,14 @@
   "paths": {
     "/CargoHandlingEquipment/SustainabilityMetrics_v0.1": {
       "post": {
-        "tags": ["Cargo handling equipment", "Emissions", "Sustainability"],
+        "tags": [
+          "Cargo handling equipment",
+          "Emissions",
+          "Freight terminal",
+          "Logistics",
+          "Port",
+          "Sustainability"
+        ],
         "summary": "Cargo handling equipment sustainability metrics",
         "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations",
         "operationId": "request_CargoHandlingEquipment_SustainabilityMetrics_v0_1",
@@ -407,7 +414,7 @@
             ],
             "title": "Electricity consumption (kWh)",
             "description": "The total cumulative electricity consumption of the equipment in kilowatt hours",
-            "examples": [1000.0]
+            "examples": [560.0]
           }
         },
         "type": "object",
