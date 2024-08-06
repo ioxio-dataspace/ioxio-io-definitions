@@ -17,7 +17,7 @@ class Location(CamelCaseModel):
     latitude: Optional[float] = Field(
         None,
         title="Latitude (°)",
-        description="The latitude coordinate of the equipment location in decimal degrees",
+        description="The latitude coordinate in decimal degrees",
         ge=-90.0,
         le=90.0,
         examples=[60.192059],
@@ -25,7 +25,7 @@ class Location(CamelCaseModel):
     longitude: Optional[float] = Field(
         None,
         title="Longitude (°)",
-        description="The longitude coordinate of the equipment location in decimal degrees",
+        description="The longitude coordinate in decimal degrees",
         ge=-180.0,
         le=180.0,
         examples=[24.945831],
