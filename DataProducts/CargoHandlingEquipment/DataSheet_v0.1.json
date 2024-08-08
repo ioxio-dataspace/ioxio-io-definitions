@@ -244,7 +244,7 @@
               }
             ],
             "title": "Nominal capacity (Ah)",
-            "description": "The total number of ampere-hours that can be withdrawn froma fully charged battery under reference conditions",
+            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
             "examples": [225.0]
           },
           "nominalVoltage": {
@@ -316,7 +316,7 @@
             "type": "string",
             "maxLength": 40,
             "title": "Model",
-            "description": "The model of the equipment",
+            "description": "The model of the machine",
             "examples": ["Model X 1234"]
           },
           "modelYear": {
@@ -331,7 +331,7 @@
               }
             ],
             "title": "Model year",
-            "description": "The model year of the equipment",
+            "description": "The model year of the machine",
             "examples": [2023]
           },
           "manufacturerInformation": {

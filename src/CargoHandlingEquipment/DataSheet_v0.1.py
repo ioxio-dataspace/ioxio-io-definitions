@@ -63,7 +63,7 @@ class Batteries(CamelCaseModel):
     nominal_capacity: Optional[float] = Field(
         None,
         title="Nominal capacity (Ah)",
-        description="The total number of ampere-hours that can be withdrawn from"
+        description="The total number of ampere-hours that can be withdrawn from "
         "a fully charged battery under reference conditions",
         ge=0,
         examples=[225.0],
@@ -96,13 +96,13 @@ class DataSheetResponse(CamelCaseModel):
         ...,
         title="Model",
         max_length=40,
-        description="The model of the equipment",
+        description="The model of the machine",
         examples=["Model X 1234"],
     )
     model_year: Optional[int] = Field(
         None,
         title="Model year",
-        description="The model year of the equipment",
+        description="The model year of the machine",
         ge=1900,
         le=2500,
         examples=[2023],
