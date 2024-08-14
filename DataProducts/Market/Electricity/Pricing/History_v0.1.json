@@ -1,16 +1,16 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Current energy price",
-    "description": "Current energy price in euros / MWh in a specific country",
+    "title": "Electricity market price",
+    "description": "Electricity price per MWh",
     "version": "0.1.1"
   },
   "paths": {
-    "/Market/Energy/Pricing/Current_v0.1": {
+    "/Market/Electricity/Pricing/History_v0.1": {
       "post": {
-        "summary": "Current energy price",
-        "description": "Current energy price in euros / MWh in a specific country",
-        "operationId": "request_Market_Energy_Pricing_Current_v0_1",
+        "summary": "Electricity market price",
+        "description": "Electricity price per MWh",
+        "operationId": "request_Market_Electricity_Pricing_History_v0_1",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -252,35 +252,51 @@
       },
       "EnergyPriceRequest": {
         "properties": {
-          "countryCode": {
+          "location": {
             "type": "string",
-            "title": "Country code (ISO 3166-1 alpha 3)",
-            "description": "The country of the energy price in ISO 4155-1 alpha-3 format",
+            "title": "Location",
+            "description": "E.g. the country in ISO 3166-1 alpha-3 or other location identifier",
             "examples": ["FIN"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "Start time of the requested time period, in RFC 3339",
+            "examples": ["2024-01-01T00:00:00Z"]
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "End time of the requested time period, in RFC 3339",
+            "examples": ["2024-01-01T23:59:59Z"]
           }
         },
         "type": "object",
-        "required": ["countryCode"],
+        "required": ["location", "startTime", "endTime"],
         "title": "EnergyPriceRequest"
       },
       "EnergyPriceResponse": {
         "properties": {
-          "price": {
-            "type": "number",
-            "title": "Price (€/MWh)",
-            "description": "Current market price in euros per megawatt hour",
-            "examples": ["29.12"]
-          },
-          "timestamp": {
+          "currencyCode": {
             "type": "string",
-            "format": "date-time",
-            "title": "Timestamp (RFC 3339)",
-            "description": "Time of the request in RFC 3339 format",
-            "examples": [""]
+            "title": "Currency",
+            "description": "Three letter currency code for the price, from ISO 4217",
+            "examples": ["EUR", "USD"]
+          },
+          "price": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PeriodPrice"
+              }
+            ],
+            "title": "Prices",
+            "description": "List of the prices for the given time period"
           }
         },
         "type": "object",
-        "required": ["price", "timestamp"],
+        "required": ["currencyCode", "price"],
         "title": "EnergyPriceResponse"
       },
       "Forbidden": {
@@ -342,6 +358,26 @@
         "type": "object",
         "required": ["type", "message"],
         "title": "NotFound"
+      },
+      "PeriodPrice": {
+        "properties": {
+          "price": {
+            "type": "number",
+            "title": "Price (per MWh)",
+            "description": "Market price per megawatt-hour for this pricing period",
+            "examples": ["29.12"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "Start time of the pricing period, in RFC 3339",
+            "examples": ["2024-01-01T02:00:00Z"]
+          }
+        },
+        "type": "object",
+        "required": ["price", "startTime"],
+        "title": "PeriodPrice"
       },
       "RateLimitExceeded": {
         "properties": {
