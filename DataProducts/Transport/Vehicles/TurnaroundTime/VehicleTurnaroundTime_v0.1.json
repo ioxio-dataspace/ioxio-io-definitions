@@ -384,22 +384,22 @@
       },
       "VehicleTurnaroundTimeRequest": {
         "properties": {
-          "vehicleID": {
+          "vehicleId": {
             "type": "string",
-            "title": "Identifying number of the vehicle",
+            "title": "Vehicle identifier",
             "description": "Licence plate number or similar identification number of the vehicle",
             "examples": ["123-ABC"]
           },
-          "entryTime": {
+          "leaveTime": {
             "type": "string",
             "format": "date-time",
-            "title": "Entry time (RFC 3339)",
-            "description": "Entry time in RFC 3339 format",
-            "examples": ["2023-04-12T23:20:50Z"]
+            "title": "Leaving time",
+            "description": "Time the vehicle left the facility, in RFC 3339 format",
+            "examples": ["2024-07-15T14:45:00Z"]
           }
         },
         "type": "object",
-        "required": ["vehicleID", "entryTime"],
+        "required": ["vehicleId", "leaveTime"],
         "title": "VehicleTurnaroundTimeRequest"
       },
       "VehicleTurnaroundTimeResponse": {
@@ -407,8 +407,8 @@
           "turnaroundTime": {
             "type": "integer",
             "title": "Turnaround time (s)",
-            "description": "Turnaround time of the vehicle in seconds",
-            "examples": ["31752000"]
+            "description": "Vehicle's previous turnaround time prior to the leaving time in seconds",
+            "examples": ["7200"]
           }
         },
         "type": "object",
