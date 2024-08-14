@@ -89,7 +89,7 @@ class DataSheetResponse(CamelCaseModel):
     type: EquipmentType = Field(
         ...,
         title="Type",
-        description="The type of the cargo handling equipment according to TIC4.0 classification",
+        description="The type of the cargo handling equipment according to TIC4.0 classification. Options are Straddle Carrier (SC) / Ship-to-Shore Crane (STS) / Mobile Crane (MC) / Rubber-tired Gantry Crane (RTG) / Rail-mounted Gantry Crane (RMG) / Automatic Stacking Crane (ASC) / Reach Stacker (RS) / Top Handler (TH) / Empty Container Handler (ECH) / Terminal Tractor (TT)",
         examples=[EquipmentType.STRADDLE_CARRIER],
     )
     model: str = Field(
@@ -126,13 +126,13 @@ class DataSheetResponse(CamelCaseModel):
     fuel_volume: Optional[float] = Field(
         None,
         title="Fuel volume (l)",
-        description="The maximum fuel amount in litres",
+        description="The maximum fuel amount in litres assuming the vehicle uses fuel for operation",
         examples=[3000.0],
     )
     gas_amount: Optional[float] = Field(
         None,
         title="Gas amount (kg)",
-        description="The maximum gas amount in kilograms",
+        description="The maximum gas amount in kilograms assuming the vehicle uses gas for operation",
         examples=[50.0],
     )
     expected_range: Optional[float] = Field(
