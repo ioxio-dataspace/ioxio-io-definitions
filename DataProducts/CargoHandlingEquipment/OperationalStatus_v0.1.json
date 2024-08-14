@@ -297,37 +297,24 @@
       "Location": {
         "properties": {
           "latitude": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 90.0,
-                "minimum": -90.0
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
             "title": "Latitude (°)",
             "description": "The latitude coordinate in decimal degrees",
             "examples": [60.192059]
           },
           "longitude": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 180.0,
-                "minimum": -180.0
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
             "title": "Longitude (°)",
             "description": "The longitude coordinate in decimal degrees",
             "examples": [24.945831]
           }
         },
         "type": "object",
+        "required": ["latitude", "longitude"],
         "title": "Location"
       },
       "NotFound": {
@@ -372,7 +359,7 @@
               }
             ],
             "title": "Time",
-            "description": "The time of the equipment's status in RFC 3339 format. If data on the requested time doesn't exist return the latest value.",
+            "description": "Request the equipment's status information at or before this given time, in RFC 3339 format. If empty, provide latest value.",
             "examples": ["2023-04-12T23:20:50Z"]
           }
         },
@@ -393,7 +380,7 @@
               }
             ],
             "title": "Time",
-            "description": "The time the status of the equipment was recorded in RFC 3339 format",
+            "description": "The time the status of the equipment was recorded, in RFC 3339 format",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "operationalState": {

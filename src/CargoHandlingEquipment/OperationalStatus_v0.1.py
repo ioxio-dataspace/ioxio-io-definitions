@@ -14,16 +14,16 @@ class OperationalState(str, Enum):
 
 
 class Location(CamelCaseModel):
-    latitude: Optional[float] = Field(
-        None,
+    latitude: float = Field(
+        ...,
         title="Latitude (°)",
         description="The latitude coordinate in decimal degrees",
         ge=-90.0,
         le=90.0,
         examples=[60.192059],
     )
-    longitude: Optional[float] = Field(
-        None,
+    longitude: float = Field(
+        ...,
         title="Longitude (°)",
         description="The longitude coordinate in decimal degrees",
         ge=-180.0,
@@ -36,7 +36,7 @@ class OperationalStatusResponse(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time the status of the equipment was recorded in RFC 3339 format",
+        description="The time the status of the equipment was recorded, in RFC 3339 format",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -89,7 +89,7 @@ class OperationalStatusRequest(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time of the equipment's status in RFC 3339 format. If data on the requested time doesn't exist return the latest value.",
+        description="Request the equipment's status information at or before this given time, in RFC 3339 format. If empty, provide latest value.",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
