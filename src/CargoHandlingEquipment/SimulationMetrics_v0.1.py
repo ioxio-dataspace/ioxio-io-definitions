@@ -28,7 +28,7 @@ class Sample(CamelCaseModel):
     time: datetime.datetime = Field(
         ...,
         title="Time",
-        description="The time of the equipment's performance sample in RFC 3339 format",
+        description="The time of the equipment's performance sample, in RFC 3339 format",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -102,7 +102,7 @@ class Sample(CamelCaseModel):
     idle_status: bool = Field(
         ...,
         title="Idle status",
-        description="The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command# from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc)",
+        description="The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc).",
         examples=["True", "False"],
     )
     driving_forward: bool = Field(
@@ -146,7 +146,7 @@ class SimulationMetricsRequest(CamelCaseModel):
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
-        description="The start time of the sample period in RFC 3339 format",
+        description="The start time of the sample period, in RFC 3339 format",
         examples=[
             datetime.datetime(
                 2023, 4, 12, 23, 20, 50, 52, tzinfo=datetime.timezone.utc
@@ -155,8 +155,8 @@ class SimulationMetricsRequest(CamelCaseModel):
     )
     end_time: Optional[datetime.datetime] = Field(
         None,
-        title="End time (RFC 3339)",
-        description="The end time of the sample period in RFC 3339 format",
+        title="End time",
+        description="The end time of the sample period, in RFC 3339 format",
         examples=[
             datetime.datetime(
                 2023, 4, 12, 23, 20, 50, 52, tzinfo=datetime.timezone.utc

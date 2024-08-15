@@ -360,7 +360,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Time",
-            "description": "The time of the equipment's performance sample in RFC 3339 format",
+            "description": "The time of the equipment's performance sample, in RFC 3339 format",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "speed": {
@@ -462,7 +462,7 @@
           "idleStatus": {
             "type": "boolean",
             "title": "Idle status",
-            "description": "The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command# from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc)",
+            "description": "The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc).",
             "examples": ["True", "False"]
           },
           "drivingForward": {
@@ -536,7 +536,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "The start time of the sample period in RFC 3339 format",
+            "description": "The start time of the sample period, in RFC 3339 format",
             "examples": ["2023-04-12T23:20:50.000052Z"]
           },
           "endTime": {
@@ -549,8 +549,8 @@
                 "type": "null"
               }
             ],
-            "title": "End time (RFC 3339)",
-            "description": "The end time of the sample period in RFC 3339 format",
+            "title": "End time",
+            "description": "The end time of the sample period, in RFC 3339 format",
             "examples": ["2023-04-12T23:20:50.000052Z"]
           },
           "sampleInterval": {
