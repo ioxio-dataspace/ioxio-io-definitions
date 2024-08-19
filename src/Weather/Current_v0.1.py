@@ -1,3 +1,5 @@
+from typing import Optional
+
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
@@ -29,46 +31,46 @@ class WeatherCurrentResponse(CamelCaseModel):
         examples=[17.3],
         ge=-273.15,
     )
-    humidity: float = Field(
-        ...,
+    humidity: Optional[float] = Field(
+        None,
         title="Humidity (%)",
-        description="Current relative air humidity in percent",
+        description="Current relative air humidity percentage",
         ge=0.0,
         le=100.0,
         examples=[72],
     )
-    pressure: float = Field(
-        ...,
+    pressure: Optional[float] = Field(
+        None,
         title="Pressure (hPa)",
         description="Current air pressure in hectopascals",
         ge=0.0,
         examples=[1007],
     )
-    wind_speed: float = Field(
-        ...,
+    wind_speed: Optional[float] = Field(
+        None,
         title="Wind speed (m/s)",
         description="Current wind speed in meters per second",
         examples=[2.1],
         ge=0.0,
     )
-    wind_direction: float = Field(
-        ...,
+    wind_direction: Optional[float] = Field(
+        None,
         title="Wind direction (°)",
         description="Current wind direction in meteorological wind direction degrees",
         ge=0.0,
         le=360.0,
         examples=[220.0],
     )
-    precipitation: float = Field(
-        ...,
+    precipitation: Optional[float] = Field(
+        None,
         title="Precipitation (mm/h)",
         description="Current precipitation in millimeters per hour",
         ge=0.0,
         le=1000.0,
         examples=[120.0],
     )
-    visibility: float = Field(
-        ...,
+    visibility: Optional[float] = Field(
+        None,
         title="Visibility (m)",
         description="Visibility in meters",
         ge=0.0,
@@ -79,7 +81,7 @@ class WeatherCurrentResponse(CamelCaseModel):
 
 DEFINITION = DataProductDefinition(
     version="0.1.0",
-    title="Current weather",
+    title="Current weather in metric units",
     description="Common data points about the current weather with metric units in a "
     "given location",
     request=WeatherCurrentRequest,
