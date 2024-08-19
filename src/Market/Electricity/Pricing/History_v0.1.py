@@ -1,4 +1,5 @@
 import datetime
+from typing import List
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
@@ -11,20 +12,36 @@ class EnergyPriceRequest(CamelCaseModel):
         description="E.g. the country in ISO 3166-1 alpha-3 or other location identifier",
         examples=["FIN"],
     )
-    startTime: datetime.datetime = Field(
+    start_time: datetime.datetime = Field(
         ...,
         title="Start time",
         description="Start time of the requested time period, in RFC 3339",
         examples=[
-            datetime.datetime(2024, 1, 1, 00, 00, 00, tzinfo=datetime.timezone.utc),
+            datetime.datetime(
+                2024,
+                1,
+                1,
+                0,
+                0,
+                0,
+                tzinfo=datetime.timezone(datetime.timedelta(hours=2)),
+            ),
         ],
     )
-    endTime: datetime.datetime = Field(
+    end_time: datetime.datetime = Field(
         ...,
-        title="Start time",
+        title="End time",
         description="End time of the requested time period, in RFC 3339",
         examples=[
-            datetime.datetime(2024, 1, 1, 23, 59, 59, tzinfo=datetime.timezone.utc),
+            datetime.datetime(
+                2024,
+                1,
+                1,
+                23,
+                59,
+                59,
+                tzinfo=datetime.timezone(datetime.timedelta(hours=2)),
+            ),
         ],
     )
 
@@ -34,26 +51,35 @@ class PeriodPrice(CamelCaseModel):
         ...,
         title="Price (per MWh)",
         description="Market price per megawatt-hour for this pricing period",
-        examples=["29.12"],
+        examples=[29.12],
     )
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
         description="Start time of the pricing period, in RFC 3339",
         examples=[
-            datetime.datetime(2024, 1, 1, 2, 00, 00, tzinfo=datetime.timezone.utc)
+            datetime.datetime(
+                2024,
+                1,
+                1,
+                2,
+                0,
+                0,
+                tzinfo=datetime.timezone(datetime.timedelta(hours=2)),
+            )
         ],
     )
 
 
 class EnergyPriceResponse(CamelCaseModel):
-    currencyCode: str = Field(
+    currency_code: str = Field(
         ...,
         title="Currency",
         description="Three letter currency code for the price, from ISO 4217",
         examples=["EUR", "USD"],
+        pattern=r"^[A-Z]{3}$",
     )
-    price: PeriodPrice = Field(
+    prices: List[PeriodPrice] = Field(
         ...,
         title="Prices",
         description="List of the prices for the given time period",
@@ -61,7 +87,7 @@ class EnergyPriceResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.0",
     title="Electricity market price",
     description="Electricity price per MWh",
     request=EnergyPriceRequest,

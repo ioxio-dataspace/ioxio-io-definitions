@@ -3,7 +3,7 @@
   "info": {
     "title": "Electricity market price",
     "description": "Electricity price per MWh",
-    "version": "0.1.1"
+    "version": "0.1.0"
   },
   "paths": {
     "/Market/Electricity/Pricing/History_v0.1": {
@@ -263,14 +263,14 @@
             "format": "date-time",
             "title": "Start time",
             "description": "Start time of the requested time period, in RFC 3339",
-            "examples": ["2024-01-01T00:00:00Z"]
+            "examples": ["2024-01-01T00:00:00+02:00"]
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
-            "title": "Start time",
+            "title": "End time",
             "description": "End time of the requested time period, in RFC 3339",
-            "examples": ["2024-01-01T23:59:59Z"]
+            "examples": ["2024-01-01T23:59:59+02:00"]
           }
         },
         "type": "object",
@@ -281,22 +281,22 @@
         "properties": {
           "currencyCode": {
             "type": "string",
+            "pattern": "^[A-Z]{3}$",
             "title": "Currency",
             "description": "Three letter currency code for the price, from ISO 4217",
             "examples": ["EUR", "USD"]
           },
-          "price": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PeriodPrice"
-              }
-            ],
+          "prices": {
+            "items": {
+              "$ref": "#/components/schemas/PeriodPrice"
+            },
+            "type": "array",
             "title": "Prices",
             "description": "List of the prices for the given time period"
           }
         },
         "type": "object",
-        "required": ["currencyCode", "price"],
+        "required": ["currencyCode", "prices"],
         "title": "EnergyPriceResponse"
       },
       "Forbidden": {
@@ -365,14 +365,14 @@
             "type": "number",
             "title": "Price (per MWh)",
             "description": "Market price per megawatt-hour for this pricing period",
-            "examples": ["29.12"]
+            "examples": [29.12]
           },
           "startTime": {
             "type": "string",
             "format": "date-time",
             "title": "Start time",
             "description": "Start time of the pricing period, in RFC 3339",
-            "examples": ["2024-01-01T02:00:00Z"]
+            "examples": ["2024-01-01T02:00:00+02:00"]
           }
         },
         "type": "object",
