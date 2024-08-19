@@ -1,0 +1,649 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Cargo handling equipment data sheet",
+    "description": "General as-built data of a cargo handling equipment operating in a port",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.1": {
+      "post": {
+        "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
+        "summary": "Cargo handling equipment data sheet",
+        "description": "General as-built data of a cargo handling equipment operating in a port",
+        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataSheetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSheetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitExceeded"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Batteries": {
+        "properties": {
+          "cellType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cell type",
+            "description": "The type of cells used in the battery pack",
+            "examples": ["lithium-ion"]
+          },
+          "count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count",
+            "description": "The number of corresponding batteries in the machine",
+            "examples": [2]
+          },
+          "nominalCapacity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal capacity (Ah)",
+            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
+            "examples": [225.0]
+          },
+          "nominalVoltage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal voltage (v)",
+            "description": "The average voltage the battery is rated to provide under typical operating conditionstypical operating conditions",
+            "examples": [12.0]
+          },
+          "power": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power (kW)",
+            "description": "The power of the battery in use in the machine in kilowatts",
+            "examples": [75.0]
+          }
+        },
+        "type": "object",
+        "title": "Batteries"
+      },
+      "DataSheetRequest": {
+        "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 150,
+            "title": "Product",
+            "description": "The product code used for identifying the product type",
+            "examples": ["cargo-handling-equipment-modelX-1234"]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "ID",
+            "description": "The unique identifier of the product",
+            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
+          }
+        },
+        "type": "object",
+        "required": ["product", "id"],
+        "title": "DataSheetRequest"
+      },
+      "DataSheetResponse": {
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EquipmentType"
+              }
+            ],
+            "title": "Type",
+            "description": "The type of the cargo handling equipment according to TIC4.0 classification. Options are Straddle Carrier (SC) / Ship-to-Shore Crane (STS) / Mobile Crane (MC) / Rubber-tired Gantry Crane (RTG) / Rail-mounted Gantry Crane (RMG) / Automatic Stacking Crane (ASC) / Reach Stacker (RS) / Top Handler (TH) / Empty Container Handler (ECH) / Terminal Tractor (TT)",
+            "examples": ["SC"]
+          },
+          "model": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Model",
+            "description": "The model of the machine",
+            "examples": ["Model X 1234"]
+          },
+          "modelYear": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2500.0,
+                "minimum": 1900.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model year",
+            "description": "The model year of the machine",
+            "examples": [2023]
+          },
+          "manufacturerInformation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ManufacturerInformation"
+              }
+            ],
+            "title": "Manufacturer information",
+            "description": "The details of the manufacturer"
+          },
+          "powerSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PowerSource"
+              }
+            ],
+            "title": "Power source",
+            "description": "The power source used by the machine",
+            "examples": ["electric"]
+          },
+          "batteries": {
+            "items": {
+              "$ref": "#/components/schemas/Batteries"
+            },
+            "type": "array",
+            "title": "Batteries",
+            "description": "The list of the batteries in the machine"
+          },
+          "fuelVolume": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fuel volume (l)",
+            "description": "The maximum fuel amount in litres assuming the vehicle uses fuel for operation",
+            "examples": [3000.0]
+          },
+          "gasAmount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gas amount (kg)",
+            "description": "The maximum gas amount in kilograms assuming the vehicle uses gas for operation",
+            "examples": [50.0]
+          },
+          "expectedRange": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected range (km)",
+            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers",
+            "examples": [300.0]
+          },
+          "netVehicleMass": {
+            "type": "number",
+            "title": "Net vehicle mass (kg)",
+            "description": "The mass of the machine when unloaded in kilograms",
+            "examples": [4000.0]
+          },
+          "maxLoadCapacity": {
+            "type": "number",
+            "title": "Max load capacity (kg)",
+            "description": "The maximum weight that the machine can be loaded with or carry in kilograms",
+            "examples": [6000.0]
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "model",
+          "manufacturerInformation",
+          "powerSource",
+          "batteries",
+          "netVehicleMass",
+          "maxLoadCapacity"
+        ],
+        "title": "DataSheetResponse"
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "EquipmentType": {
+        "type": "string",
+        "enum": ["SC", "STS", "MC", "RTG", "RMG", "ASC", "RS", "TH", "ECH", "TT"],
+        "title": "EquipmentType"
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ManufacturerInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Name",
+            "description": "The registered trade name of the manufacturer company",
+            "examples": ["Equipment Manufacturer Company X"]
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "pattern": "^https://"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Website",
+            "description": "The website of the manufacturer",
+            "examples": ["https://example.com/"]
+          }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "ManufacturerInformation"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "PowerSource": {
+        "type": "string",
+        "enum": ["electric", "fuel", "gas", "hybrid", "h2", "hydraulic"],
+        "title": "PowerSource"
+      },
+      "RateLimitExceeded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Rate limit exceeded"
+          }
+        },
+        "type": "object",
+        "title": "RateLimitExceeded",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
