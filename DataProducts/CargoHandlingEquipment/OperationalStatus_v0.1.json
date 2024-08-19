@@ -393,6 +393,19 @@
             "description": "The state of operation",
             "examples": ["driving"]
           },
+          "isLoaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is loaded",
+            "description": "The cargo handling status that shows whether the equipment is loaded of not",
+            "examples": ["True"]
+          },
           "fuelLevel": {
             "anyOf": [
               {

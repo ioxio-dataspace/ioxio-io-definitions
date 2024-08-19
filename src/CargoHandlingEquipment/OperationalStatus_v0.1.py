@@ -47,6 +47,12 @@ class OperationalStatusResponse(CamelCaseModel):
         description="The state of operation",
         examples=[OperationalState.DRIVING],
     )
+    is_loaded: Optional[bool] = Field(
+        None,
+        title="Is loaded",
+        description="The cargo handling status that shows whether the equipment is loaded of not",
+        examples=["True"],
+    )
     fuel_level: Optional[float] = Field(
         None,
         title="Fuel level (%)",
