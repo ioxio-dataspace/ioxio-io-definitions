@@ -5,28 +5,36 @@ from pydantic import Field
 
 
 class VehicleTurnaroundTimeRequest(CamelCaseModel):
-    vehicleId: str = Field(
+    vehicle_id: str = Field(
         ...,
         title="Vehicle identifier",
         description="Licence plate number or similar identification number of the vehicle",
-        examples=["123-ABC"],
+        examples=["ABC-123"],
     )
-    leaveTime: datetime.datetime = Field(
+    leave_time: datetime.datetime = Field(
         ...,
         title="Leaving time",
         description="Time the vehicle left the facility, in RFC 3339 format",
         examples=[
-            datetime.datetime(2024, 7, 15, 14, 45, 00, tzinfo=datetime.timezone.utc),
+            datetime.datetime(
+                2024,
+                7,
+                15,
+                14,
+                45,
+                00,
+                tzinfo=datetime.timezone(datetime.timedelta(hours=2)),
+            ),
         ],
     )
 
 
 class VehicleTurnaroundTimeResponse(CamelCaseModel):
-    turnaroundTime: int = Field(
+    turnaround_time: int = Field(
         ...,
         title="Turnaround time (s)",
         description="Vehicle's previous turnaround time prior to the leaving time in seconds",
-        examples=["7200"],
+        examples=[7200],
     )
 
 

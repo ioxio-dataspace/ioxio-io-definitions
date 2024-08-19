@@ -388,14 +388,14 @@
             "type": "string",
             "title": "Vehicle identifier",
             "description": "Licence plate number or similar identification number of the vehicle",
-            "examples": ["123-ABC"]
+            "examples": ["ABC-123"]
           },
           "leaveTime": {
             "type": "string",
             "format": "date-time",
             "title": "Leaving time",
             "description": "Time the vehicle left the facility, in RFC 3339 format",
-            "examples": ["2024-07-15T14:45:00Z"]
+            "examples": ["2024-07-15T14:45:00+02:00"]
           }
         },
         "type": "object",
@@ -408,7 +408,7 @@
             "type": "integer",
             "title": "Turnaround time (s)",
             "description": "Vehicle's previous turnaround time prior to the leaving time in seconds",
-            "examples": ["7200"]
+            "examples": [7200]
           }
         },
         "type": "object",
