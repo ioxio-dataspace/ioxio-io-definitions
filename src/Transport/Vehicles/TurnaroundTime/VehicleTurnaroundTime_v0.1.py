@@ -13,7 +13,7 @@ class VehicleTurnaroundTimeRequest(CamelCaseModel):
     )
     leave_time: datetime.datetime = Field(
         ...,
-        title="Leaving time",
+        title="Leave time",
         description="Time the vehicle left the facility, in RFC 3339 format",
         examples=[
             datetime.datetime(

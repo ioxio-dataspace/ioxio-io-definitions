@@ -393,7 +393,7 @@
           "leaveTime": {
             "type": "string",
             "format": "date-time",
-            "title": "Leaving time",
+            "title": "Leave time",
             "description": "Time the vehicle left the facility, in RFC 3339 format",
             "examples": ["2024-07-15T14:45:00+02:00"]
           }
