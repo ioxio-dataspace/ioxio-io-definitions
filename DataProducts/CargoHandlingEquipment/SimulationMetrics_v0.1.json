@@ -384,14 +384,14 @@
           "hoistSpeed": {
             "type": "number",
             "title": "Hoist speed (mm/s)",
-            "description": "The instantaneous speed of the equipment hoist move in millmeters per second from the ground",
+            "description": "The instantaneous speed of the equipment hoist move in millimeters per second from the ground",
             "examples": [500]
           },
           "twistLocksClosed": {
             "type": "boolean",
             "title": "Twist locks closed",
             "description": "Whether twist locks are closed or not. When they are closed, the container can be hoisted.",
-            "examples": ["True"]
+            "examples": [true]
           },
           "locationCoordinates": {
             "allOf": [
@@ -408,7 +408,7 @@
             "minimum": 0.0,
             "title": "Heading (°)",
             "description": "The GPS heading of the equipment measured from the true north in degrees",
-            "examples": ["90.5"]
+            "examples": [90.5]
           },
           "drivePower": {
             "anyOf": [
@@ -457,19 +457,33 @@
             ],
             "title": "Spreader length (ft)",
             "description": "The length of the equipment spreader measured in feet",
-            "examples": ["20"]
+            "examples": [20.0]
           },
           "idleStatus": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Idle status",
             "description": "The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc).",
-            "examples": ["True", "False"]
+            "examples": [true]
           },
           "drivingForward": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Driving forward",
             "description": "The instantaneous driving status of the equipment",
-            "examples": ["True", "False"]
+            "examples": [true]
           },
           "acceleration": {
             "anyOf": [
@@ -482,7 +496,7 @@
             ],
             "title": "Acceleration (mm/s^2)",
             "description": "The instantaneous acceleration of the equipment on the ground in millimeters per second per second",
-            "examples": ["1000"]
+            "examples": [1000.0]
           },
           "hoistAccelerator": {
             "anyOf": [
@@ -494,7 +508,8 @@
               }
             ],
             "title": "Hoist acceleration (mm/s^2)",
-            "description": "The instantaneous acceleration for hoisting the load in millimeters per second per second per second"
+            "description": "The instantaneous acceleration for hoisting the load in millimeters per second per second",
+            "examples": [500.0]
           }
         },
         "type": "object",
@@ -506,9 +521,7 @@
           "hoistSpeed",
           "twistLocksClosed",
           "locationCoordinates",
-          "heading",
-          "idleStatus",
-          "drivingForward"
+          "heading"
         ],
         "title": "Sample"
       },
@@ -551,19 +564,26 @@
             ],
             "title": "End time",
             "description": "The end time of the sample period, in RFC 3339 format",
-            "examples": ["2023-04-12T23:20:50.000052Z"]
+            "examples": ["2023-05-12T23:20:50.000052Z"]
           },
           "sampleInterval": {
-            "type": "integer",
-            "maximum": 1000.0,
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Sample interval (ms)",
             "description": "The requested sample interval smaller or equal to 1000 milliseconds",
-            "example": ["500"]
+            "example": [500]
           }
         },
         "type": "object",
-        "required": ["id", "startTime", "sampleInterval"],
+        "required": ["id", "startTime"],
         "title": "SimulationMetricsRequest"
       },
       "SimulationMetricsResponse": {
@@ -573,7 +593,7 @@
             "minimum": 0.0,
             "title": "Sample count",
             "description": "The number of samples received in the response",
-            "examples": ["10000"]
+            "examples": [10000]
           },
           "samples": {
             "items": {
