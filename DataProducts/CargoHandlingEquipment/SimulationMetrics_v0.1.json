@@ -1,0 +1,659 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Cargo handling equipment simulation metrics",
+    "description": "General simulation metrics of a cargo handling equipment operating in a port",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/CargoHandlingEquipment/SimulationMetrics_v0.1": {
+      "post": {
+        "tags": [
+          "Cargo handling equipment",
+          "Freight terminal",
+          "Logistics",
+          "Performance",
+          "Port",
+          "Simulations"
+        ],
+        "summary": "Cargo handling equipment simulation metrics",
+        "description": "General simulation metrics of a cargo handling equipment operating in a port",
+        "operationId": "request_CargoHandlingEquipment_SimulationMetrics_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationMetricsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimulationMetricsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitExceeded"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LocationCoordinates": {
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Latitude (°)",
+            "description": "The latitude coordinate of the location in degrees",
+            "examples": [60.192059]
+          },
+          "longitude": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Longitude (°)",
+            "description": "The longitude coordinate of the location in degrees",
+            "examples": [24.945831]
+          }
+        },
+        "type": "object",
+        "required": ["latitude", "longitude"],
+        "title": "LocationCoordinates"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "RateLimitExceeded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Rate limit exceeded"
+          }
+        },
+        "type": "object",
+        "title": "RateLimitExceeded",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Sample": {
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Time",
+            "description": "The time of the equipment's performance sample, in RFC 3339 format",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "speed": {
+            "type": "number",
+            "title": "Speed (mm/s)",
+            "description": "The instantaneous speed of the equipment on the ground in millimeters per second",
+            "examples": [3000]
+          },
+          "load": {
+            "type": "number",
+            "title": "Load (kg)",
+            "description": "The instantaneous load of the equipment in kilograms",
+            "examples": [5000]
+          },
+          "loadHeight": {
+            "type": "number",
+            "title": "Load height (mm)",
+            "description": "The instantaneous load height in millimeters from the ground",
+            "examples": [2000]
+          },
+          "hoistSpeed": {
+            "type": "number",
+            "title": "Hoist speed (mm/s)",
+            "description": "The instantaneous speed of the equipment hoist move in millimeters per second from the ground",
+            "examples": [500]
+          },
+          "twistLocksClosed": {
+            "type": "boolean",
+            "title": "Twist locks closed",
+            "description": "Whether twist locks are closed or not. When they are closed, the container can be hoisted.",
+            "examples": [true]
+          },
+          "locationCoordinates": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LocationCoordinates"
+              }
+            ],
+            "title": "Location",
+            "description": "The location of the equipment in GPS coordinates"
+          },
+          "heading": {
+            "type": "number",
+            "maximum": 360.0,
+            "minimum": 0.0,
+            "title": "Heading (°)",
+            "description": "The GPS heading of the equipment measured from the true north in degrees",
+            "examples": [90.5]
+          },
+          "drivePower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Drive power (kW)",
+            "description": "The instantaneous power of the equipment for driving on the ground in kilowatts"
+          },
+          "hoistPower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hoist power (kW)",
+            "description": "The instantaneous power of the equipment for hoisting load in kilowatts"
+          },
+          "auxiliaryPower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auxiliary power (kW)",
+            "description": "The instantaneous auxiliary (other) energy consumption in kilowatts"
+          },
+          "spreaderLength": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spreader length (ft)",
+            "description": "The length of the equipment spreader measured in feet",
+            "examples": [20.0]
+          },
+          "idleStatus": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idle status",
+            "description": "The instantaneous idling status of the equipment. Idling means the equipment is not receiving any command from the driver (joystick) and it is not moving any element to perform a job (drive, hoist, gantry, trolley, etc).",
+            "examples": [true]
+          },
+          "drivingForward": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driving forward",
+            "description": "The instantaneous driving status of the equipment",
+            "examples": [true]
+          },
+          "acceleration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acceleration (mm/s^2)",
+            "description": "The instantaneous acceleration of the equipment on the ground in millimeters per second per second",
+            "examples": [1000.0]
+          },
+          "hoistAccelerator": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hoist acceleration (mm/s^2)",
+            "description": "The instantaneous acceleration for hoisting the load in millimeters per second per second",
+            "examples": [500.0]
+          }
+        },
+        "type": "object",
+        "required": [
+          "time",
+          "speed",
+          "load",
+          "loadHeight",
+          "hoistSpeed",
+          "twistLocksClosed",
+          "locationCoordinates",
+          "heading"
+        ],
+        "title": "Sample"
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "SimulationMetricsRequest": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "ID",
+            "description": "The unique identifier of the data source"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "The start time of the sample period, in RFC 3339 format",
+            "examples": ["2023-04-12T23:20:50.000052Z"]
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End time",
+            "description": "The end time of the sample period, in RFC 3339 format",
+            "examples": ["2023-05-12T23:20:50.000052Z"]
+          },
+          "sampleInterval": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sample interval (ms)",
+            "description": "The requested sample interval smaller or equal to 1000 milliseconds",
+            "example": [500]
+          }
+        },
+        "type": "object",
+        "required": ["id", "startTime"],
+        "title": "SimulationMetricsRequest"
+      },
+      "SimulationMetricsResponse": {
+        "properties": {
+          "sampleCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sample count",
+            "description": "The number of samples received in the response",
+            "examples": [10000]
+          },
+          "samples": {
+            "items": {
+              "$ref": "#/components/schemas/Sample"
+            },
+            "type": "array",
+            "title": "Samples",
+            "description": "List of equipment's performance samples"
+          }
+        },
+        "type": "object",
+        "required": ["sampleCount", "samples"],
+        "title": "SimulationMetricsResponse"
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
