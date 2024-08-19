@@ -25,7 +25,7 @@ class HoistMoves(CamelCaseModel):
     lift: Optional[int] = Field(
         None,
         title="Number of lift moves",
-        description="Count of lift moves the cargo handling equipment has performed during the time period",
+        description="Count of lifting moves the cargo handling equipment has performed during the time period",
         examples=[165],
     )
     lower: Optional[int] = Field(
@@ -40,7 +40,7 @@ class OperationalPerformanceResponse(CamelCaseModel):
     start_time: Optional[datetime.datetime] = Field(
         None,
         title="Start time",
-        description="The start time of the performance period in RFC 3339 format",
+        description="The start time of the performance period, in RFC 3339 format",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -48,7 +48,7 @@ class OperationalPerformanceResponse(CamelCaseModel):
     end_time: Optional[datetime.datetime] = Field(
         None,
         title="End time",
-        description="The end time of the performance period in RFC 3339 format",
+        description="The end time of the performance period, in RFC 3339 format",
         examples=[
             datetime.datetime(2023, 5, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -78,7 +78,7 @@ class OperationalPerformanceResponse(CamelCaseModel):
     cargo_weight_processed: Optional[float] = Field(
         None,
         title="Cargo weight processed (kg)",
-        description="The total cargo weight processed in kilograms",
+        description="The total cargo weight processed kilograms",
         examples=[75.0],
     )
 
@@ -94,7 +94,7 @@ class OperationalPerformanceRequest(CamelCaseModel):
     start_time: Optional[datetime.datetime] = Field(
         None,
         title="Start time",
-        description="The start time of the performance period in RFC 3339 format",
+        description="The start time of the performance period, in RFC 3339 format",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -102,7 +102,7 @@ class OperationalPerformanceRequest(CamelCaseModel):
     end_time: Optional[datetime.datetime] = Field(
         None,
         title="End time",
-        description="The end time of the performance period in RFC 3339 format",
+        description="The end time of the performance period in, RFC 3339 format",
         examples=[
             datetime.datetime(2023, 5, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
