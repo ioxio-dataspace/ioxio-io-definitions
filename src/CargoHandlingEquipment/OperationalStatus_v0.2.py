@@ -7,7 +7,7 @@ from pydantic import Field
 
 
 class OperationalState(str, Enum):
-    DRIVING = "driving"
+    OPERATING = "operating"
     IDLE = "idle"
     CHARGING = "charging"
     REFILLING = "refilling"
@@ -45,7 +45,7 @@ class OperationalStatusResponse(CamelCaseModel):
         ...,
         title="Operational state",
         description="The state of operation",
-        examples=[OperationalState.DRIVING],
+        examples=[OperationalState.OPERATING],
     )
     is_loaded: Optional[bool] = Field(
         None,
@@ -103,8 +103,7 @@ class OperationalStatusRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
-    deprecated=True,
+    version="0.2.0",
     title="Cargo handling equipment operational status",
     description="General operational status data of a cargo handling equipment "
     "operating in a port",
