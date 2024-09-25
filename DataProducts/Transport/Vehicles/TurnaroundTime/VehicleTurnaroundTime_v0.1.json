@@ -3,7 +3,7 @@
   "info": {
     "title": "Vehicle turnaround time",
     "description": "Turnaround time of a vehicle within a facility",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Transport/Vehicles/TurnaroundTime/VehicleTurnaroundTime_v0.1": {
@@ -11,6 +11,7 @@
         "summary": "Vehicle turnaround time",
         "description": "Turnaround time of a vehicle within a facility",
         "operationId": "request_Transport_Vehicles_TurnaroundTime_VehicleTurnaroundTime_v0_1",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",
