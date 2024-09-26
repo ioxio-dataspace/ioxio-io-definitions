@@ -57,7 +57,8 @@ class TurnaroundTimeRequest(CamelCaseModel):
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
-        description="The start time of the performance period, in RFC 3339 format.",
+        description="The start time of the time range to get turnaround times for, in "
+        "RFC 3339 format.",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc)
         ],
@@ -65,7 +66,8 @@ class TurnaroundTimeRequest(CamelCaseModel):
     end_time: datetime.datetime = Field(
         ...,
         title="End time",
-        description="The end time of the performance period in, RFC 3339 format.",
+        description="The end time of the time range to get turnaround times for, in "
+        "RFC 3339 format.",
         examples=[
             datetime.datetime(2023, 5, 12, 23, 20, 50, tzinfo=datetime.timezone.utc)
         ],

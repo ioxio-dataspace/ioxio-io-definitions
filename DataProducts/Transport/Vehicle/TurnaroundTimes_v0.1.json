@@ -405,14 +405,14 @@
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "The start time of the performance period, in RFC 3339 format.",
+            "description": "The start time of the time range to get turnaround times for, in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
             "title": "End time",
-            "description": "The end time of the performance period in, RFC 3339 format.",
+            "description": "The end time of the time range to get turnaround times for, in RFC 3339 format.",
             "examples": ["2023-05-12T23:20:50Z"]
           }
         },
