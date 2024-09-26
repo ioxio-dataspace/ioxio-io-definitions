@@ -39,9 +39,10 @@ class VehicleTurnaroundTimeResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Vehicle turnaround time",
     description="Turnaround time of a vehicle within a facility",
     request=VehicleTurnaroundTimeRequest,
     response=VehicleTurnaroundTimeResponse,
+    deprecated=True,
 )

@@ -1,17 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Vehicle turnaround time",
-    "description": "Turnaround time of a vehicle within a facility",
-    "version": "0.1.1"
+    "title": "Vehicle turnaround times",
+    "description": "Turnaround times of vehicles within a facility.",
+    "version": "0.1.0"
   },
   "paths": {
-    "/Transport/Vehicles/TurnaroundTime/VehicleTurnaroundTime_v0.1": {
+    "/Transport/Vehicle/TurnaroundTimes_v0.1": {
       "post": {
-        "summary": "Vehicle turnaround time",
-        "description": "Turnaround time of a vehicle within a facility",
-        "operationId": "request_Transport_Vehicles_TurnaroundTime_VehicleTurnaroundTime_v0_1",
-        "deprecated": true,
+        "tags": ["Logistics"],
+        "summary": "Vehicle turnaround times",
+        "description": "Turnaround times of vehicles within a facility.",
+        "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_1",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -61,7 +61,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VehicleTurnaroundTimeRequest"
+                "$ref": "#/components/schemas/TurnaroundTimeRequest"
               }
             }
           }
@@ -72,7 +72,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VehicleTurnaroundTimeResponse"
+                  "$ref": "#/components/schemas/TurnaroundTimeResponse"
                 }
               }
             }
@@ -337,6 +337,104 @@
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
       },
+      "TurnaroundTime": {
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Vehicle identifier",
+            "description": "Licence plate number or similar identification number of the vehicle.",
+            "examples": ["ABC-123"]
+          },
+          "vehicleType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle type",
+            "description": "The type of the vehicle.",
+            "examples": ["truck"]
+          },
+          "entryTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Entry time",
+            "description": "The time when the vehicle entered the facility.",
+            "examples": ["2023-04-12T22:20:50Z"]
+          },
+          "leaveTime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leave time",
+            "description": "The time when the vehicle left the facility.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "turnaroundTime": {
+            "type": "integer",
+            "title": "Turnaround time (s)",
+            "description": "Turnaround time of the vehicle in seconds.",
+            "examples": [3600]
+          }
+        },
+        "type": "object",
+        "required": ["vehicleId", "entryTime", "turnaroundTime"],
+        "title": "TurnaroundTime"
+      },
+      "TurnaroundTimeRequest": {
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Location identifier",
+            "description": "Location identification number based on UN/LOCODE, or other similar identification number of the transport location or facility.",
+            "examples": ["FI OUL"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "The start time of the time range to get turnaround times for, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End time",
+            "description": "The end time of the time range to get turnaround times for, in RFC 3339 format.",
+            "examples": ["2023-05-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["locationId", "startTime", "endTime"],
+        "title": "TurnaroundTimeRequest"
+      },
+      "TurnaroundTimeResponse": {
+        "properties": {
+          "turnaroundTimes": {
+            "items": {
+              "$ref": "#/components/schemas/TurnaroundTime"
+            },
+            "type": "array",
+            "title": "Turnaround times",
+            "description": "The list of turnaround times of vehicles within the facility."
+          }
+        },
+        "type": "object",
+        "required": ["turnaroundTimes"],
+        "title": "TurnaroundTimeResponse"
+      },
       "Unauthorized": {
         "properties": {
           "type": {
@@ -382,39 +480,6 @@
         "type": "object",
         "required": ["loc", "msg", "type"],
         "title": "ValidationError"
-      },
-      "VehicleTurnaroundTimeRequest": {
-        "properties": {
-          "vehicleId": {
-            "type": "string",
-            "title": "Vehicle identifier",
-            "description": "Licence plate number or similar identification number of the vehicle",
-            "examples": ["ABC-123"]
-          },
-          "leaveTime": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Leave time",
-            "description": "Time the vehicle left the facility, in RFC 3339 format",
-            "examples": ["2024-07-15T14:45:00+02:00"]
-          }
-        },
-        "type": "object",
-        "required": ["vehicleId", "leaveTime"],
-        "title": "VehicleTurnaroundTimeRequest"
-      },
-      "VehicleTurnaroundTimeResponse": {
-        "properties": {
-          "turnaroundTime": {
-            "type": "integer",
-            "title": "Turnaround time (s)",
-            "description": "Vehicle's previous turnaround time prior to the leaving time in seconds",
-            "examples": [7200]
-          }
-        },
-        "type": "object",
-        "required": ["turnaroundTime"],
-        "title": "VehicleTurnaroundTimeResponse"
       }
     }
   }
