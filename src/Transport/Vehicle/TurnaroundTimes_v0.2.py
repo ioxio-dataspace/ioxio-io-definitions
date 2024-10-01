@@ -37,8 +37,8 @@ class TurnaroundTime(CamelCaseModel):
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc)
         ],
     )
-    turnaround_time: int = Field(
-        ...,
+    turnaround_time: Optional[int] = Field(
+        None,
         title="Turnaround time (s)",
         description="Turnaround time of the vehicle in seconds.",
         examples=[3600],
@@ -83,8 +83,7 @@ class TurnaroundTimeResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
-    deprecated=True,
+    version="0.2.0",
     title="Vehicle turnaround times",
     description="Turnaround times of vehicles within a facility.",
     tags=["Logistics"],
