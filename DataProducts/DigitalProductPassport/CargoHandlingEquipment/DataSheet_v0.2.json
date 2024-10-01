@@ -3,15 +3,15 @@
   "info": {
     "title": "Cargo handling equipment data sheet",
     "description": "General as-built data of a cargo handling equipment operating in a port",
-    "version": "0.1.1"
+    "version": "0.2.0"
   },
   "paths": {
-    "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.1": {
+    "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.2": {
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
         "summary": "Cargo handling equipment data sheet",
         "description": "General as-built data of a cargo handling equipment operating in a port",
-        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_1",
+        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -319,7 +319,7 @@
             "description": "The model of the machine",
             "examples": ["Model X 1234"]
           },
-          "modelYear": {
+          "releaseYear": {
             "anyOf": [
               {
                 "type": "integer",
@@ -330,7 +330,7 @@
                 "type": "null"
               }
             ],
-            "title": "Model year",
+            "title": "Release year",
             "description": "The model year of the machine",
             "examples": [2023]
           },
