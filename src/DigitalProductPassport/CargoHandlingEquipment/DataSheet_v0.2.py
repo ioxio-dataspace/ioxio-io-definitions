@@ -99,10 +99,10 @@ class DataSheetResponse(CamelCaseModel):
         description="The model of the machine",
         examples=["Model X 1234"],
     )
-    model_year: Optional[int] = Field(
+    version_year: Optional[int] = Field(
         None,
-        title="Model year",
-        description="The model year of the machine",
+        title="Version year",
+        description="The year representing the machine's model version.",
         ge=1900,
         le=2500,
         examples=[2023],
@@ -175,7 +175,7 @@ class DataSheetRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.2.0",
     title="Cargo handling equipment data sheet",
     description="General as-built data of a cargo handling equipment operating in a "
     "port",
