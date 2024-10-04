@@ -319,7 +319,7 @@
             "description": "The model of the machine",
             "examples": ["Model X 1234"]
           },
-          "releaseYear": {
+          "versionYear": {
             "anyOf": [
               {
                 "type": "integer",
@@ -330,8 +330,8 @@
                 "type": "null"
               }
             ],
-            "title": "Release year",
-            "description": "The model year of the machine",
+            "title": "Version year",
+            "description": "The year representing the machine's model version.",
             "examples": [2023]
           },
           "manufacturerInformation": {
