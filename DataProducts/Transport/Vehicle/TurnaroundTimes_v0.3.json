@@ -3,16 +3,15 @@
   "info": {
     "title": "Vehicle turnaround times",
     "description": "Turnaround times of vehicles within a facility.",
-    "version": "0.2.1"
+    "version": "0.3.0"
   },
   "paths": {
-    "/Transport/Vehicle/TurnaroundTimes_v0.2": {
+    "/Transport/Vehicle/TurnaroundTimes_v0.3": {
       "post": {
         "tags": ["Logistics"],
         "summary": "Vehicle turnaround times",
         "description": "Turnaround times of vehicles within a facility.",
-        "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_2",
-        "deprecated": true,
+        "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_3",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -342,7 +341,7 @@
         "properties": {
           "vehicleId": {
             "type": "string",
-            "maxLength": 40,
+            "maxLength": 128,
             "title": "Vehicle identifier",
             "description": "Licence plate number or similar identification number of the vehicle.",
             "examples": ["ABC-123"]
