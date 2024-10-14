@@ -389,7 +389,7 @@
             "maximum": 90.0,
             "minimum": -90.0,
             "title": "Latitude (°)",
-            "description": "The latitude coordinate of the desired location in degrees",
+            "description": "The latitude coordinate of the desired location in degrees.",
             "examples": [60.192059]
           },
           "lon": {
@@ -397,7 +397,7 @@
             "maximum": 180.0,
             "minimum": -180.0,
             "title": "Longitude (°)",
-            "description": "The longitude coordinate of the desired location in degrees",
+            "description": "The longitude coordinate of the desired location in degrees.",
             "examples": [24.945831]
           },
           "when": {
@@ -411,7 +411,7 @@
               }
             ],
             "title": "Date and time",
-            "description": "Date and time in RFC 3339 format. If not set, request the current weather",
+            "description": "Date and time in RFC 3339 format. If not specified, returns the current weather.",
             "examples": ["2023-04-12T23:20:50Z"]
           }
         },
@@ -425,7 +425,7 @@
             "type": "number",
             "minimum": -273.15,
             "title": "Temperature (°C)",
-            "description": "Current temperature in degrees Celsius",
+            "description": "Current temperature in degrees Celsius.",
             "examples": [17.3]
           },
           "humidity": {
@@ -440,7 +440,7 @@
               }
             ],
             "title": "Humidity (%)",
-            "description": "Current relative air humidity percentage",
+            "description": "Current relative air humidity percentage.",
             "examples": [72]
           },
           "pressure": {
@@ -454,7 +454,7 @@
               }
             ],
             "title": "Pressure (hPa)",
-            "description": "Current air pressure in hectopascals",
+            "description": "Current air pressure in hectopascals.",
             "examples": [1007]
           },
           "windSpeed": {
@@ -468,7 +468,7 @@
               }
             ],
             "title": "Wind speed (m/s)",
-            "description": "Current wind speed in meters per second",
+            "description": "Current wind speed in meters per second.",
             "examples": [2.1]
           },
           "windDirection": {
@@ -483,7 +483,7 @@
               }
             ],
             "title": "Wind direction (°)",
-            "description": "Current wind direction in meteorological wind direction degrees",
+            "description": "Current wind direction in meteorological wind direction degrees.",
             "examples": [220.0]
           },
           "precipitation": {
@@ -498,7 +498,7 @@
               }
             ],
             "title": "Precipitation (mm/h)",
-            "description": "Current precipitation in millimeters per hour",
+            "description": "Current precipitation in millimeters per hour.",
             "examples": [120.0]
           },
           "visibility": {
@@ -513,7 +513,7 @@
               }
             ],
             "title": "Visibility (m)",
-            "description": "Visibility in meters",
+            "description": "Visibility in meters.",
             "examples": [320.0]
           }
         },
