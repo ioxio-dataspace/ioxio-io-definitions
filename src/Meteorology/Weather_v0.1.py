@@ -1,11 +1,12 @@
+import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
 
-class WeatherCurrentRequest(CamelCaseModel):
-    latitude: float = Field(
+class WeatherRequest(CamelCaseModel):
+    lat: float = Field(
         ...,
         title="Latitude (°)",
         description="The latitude coordinate of the desired location in degrees",
@@ -13,7 +14,7 @@ class WeatherCurrentRequest(CamelCaseModel):
         le=90.0,
         examples=[60.192059],
     )
-    longitude: float = Field(
+    lon: float = Field(
         ...,
         title="Longitude (°)",
         description="The longitude coordinate of the desired location in degrees",
@@ -21,9 +22,17 @@ class WeatherCurrentRequest(CamelCaseModel):
         le=180.0,
         examples=[24.945831],
     )
+    when: Optional[datetime.datetime] = Field(
+        None,
+        title="Date and time",
+        description="Date and time in RFC 3339 format. If not set, request the current weather",
+        examples=[
+            datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc)
+        ],
+    )
 
 
-class WeatherCurrentResponse(CamelCaseModel):
+class WeatherResponse(CamelCaseModel):
     temperature: float = Field(
         ...,
         title="Temperature (°C)",
@@ -80,11 +89,10 @@ class WeatherCurrentResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    deprecated=True,
     version="0.1.0",
-    title="Current weather in metric units",
-    description="Common data points about the current weather with metric units in a "
-    "given location",
-    request=WeatherCurrentRequest,
-    response=WeatherCurrentResponse,
+    title="Weather in metric units",
+    description="Common data points about the weather with metric units in a "
+    "given location. Can be requested for a date in the past.",
+    request=WeatherRequest,
+    response=WeatherResponse,
 )
