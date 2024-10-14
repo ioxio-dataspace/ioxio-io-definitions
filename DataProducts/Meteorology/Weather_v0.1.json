@@ -2,14 +2,14 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Weather in metric units",
-    "description": "Common data points about the weather with metric units in a given location. Can be requested for a date in the past.",
+    "description": "Weather information for a given location, either current weather prediction or historical weather observations, using metric units.",
     "version": "0.1.0"
   },
   "paths": {
     "/Meteorology/Weather_v0.1": {
       "post": {
         "summary": "Weather in metric units",
-        "description": "Common data points about the weather with metric units in a given location. Can be requested for a date in the past.",
+        "description": "Weather information for a given location, either current weather prediction or historical weather observations, using metric units.",
         "operationId": "request_Meteorology_Weather_v0_1",
         "parameters": [
           {

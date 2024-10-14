@@ -91,8 +91,8 @@ class WeatherResponse(CamelCaseModel):
 DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Weather in metric units",
-    description="Common data points about the weather with metric units in a "
-    "given location. Can be requested for a date in the past.",
+    description="Weather information for a given location, either current "
+    "weather prediction or historical weather observations, using metric units.",
     request=WeatherRequest,
     response=WeatherResponse,
 )
