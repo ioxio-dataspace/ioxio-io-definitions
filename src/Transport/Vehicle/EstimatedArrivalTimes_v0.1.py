@@ -37,7 +37,7 @@ class Request(CamelCaseModel):
         description="Location identification number based on UN/LOCODE, IATA or other "
         "similar identification number of the transport location.",
         max_length=40,
-        examples=["FI OUL"],
+        examples=["FIOUL"],
     )
     start_time: datetime = Field(
         ...,

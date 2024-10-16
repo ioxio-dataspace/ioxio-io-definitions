@@ -366,7 +366,7 @@
             "maxLength": 40,
             "title": "Location identifier",
             "description": "Location identification number based on UN/LOCODE, IATA or other similar identification number of the transport location.",
-            "examples": ["FI OUL"]
+            "examples": ["FIOUL"]
           },
           "startTime": {
             "type": "string",
