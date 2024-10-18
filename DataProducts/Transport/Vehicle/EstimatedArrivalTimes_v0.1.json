@@ -8,7 +8,7 @@
   "paths": {
     "/Transport/Vehicle/EstimatedArrivalTimes_v0.1": {
       "post": {
-        "tags": ["ETA", "Estimated time of arrival", "Logistics"],
+        "tags": ["ETA", "Logistics"],
         "summary": "Estimated arrival times",
         "description": "Estimated arrival times of vehicles within a transport location.",
         "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_1",

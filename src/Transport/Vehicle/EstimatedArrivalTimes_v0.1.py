@@ -72,7 +72,7 @@ DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Estimated arrival times",
     description="Estimated arrival times of vehicles within a transport location.",
-    tags=["Logistics", "Estimated time of arrival", "ETA"],
+    tags=["Logistics", "ETA"],
     request=Request,
     response=Response,
 )
