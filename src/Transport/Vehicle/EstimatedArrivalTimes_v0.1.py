@@ -14,6 +14,13 @@ class EstimatedArrival(CamelCaseModel):
         max_length=128,
         examples=["ABC-123"],
     )
+    vehicle_name: Optional[str] = Field(
+        None,
+        title="Vehicle name",
+        description="Name of the vehicle or vessel.",
+        max_length=128,
+        examples=["Havelland"],
+    )
     vehicle_type: Optional[str] = Field(
         None,
         title="Vehicle type",

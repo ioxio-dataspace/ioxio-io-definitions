@@ -260,6 +260,20 @@
             "description": "Licence plate number or similar identification number of the vehicle or vessel.",
             "examples": ["ABC-123"]
           },
+          "vehicleName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle name",
+            "description": "Name of the vehicle or vessel.",
+            "examples": ["Havelland"]
+          },
           "vehicleType": {
             "anyOf": [
               {
