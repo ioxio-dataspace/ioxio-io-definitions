@@ -54,6 +54,24 @@
               "title": "X-Authorization-Provider"
             },
             "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
           }
         ],
         "requestBody": {
@@ -303,11 +321,7 @@
       "DataSheetResponse": {
         "properties": {
           "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EquipmentType"
-              }
-            ],
+            "$ref": "#/components/schemas/EquipmentType",
             "title": "Type",
             "description": "The type of the cargo handling equipment according to TIC4.0 classification. Options are Straddle Carrier (SC) / Ship-to-Shore Crane (STS) / Mobile Crane (MC) / Rubber-tired Gantry Crane (RTG) / Rail-mounted Gantry Crane (RMG) / Automatic Stacking Crane (ASC) / Reach Stacker (RS) / Top Handler (TH) / Empty Container Handler (ECH) / Terminal Tractor (TT)",
             "examples": ["SC"]
@@ -335,20 +349,12 @@
             "examples": [2023]
           },
           "manufacturerInformation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ManufacturerInformation"
-              }
-            ],
+            "$ref": "#/components/schemas/ManufacturerInformation",
             "title": "Manufacturer information",
             "description": "The details of the manufacturer"
           },
           "powerSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PowerSource"
-              }
-            ],
+            "$ref": "#/components/schemas/PowerSource",
             "title": "Power source",
             "description": "The power source used by the machine",
             "examples": ["electric"]
