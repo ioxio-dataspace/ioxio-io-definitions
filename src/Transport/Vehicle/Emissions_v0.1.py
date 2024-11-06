@@ -44,19 +44,19 @@ class EmissionsResponse(CamelCaseModel):
         ...,
         title="Carbon dioxide (kg)",
         description="The mass of the carbon dioxide (CO2) emissions in kilograms.",
-        examples=[550.0],
+        examples=[4000],
     )
     nitrogen_oxides: float = Field(
         ...,
         title="Nitrogen oxides (kg)",
         description="The mass of the nitrogen oxides emissions (NOx) in kilograms.",
-        examples=[2500.0],
+        examples=[1.5],
     )
     particulate_matter: float = Field(
         ...,
         title="Particulate matter (kg)",
         description="The mass of the particulate matter emissions (PM) in kilograms.",
-        examples=[2500.0],
+        examples=[0.05],
     )
 
 
