@@ -69,7 +69,8 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
+    deprecated=True,
     title="Estimated arrival times",
     description="Estimated arrival times of vehicles within a transport location.",
     tags=["Logistics", "ETA"],
