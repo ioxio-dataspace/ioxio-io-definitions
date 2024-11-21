@@ -8,7 +8,7 @@
   "paths": {
     "/Cargo/Metrics_v0.1": {
       "post": {
-        "tags": ["Cargo", "Metrics", "Volume", "Weight"],
+        "tags": ["Cargo", "Metrics", "Packing list", "Volume", "Weight"],
         "summary": "Cargo metrics",
         "description": "The key metrics of the transported cargo",
         "operationId": "request_Cargo_Metrics_v0_1",
@@ -223,45 +223,6 @@
       },
       "CargoItem": {
         "properties": {
-          "productName": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Product name",
-            "description": "Name of the product.",
-            "examples": ["Example product"]
-          },
-          "parcel": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parcel",
-            "description": "Parcel number.",
-            "examples": [123456]
-          },
-          "quantity": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Quantity",
-            "description": "Quantity of the product.",
-            "examples": [500]
-          },
           "weight": {
             "anyOf": [
               {
@@ -272,7 +233,7 @@
               }
             ],
             "title": "Weight (kg)",
-            "description": "The weight in kilograms.",
+            "description": "The weight of the cargo item in kilograms.",
             "examples": [2000]
           },
           "volume": {
@@ -285,8 +246,47 @@
               }
             ],
             "title": "Volume (m^3)",
-            "description": "The volume in cubic meters.",
-            "examples": [5.5]
+            "description": "The volume of the cargo item in cubic meters.",
+            "examples": [5.25]
+          },
+          "length": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Length (m)",
+            "description": "The length of the cargo item in meters.",
+            "examples": [3.5]
+          },
+          "width": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width (m)",
+            "description": "The width of the cargo item in meters.",
+            "examples": [1.5]
+          },
+          "height": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height (m)",
+            "description": "The height of the cargo item in meters.",
+            "examples": [1.0]
           }
         },
         "type": "object",
@@ -308,10 +308,23 @@
       },
       "CargoMetricsResponse": {
         "properties": {
+          "cargoType": {
+            "$ref": "#/components/schemas/CargoType",
+            "title": "Cargo type",
+            "description": "The type of the cargo within the delivery.",
+            "examples": ["breakbulk"]
+          },
           "weight": {
-            "type": "number",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Weight (kg)",
-            "description": "The weight of cargo within the same delivery in kilograms.",
+            "description": "The weight of the cargo within the delivery in kilograms.",
             "examples": [20000]
           },
           "volume": {
@@ -324,8 +337,21 @@
               }
             ],
             "title": "Volume (m^3)",
-            "description": "The volume of cargo within the same delivery in cubic meters if applicable.",
+            "description": "The volume of the cargo within the delivery in cubic meters.",
             "examples": [50]
+          },
+          "cargoUnits": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cargo units",
+            "description": "The number of the cargo units in the delivery.",
+            "examples": [1]
           },
           "cargoItems": {
             "items": {
@@ -333,12 +359,17 @@
             },
             "type": "array",
             "title": "Cargo items",
-            "description": "List of cargo items."
+            "description": "The details of the cargo items within the delivery."
           }
         },
         "type": "object",
-        "required": ["weight", "cargoItems"],
+        "required": ["cargoType", "cargoItems"],
         "title": "CargoMetricsResponse"
+      },
+      "CargoType": {
+        "type": "string",
+        "enum": ["container", "bulk", "breakbulk", "liquid"],
+        "title": "CargoType"
       },
       "DataSourceError": {
         "properties": {

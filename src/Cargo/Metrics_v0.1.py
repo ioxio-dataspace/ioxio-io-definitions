@@ -1,39 +1,47 @@
+from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
 
+class CargoType(str, Enum):
+    CONTAINER = "container"
+    BULK = "bulk"
+    BREAKBULK = "breakbulk"
+    LIQUID = "liquid"
+
+
 class CargoItem(CamelCaseModel):
-    product_name: Optional[str] = Field(
-        None,
-        title="Product name",
-        description="Name of the product.",
-        examples=["Example product"],
-    )
-    parcel: Optional[int] = Field(
-        None,
-        title="Parcel",
-        description="Parcel number.",
-        examples=[123456],
-    )
-    quantity: Optional[int] = Field(
-        None,
-        title="Quantity",
-        description="Quantity of the product.",
-        examples=[500],
-    )
     weight: Optional[float] = Field(
         None,
         title="Weight (kg)",
-        description="The weight in kilograms.",
+        description="The weight of the cargo item in kilograms.",
         examples=[2000],
     )
     volume: Optional[float] = Field(
         None,
         title="Volume (m^3)",
-        description="The volume in cubic meters.",
-        examples=[5.5],
+        description="The volume of the cargo item in cubic meters.",
+        examples=[5.25],
+    )
+    length: Optional[float] = Field(
+        None,
+        title="Length (m)",
+        description="The length of the cargo item in meters.",
+        examples=[3.5],
+    )
+    width: Optional[float] = Field(
+        None,
+        title="Width (m)",
+        description="The width of the cargo item in meters.",
+        examples=[1.5],
+    )
+    height: Optional[float] = Field(
+        None,
+        title="Height (m)",
+        description="The height of the cargo item in meters.",
+        examples=[1.0],
     )
 
 
@@ -48,22 +56,34 @@ class CargoMetricsRequest(CamelCaseModel):
 
 
 class CargoMetricsResponse(CamelCaseModel):
-    weight: float = Field(
+    cargo_type: CargoType = Field(
         ...,
+        title="Cargo type",
+        description="The type of the cargo within the delivery.",
+        examples=[CargoType.BREAKBULK],
+    )
+    weight: Optional[float] = Field(
+        None,
         title="Weight (kg)",
-        description="The weight of cargo within the same delivery in kilograms.",
+        description="The weight of the cargo within the delivery in kilograms.",
         examples=[20000],
     )
     volume: Optional[float] = Field(
         None,
         title="Volume (m^3)",
-        description="The volume of cargo within the same delivery in cubic meters if applicable.",
+        description="The volume of the cargo within the delivery in cubic meters.",
         examples=[50],
+    )
+    cargo_units: Optional[int] = Field(
+        None,
+        title="Cargo units",
+        description="The number of the cargo units in the delivery.",
+        examples=[1],
     )
     cargo_items: list[CargoItem] = Field(
         ...,
         title="Cargo items",
-        description="List of cargo items.",
+        description="The details of the cargo items within the delivery.",
     )
 
 
@@ -71,7 +91,7 @@ DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Cargo metrics",
     description="The key metrics of the transported cargo",
-    tags=["Cargo", "Metrics", "Volume", "Weight"],
+    tags=["Cargo", "Metrics", "Volume", "Weight", "Packing list"],
     request=CargoMetricsRequest,
     response=CargoMetricsResponse,
 )
