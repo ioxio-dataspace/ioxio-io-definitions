@@ -35,6 +35,12 @@ class EstimatedArrival(CamelCaseModel):
         "3339 format.",
         examples=[datetime.fromisoformat("2023-04-12T23:45:00Z")],
     )
+    waybills: list[str] = Field(
+        ...,
+        title="Waybills",
+        description="The list of waybills being carried within the vehicle.",
+        examples=[["DGT1234567", "FTP7654321"]],
+    )
 
 
 class Request(CamelCaseModel):
@@ -69,8 +75,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
-    deprecated=True,
+    version="0.2.0",
     title="Estimated arrival times",
     description="Estimated arrival times of vehicles within a transport location.",
     tags=["Logistics", "ETA"],

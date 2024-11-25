@@ -3,16 +3,15 @@
   "info": {
     "title": "Estimated arrival times",
     "description": "Estimated arrival times of vehicles within a transport location.",
-    "version": "0.1.1"
+    "version": "0.2.0"
   },
   "paths": {
-    "/Transport/Vehicle/EstimatedArrivalTimes_v0.1": {
+    "/Transport/Vehicle/EstimatedArrivalTimes_v0.2": {
       "post": {
         "tags": ["ETA", "Logistics"],
         "summary": "Estimated arrival times",
         "description": "Estimated arrival times of vehicles within a transport location.",
-        "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_1",
-        "deprecated": true,
+        "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -313,10 +312,19 @@
             "title": "Estimated arrival",
             "description": "Expected time of arrival for the vehicle to the facility, in RFC 3339 format.",
             "examples": ["2023-04-12T23:45:00Z"]
+          },
+          "waybills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Waybills",
+            "description": "The list of waybills being carried within the vehicle.",
+            "examples": [["DGT1234567", "FTP7654321"]]
           }
         },
         "type": "object",
-        "required": ["vehicleId", "estimatedArrival"],
+        "required": ["vehicleId", "estimatedArrival", "waybills"],
         "title": "EstimatedArrival"
       },
       "Forbidden": {
