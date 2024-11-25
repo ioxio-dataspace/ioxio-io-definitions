@@ -1,17 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Current weather in metric units",
-    "description": "Common data points about the current weather with metric units in a given location",
-    "version": "0.1.1"
+    "title": "Estimated arrival times",
+    "description": "Estimated arrival times of vehicles within a transport location.",
+    "version": "0.2.0"
   },
   "paths": {
-    "/Weather/Current_v0.1": {
+    "/Transport/Vehicle/EstimatedArrivalTimes_v0.2": {
       "post": {
-        "summary": "Current weather in metric units",
-        "description": "Common data points about the current weather with metric units in a given location",
-        "operationId": "request_Weather_Current_v0_1",
-        "deprecated": true,
+        "tags": ["ETA", "Logistics"],
+        "summary": "Estimated arrival times",
+        "description": "Estimated arrival times of vehicles within a transport location.",
+        "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -79,7 +79,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WeatherCurrentRequest"
+                "$ref": "#/components/schemas/Request"
               }
             }
           }
@@ -90,7 +90,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WeatherCurrentResponse"
+                  "$ref": "#/components/schemas/Response"
                 }
               }
             }
@@ -269,6 +269,64 @@
         "title": "DoesNotConformToDefinition",
         "description": "This response is reserved by Product Gateway."
       },
+      "EstimatedArrival": {
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Vehicle identifier",
+            "description": "Licence plate number or similar identification number of the vehicle or vessel.",
+            "examples": ["ABC-123"]
+          },
+          "vehicleName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle name",
+            "description": "Name of the vehicle or vessel.",
+            "examples": ["Havelland"]
+          },
+          "vehicleType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle type",
+            "description": "The type of the arriving vehicle.",
+            "examples": ["container ship", "truck"]
+          },
+          "estimatedArrival": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Estimated arrival",
+            "description": "Expected time of arrival for the vehicle to the facility, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:45:00Z"]
+          },
+          "waybills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Waybills",
+            "description": "The list of waybills being carried within the vehicle.",
+            "examples": [["DGT1234567", "FTP7654321"]]
+          }
+        },
+        "type": "object",
+        "required": ["vehicleId", "estimatedArrival", "waybills"],
+        "title": "EstimatedArrival"
+      },
       "Forbidden": {
         "properties": {
           "type": {
@@ -342,6 +400,49 @@
         "title": "RateLimitExceeded",
         "description": "This response is reserved by Product Gateway."
       },
+      "Request": {
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Location identifier",
+            "description": "Location identification number based on UN/LOCODE, IATA or other similar identification number of the transport location.",
+            "examples": ["FIOUL"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "The start time of the evaluation period, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End time",
+            "description": "The end time of the evaluation period, in RFC 3339 format.",
+            "examples": ["2023-05-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["locationId", "startTime", "endTime"],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "estimatedArrivals": {
+            "items": {
+              "$ref": "#/components/schemas/EstimatedArrival"
+            },
+            "type": "array",
+            "title": "Estimated arrivals",
+            "description": "Estimated arrival times."
+          }
+        },
+        "type": "object",
+        "required": ["estimatedArrivals"],
+        "title": "Response"
+      },
       "ServiceUnavailable": {
         "properties": {
           "message": {
@@ -400,131 +501,6 @@
         "type": "object",
         "required": ["loc", "msg", "type"],
         "title": "ValidationError"
-      },
-      "WeatherCurrentRequest": {
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "maximum": 90.0,
-            "minimum": -90.0,
-            "title": "Latitude (°)",
-            "description": "The latitude coordinate of the desired location in degrees",
-            "examples": [60.192059]
-          },
-          "longitude": {
-            "type": "number",
-            "maximum": 180.0,
-            "minimum": -180.0,
-            "title": "Longitude (°)",
-            "description": "The longitude coordinate of the desired location in degrees",
-            "examples": [24.945831]
-          }
-        },
-        "type": "object",
-        "required": ["latitude", "longitude"],
-        "title": "WeatherCurrentRequest"
-      },
-      "WeatherCurrentResponse": {
-        "properties": {
-          "temperature": {
-            "type": "number",
-            "minimum": -273.15,
-            "title": "Temperature (°C)",
-            "description": "Current temperature in degrees Celsius",
-            "examples": [17.3]
-          },
-          "humidity": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Humidity (%)",
-            "description": "Current relative air humidity percentage",
-            "examples": [72]
-          },
-          "pressure": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pressure (hPa)",
-            "description": "Current air pressure in hectopascals",
-            "examples": [1007]
-          },
-          "windSpeed": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind speed (m/s)",
-            "description": "Current wind speed in meters per second",
-            "examples": [2.1]
-          },
-          "windDirection": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 360.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind direction (°)",
-            "description": "Current wind direction in meteorological wind direction degrees",
-            "examples": [220.0]
-          },
-          "precipitation": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 1000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Precipitation (mm/h)",
-            "description": "Current precipitation in millimeters per hour",
-            "examples": [120.0]
-          },
-          "visibility": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 300000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Visibility (m)",
-            "description": "Visibility in meters",
-            "examples": [320.0]
-          }
-        },
-        "type": "object",
-        "required": ["temperature"],
-        "title": "WeatherCurrentResponse"
       }
     }
   }

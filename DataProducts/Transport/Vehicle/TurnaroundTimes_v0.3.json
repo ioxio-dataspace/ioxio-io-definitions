@@ -1,17 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Cargo handling equipment data sheet",
-    "description": "General as-built data of a cargo handling equipment operating in a port",
-    "version": "0.1.0"
+    "title": "Vehicle turnaround times",
+    "description": "Turnaround times of vehicles within a facility.",
+    "version": "0.3.0"
   },
   "paths": {
-    "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.1": {
+    "/Transport/Vehicle/TurnaroundTimes_v0.3": {
       "post": {
-        "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
-        "summary": "Cargo handling equipment data sheet",
-        "description": "General as-built data of a cargo handling equipment operating in a port",
-        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_1",
+        "tags": ["Logistics"],
+        "summary": "Vehicle turnaround times",
+        "description": "Turnaround times of vehicles within a facility.",
+        "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_3",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -54,6 +54,24 @@
               "title": "X-Authorization-Provider"
             },
             "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
           }
         ],
         "requestBody": {
@@ -61,7 +79,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DataSheetRequest"
+                "$ref": "#/components/schemas/TurnaroundTimeRequest"
               }
             }
           }
@@ -72,7 +90,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DataSheetResponse"
+                  "$ref": "#/components/schemas/TurnaroundTimeResponse"
                 }
               }
             }
@@ -203,228 +221,6 @@
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
       },
-      "Batteries": {
-        "properties": {
-          "cellType": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 250
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cell type",
-            "description": "The type of cells used in the battery pack",
-            "examples": ["lithium-ion"]
-          },
-          "count": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Count",
-            "description": "The number of corresponding batteries in the machine",
-            "examples": [2]
-          },
-          "nominalCapacity": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Nominal capacity (Ah)",
-            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
-            "examples": [225.0]
-          },
-          "nominalVoltage": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Nominal voltage (v)",
-            "description": "The average voltage the battery is rated to provide under typical operating conditionstypical operating conditions",
-            "examples": [12.0]
-          },
-          "power": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Power (kW)",
-            "description": "The power of the battery in use in the machine in kilowatts",
-            "examples": [75.0]
-          }
-        },
-        "type": "object",
-        "title": "Batteries"
-      },
-      "DataSheetRequest": {
-        "properties": {
-          "product": {
-            "type": "string",
-            "maxLength": 150,
-            "title": "Product",
-            "description": "The product code used for identifying the product type",
-            "examples": ["cargo-handling-equipment-modelX-1234"]
-          },
-          "id": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "ID",
-            "description": "The unique identifier of the product",
-            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
-          }
-        },
-        "type": "object",
-        "required": ["product", "id"],
-        "title": "DataSheetRequest"
-      },
-      "DataSheetResponse": {
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EquipmentType"
-              }
-            ],
-            "title": "Type",
-            "description": "The type of the cargo handling equipment according to TIC4.0 classification. Options are Straddle Carrier (SC) / Ship-to-Shore Crane (STS) / Mobile Crane (MC) / Rubber-tired Gantry Crane (RTG) / Rail-mounted Gantry Crane (RMG) / Automatic Stacking Crane (ASC) / Reach Stacker (RS) / Top Handler (TH) / Empty Container Handler (ECH) / Terminal Tractor (TT)",
-            "examples": ["SC"]
-          },
-          "model": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Model",
-            "description": "The model of the machine",
-            "examples": ["Model X 1234"]
-          },
-          "modelYear": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 2500.0,
-                "minimum": 1900.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model year",
-            "description": "The model year of the machine",
-            "examples": [2023]
-          },
-          "manufacturerInformation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ManufacturerInformation"
-              }
-            ],
-            "title": "Manufacturer information",
-            "description": "The details of the manufacturer"
-          },
-          "powerSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PowerSource"
-              }
-            ],
-            "title": "Power source",
-            "description": "The power source used by the machine",
-            "examples": ["electric"]
-          },
-          "batteries": {
-            "items": {
-              "$ref": "#/components/schemas/Batteries"
-            },
-            "type": "array",
-            "title": "Batteries",
-            "description": "The list of the batteries in the machine"
-          },
-          "fuelVolume": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fuel volume (l)",
-            "description": "The maximum fuel amount in litres assuming the vehicle uses fuel for operation",
-            "examples": [3000.0]
-          },
-          "gasAmount": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Gas amount (kg)",
-            "description": "The maximum gas amount in kilograms assuming the vehicle uses gas for operation",
-            "examples": [50.0]
-          },
-          "expectedRange": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected range (km)",
-            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers",
-            "examples": [300.0]
-          },
-          "netVehicleMass": {
-            "type": "number",
-            "title": "Net vehicle mass (kg)",
-            "description": "The mass of the machine when unloaded in kilograms",
-            "examples": [4000.0]
-          },
-          "maxLoadCapacity": {
-            "type": "number",
-            "title": "Max load capacity (kg)",
-            "description": "The maximum weight that the machine can be loaded with or carry in kilograms",
-            "examples": [6000.0]
-          }
-        },
-        "type": "object",
-        "required": [
-          "type",
-          "model",
-          "manufacturerInformation",
-          "powerSource",
-          "batteries",
-          "netVehicleMass",
-          "maxLoadCapacity"
-        ],
-        "title": "DataSheetResponse"
-      },
       "DataSourceError": {
         "properties": {
           "type": {
@@ -473,11 +269,6 @@
         "title": "DoesNotConformToDefinition",
         "description": "This response is reserved by Product Gateway."
       },
-      "EquipmentType": {
-        "type": "string",
-        "enum": ["SC", "STS", "MC", "RTG", "RMG", "ASC", "RS", "TH", "ECH", "TT"],
-        "title": "EquipmentType"
-      },
       "Forbidden": {
         "properties": {
           "type": {
@@ -521,35 +312,6 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "ManufacturerInformation": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 250,
-            "title": "Name",
-            "description": "The registered trade name of the manufacturer company",
-            "examples": ["Equipment Manufacturer Company X"]
-          },
-          "website": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 2083,
-                "pattern": "^https://"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Website",
-            "description": "The website of the manufacturer",
-            "examples": ["https://example.com/"]
-          }
-        },
-        "type": "object",
-        "required": ["name"],
-        "title": "ManufacturerInformation"
-      },
       "NotFound": {
         "properties": {
           "type": {
@@ -566,11 +328,6 @@
         "type": "object",
         "required": ["type", "message"],
         "title": "NotFound"
-      },
-      "PowerSource": {
-        "type": "string",
-        "enum": ["electric", "fuel", "gas", "hybrid", "h2", "hydraulic"],
-        "title": "PowerSource"
       },
       "RateLimitExceeded": {
         "properties": {
@@ -597,6 +354,111 @@
         "type": "object",
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
+      },
+      "TurnaroundTime": {
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Vehicle identifier",
+            "description": "Licence plate number or similar identification number of the vehicle.",
+            "examples": ["ABC-123"]
+          },
+          "vehicleType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle type",
+            "description": "The type of the vehicle.",
+            "examples": ["truck"]
+          },
+          "entryTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Entry time",
+            "description": "The time when the vehicle entered the facility.",
+            "examples": ["2023-04-12T22:20:50Z"]
+          },
+          "leaveTime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leave time",
+            "description": "The time when the vehicle left the facility.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "turnaroundTime": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turnaround time (s)",
+            "description": "Turnaround time of the vehicle in seconds.",
+            "examples": [3600]
+          }
+        },
+        "type": "object",
+        "required": ["vehicleId", "entryTime"],
+        "title": "TurnaroundTime"
+      },
+      "TurnaroundTimeRequest": {
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Location identifier",
+            "description": "Location identification number based on UN/LOCODE, or other similar identification number of the transport location or facility.",
+            "examples": ["FI OUL"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "The start time of the time range to get turnaround times for, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End time",
+            "description": "The end time of the time range to get turnaround times for, in RFC 3339 format.",
+            "examples": ["2023-05-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["locationId", "startTime", "endTime"],
+        "title": "TurnaroundTimeRequest"
+      },
+      "TurnaroundTimeResponse": {
+        "properties": {
+          "turnaroundTimes": {
+            "items": {
+              "$ref": "#/components/schemas/TurnaroundTime"
+            },
+            "type": "array",
+            "title": "Turnaround times",
+            "description": "The list of turnaround times of vehicles within the facility."
+          }
+        },
+        "type": "object",
+        "required": ["turnaroundTimes"],
+        "title": "TurnaroundTimeResponse"
       },
       "Unauthorized": {
         "properties": {

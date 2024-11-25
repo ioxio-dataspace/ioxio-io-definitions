@@ -1,17 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Current weather in metric units",
-    "description": "Common data points about the current weather with metric units in a given location",
-    "version": "0.1.1"
+    "title": "Transport vehicle operational status",
+    "description": "General operational status data of a transport vehicle.",
+    "version": "0.1.0"
   },
   "paths": {
-    "/Weather/Current_v0.1": {
+    "/Transport/Vehicle/OperationalStatus_v0.1": {
       "post": {
-        "summary": "Current weather in metric units",
-        "description": "Common data points about the current weather with metric units in a given location",
-        "operationId": "request_Weather_Current_v0_1",
-        "deprecated": true,
+        "tags": ["Logistics", "Road transport", "Truck"],
+        "summary": "Transport vehicle operational status",
+        "description": "General operational status data of a transport vehicle.",
+        "operationId": "request_Transport_Vehicle_OperationalStatus_v0_1",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -79,7 +79,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WeatherCurrentRequest"
+                "$ref": "#/components/schemas/OperationalStatusRequest"
               }
             }
           }
@@ -90,7 +90,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WeatherCurrentResponse"
+                  "$ref": "#/components/schemas/OperationalStatusResponse"
                 }
               }
             }
@@ -312,6 +312,29 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "Location": {
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "title": "Latitude (°)",
+            "description": "The latitude coordinate in decimal degrees.",
+            "examples": [60.192059],
+            "gte": -90,
+            "lte": 90
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude (°)",
+            "description": "The longitude coordinate in decimal degrees.",
+            "examples": [24.945831],
+            "gte": -180,
+            "lte": 180
+          }
+        },
+        "type": "object",
+        "required": ["latitude", "longitude"],
+        "title": "Location"
+      },
       "NotFound": {
         "properties": {
           "type": {
@@ -328,6 +351,109 @@
         "type": "object",
         "required": ["type", "message"],
         "title": "NotFound"
+      },
+      "OperationalStatusRequest": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "ID",
+            "description": "The unique identifier of the vehicle.",
+            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
+          },
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "Request the vehicle's status information at or before this given time, in RFC 3339 format. If empty, provide latest value.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "OperationalStatusRequest"
+      },
+      "OperationalStatusResponse": {
+        "properties": {
+          "time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time",
+            "description": "The time the status of the vehicle was recorded, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "speed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed (km/h)",
+            "description": "The speed of the vehicle in kilometers per hour.",
+            "examples": [60.0]
+          },
+          "fuelLevel": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fuel level (%)",
+            "description": "The percent of fuel left as a number value between 0 and 100.",
+            "examples": [75.0],
+            "gte": 0,
+            "lte": 100
+          },
+          "chargeLevel": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Charge level (%)",
+            "description": "The percent of battery capacity left as a number value between 0 and 100.",
+            "examples": [75.0],
+            "gte": 0,
+            "lte": 100
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Location"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location",
+            "description": "The location in GPS coordinates."
+          }
+        },
+        "type": "object",
+        "title": "OperationalStatusResponse"
       },
       "RateLimitExceeded": {
         "properties": {
@@ -400,131 +526,6 @@
         "type": "object",
         "required": ["loc", "msg", "type"],
         "title": "ValidationError"
-      },
-      "WeatherCurrentRequest": {
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "maximum": 90.0,
-            "minimum": -90.0,
-            "title": "Latitude (°)",
-            "description": "The latitude coordinate of the desired location in degrees",
-            "examples": [60.192059]
-          },
-          "longitude": {
-            "type": "number",
-            "maximum": 180.0,
-            "minimum": -180.0,
-            "title": "Longitude (°)",
-            "description": "The longitude coordinate of the desired location in degrees",
-            "examples": [24.945831]
-          }
-        },
-        "type": "object",
-        "required": ["latitude", "longitude"],
-        "title": "WeatherCurrentRequest"
-      },
-      "WeatherCurrentResponse": {
-        "properties": {
-          "temperature": {
-            "type": "number",
-            "minimum": -273.15,
-            "title": "Temperature (°C)",
-            "description": "Current temperature in degrees Celsius",
-            "examples": [17.3]
-          },
-          "humidity": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Humidity (%)",
-            "description": "Current relative air humidity percentage",
-            "examples": [72]
-          },
-          "pressure": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pressure (hPa)",
-            "description": "Current air pressure in hectopascals",
-            "examples": [1007]
-          },
-          "windSpeed": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind speed (m/s)",
-            "description": "Current wind speed in meters per second",
-            "examples": [2.1]
-          },
-          "windDirection": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 360.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind direction (°)",
-            "description": "Current wind direction in meteorological wind direction degrees",
-            "examples": [220.0]
-          },
-          "precipitation": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 1000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Precipitation (mm/h)",
-            "description": "Current precipitation in millimeters per hour",
-            "examples": [120.0]
-          },
-          "visibility": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 300000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Visibility (m)",
-            "description": "Visibility in meters",
-            "examples": [320.0]
-          }
-        },
-        "type": "object",
-        "required": ["temperature"],
-        "title": "WeatherCurrentResponse"
       }
     }
   }

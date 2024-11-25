@@ -54,6 +54,24 @@
               "title": "X-Authorization-Provider"
             },
             "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
           }
         ],
         "requestBody": {
@@ -384,11 +402,7 @@
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "operationalState": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OperationalState"
-              }
-            ],
+            "$ref": "#/components/schemas/OperationalState",
             "title": "Operational state",
             "description": "The state of operation",
             "examples": ["operating"]

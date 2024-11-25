@@ -11,7 +11,7 @@ class TurnaroundTime(CamelCaseModel):
         title="Vehicle identifier",
         description="Licence plate number or similar identification number of the "
         "vehicle.",
-        max_length=40,
+        max_length=128,
         examples=["ABC-123"],
     )
     vehicle_type: Optional[str] = Field(
@@ -83,7 +83,7 @@ class TurnaroundTimeResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.0",
+    version="0.3.0",
     title="Vehicle turnaround times",
     description="Turnaround times of vehicles within a facility.",
     tags=["Logistics"],

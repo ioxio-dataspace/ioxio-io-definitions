@@ -1,17 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Current weather in metric units",
-    "description": "Common data points about the current weather with metric units in a given location",
-    "version": "0.1.1"
+    "title": "Cargo handling equipment data sheet",
+    "description": "General as-built data of a cargo handling equipment operating in a port",
+    "version": "0.2.0"
   },
   "paths": {
-    "/Weather/Current_v0.1": {
+    "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.2": {
       "post": {
-        "summary": "Current weather in metric units",
-        "description": "Common data points about the current weather with metric units in a given location",
-        "operationId": "request_Weather_Current_v0_1",
-        "deprecated": true,
+        "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
+        "summary": "Cargo handling equipment data sheet",
+        "description": "General as-built data of a cargo handling equipment operating in a port",
+        "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -79,7 +79,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WeatherCurrentRequest"
+                "$ref": "#/components/schemas/DataSheetRequest"
               }
             }
           }
@@ -90,7 +90,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WeatherCurrentResponse"
+                  "$ref": "#/components/schemas/DataSheetResponse"
                 }
               }
             }
@@ -221,6 +221,216 @@
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
       },
+      "Batteries": {
+        "properties": {
+          "cellType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cell type",
+            "description": "The type of cells used in the battery pack",
+            "examples": ["lithium-ion"]
+          },
+          "count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count",
+            "description": "The number of corresponding batteries in the machine",
+            "examples": [2]
+          },
+          "nominalCapacity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal capacity (Ah)",
+            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions",
+            "examples": [225.0]
+          },
+          "nominalVoltage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nominal voltage (v)",
+            "description": "The average voltage the battery is rated to provide under typical operating conditionstypical operating conditions",
+            "examples": [12.0]
+          },
+          "power": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Power (kW)",
+            "description": "The power of the battery in use in the machine in kilowatts",
+            "examples": [75.0]
+          }
+        },
+        "type": "object",
+        "title": "Batteries"
+      },
+      "DataSheetRequest": {
+        "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 150,
+            "title": "Product",
+            "description": "The product code used for identifying the product type",
+            "examples": ["cargo-handling-equipment-modelX-1234"]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "ID",
+            "description": "The unique identifier of the product",
+            "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
+          }
+        },
+        "type": "object",
+        "required": ["product", "id"],
+        "title": "DataSheetRequest"
+      },
+      "DataSheetResponse": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EquipmentType",
+            "title": "Type",
+            "description": "The type of the cargo handling equipment according to TIC4.0 classification. Options are Straddle Carrier (SC) / Ship-to-Shore Crane (STS) / Mobile Crane (MC) / Rubber-tired Gantry Crane (RTG) / Rail-mounted Gantry Crane (RMG) / Automatic Stacking Crane (ASC) / Reach Stacker (RS) / Top Handler (TH) / Empty Container Handler (ECH) / Terminal Tractor (TT)",
+            "examples": ["SC"]
+          },
+          "model": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Model",
+            "description": "The model of the machine",
+            "examples": ["Model X 1234"]
+          },
+          "versionYear": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2500.0,
+                "minimum": 1900.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version year",
+            "description": "The year representing the machine's model version.",
+            "examples": [2023]
+          },
+          "manufacturerInformation": {
+            "$ref": "#/components/schemas/ManufacturerInformation",
+            "title": "Manufacturer information",
+            "description": "The details of the manufacturer"
+          },
+          "powerSource": {
+            "$ref": "#/components/schemas/PowerSource",
+            "title": "Power source",
+            "description": "The power source used by the machine",
+            "examples": ["electric"]
+          },
+          "batteries": {
+            "items": {
+              "$ref": "#/components/schemas/Batteries"
+            },
+            "type": "array",
+            "title": "Batteries",
+            "description": "The list of the batteries in the machine"
+          },
+          "fuelVolume": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fuel volume (l)",
+            "description": "The maximum fuel amount in litres assuming the vehicle uses fuel for operation",
+            "examples": [3000.0]
+          },
+          "gasAmount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gas amount (kg)",
+            "description": "The maximum gas amount in kilograms assuming the vehicle uses gas for operation",
+            "examples": [50.0]
+          },
+          "expectedRange": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected range (km)",
+            "description": "The expected range with fully charged batteries and/or refilled tank in kilometers",
+            "examples": [300.0]
+          },
+          "netVehicleMass": {
+            "type": "number",
+            "title": "Net vehicle mass (kg)",
+            "description": "The mass of the machine when unloaded in kilograms",
+            "examples": [4000.0]
+          },
+          "maxLoadCapacity": {
+            "type": "number",
+            "title": "Max load capacity (kg)",
+            "description": "The maximum weight that the machine can be loaded with or carry in kilograms",
+            "examples": [6000.0]
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "model",
+          "manufacturerInformation",
+          "powerSource",
+          "batteries",
+          "netVehicleMass",
+          "maxLoadCapacity"
+        ],
+        "title": "DataSheetResponse"
+      },
       "DataSourceError": {
         "properties": {
           "type": {
@@ -269,6 +479,11 @@
         "title": "DoesNotConformToDefinition",
         "description": "This response is reserved by Product Gateway."
       },
+      "EquipmentType": {
+        "type": "string",
+        "enum": ["SC", "STS", "MC", "RTG", "RMG", "ASC", "RS", "TH", "ECH", "TT"],
+        "title": "EquipmentType"
+      },
       "Forbidden": {
         "properties": {
           "type": {
@@ -312,6 +527,35 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "ManufacturerInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Name",
+            "description": "The registered trade name of the manufacturer company",
+            "examples": ["Equipment Manufacturer Company X"]
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "pattern": "^https://"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Website",
+            "description": "The website of the manufacturer",
+            "examples": ["https://example.com/"]
+          }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "ManufacturerInformation"
+      },
       "NotFound": {
         "properties": {
           "type": {
@@ -328,6 +572,11 @@
         "type": "object",
         "required": ["type", "message"],
         "title": "NotFound"
+      },
+      "PowerSource": {
+        "type": "string",
+        "enum": ["electric", "fuel", "gas", "hybrid", "h2", "hydraulic"],
+        "title": "PowerSource"
       },
       "RateLimitExceeded": {
         "properties": {
@@ -400,131 +649,6 @@
         "type": "object",
         "required": ["loc", "msg", "type"],
         "title": "ValidationError"
-      },
-      "WeatherCurrentRequest": {
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "maximum": 90.0,
-            "minimum": -90.0,
-            "title": "Latitude (°)",
-            "description": "The latitude coordinate of the desired location in degrees",
-            "examples": [60.192059]
-          },
-          "longitude": {
-            "type": "number",
-            "maximum": 180.0,
-            "minimum": -180.0,
-            "title": "Longitude (°)",
-            "description": "The longitude coordinate of the desired location in degrees",
-            "examples": [24.945831]
-          }
-        },
-        "type": "object",
-        "required": ["latitude", "longitude"],
-        "title": "WeatherCurrentRequest"
-      },
-      "WeatherCurrentResponse": {
-        "properties": {
-          "temperature": {
-            "type": "number",
-            "minimum": -273.15,
-            "title": "Temperature (°C)",
-            "description": "Current temperature in degrees Celsius",
-            "examples": [17.3]
-          },
-          "humidity": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Humidity (%)",
-            "description": "Current relative air humidity percentage",
-            "examples": [72]
-          },
-          "pressure": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pressure (hPa)",
-            "description": "Current air pressure in hectopascals",
-            "examples": [1007]
-          },
-          "windSpeed": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind speed (m/s)",
-            "description": "Current wind speed in meters per second",
-            "examples": [2.1]
-          },
-          "windDirection": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 360.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Wind direction (°)",
-            "description": "Current wind direction in meteorological wind direction degrees",
-            "examples": [220.0]
-          },
-          "precipitation": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 1000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Precipitation (mm/h)",
-            "description": "Current precipitation in millimeters per hour",
-            "examples": [120.0]
-          },
-          "visibility": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 300000.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Visibility (m)",
-            "description": "Visibility in meters",
-            "examples": [320.0]
-          }
-        },
-        "type": "object",
-        "required": ["temperature"],
-        "title": "WeatherCurrentResponse"
       }
     }
   }

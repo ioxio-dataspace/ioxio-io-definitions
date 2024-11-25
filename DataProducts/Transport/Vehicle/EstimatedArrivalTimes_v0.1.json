@@ -1,17 +1,18 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Vehicle turnaround times",
-    "description": "Turnaround times of vehicles within a facility.",
-    "version": "0.2.0"
+    "title": "Estimated arrival times",
+    "description": "Estimated arrival times of vehicles within a transport location.",
+    "version": "0.1.1"
   },
   "paths": {
-    "/Transport/Vehicle/TurnaroundTimes_v0.2": {
+    "/Transport/Vehicle/EstimatedArrivalTimes_v0.1": {
       "post": {
-        "tags": ["Logistics"],
-        "summary": "Vehicle turnaround times",
-        "description": "Turnaround times of vehicles within a facility.",
-        "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_2",
+        "tags": ["ETA", "Logistics"],
+        "summary": "Estimated arrival times",
+        "description": "Estimated arrival times of vehicles within a transport location.",
+        "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_1",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",
@@ -54,6 +55,24 @@
               "title": "X-Authorization-Provider"
             },
             "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
           }
         ],
         "requestBody": {
@@ -61,7 +80,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TurnaroundTimeRequest"
+                "$ref": "#/components/schemas/Request"
               }
             }
           }
@@ -72,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TurnaroundTimeResponse"
+                  "$ref": "#/components/schemas/Response"
                 }
               }
             }
@@ -251,6 +270,55 @@
         "title": "DoesNotConformToDefinition",
         "description": "This response is reserved by Product Gateway."
       },
+      "EstimatedArrival": {
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Vehicle identifier",
+            "description": "Licence plate number or similar identification number of the vehicle or vessel.",
+            "examples": ["ABC-123"]
+          },
+          "vehicleName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle name",
+            "description": "Name of the vehicle or vessel.",
+            "examples": ["Havelland"]
+          },
+          "vehicleType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle type",
+            "description": "The type of the arriving vehicle.",
+            "examples": ["container ship", "truck"]
+          },
+          "estimatedArrival": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Estimated arrival",
+            "description": "Expected time of arrival for the vehicle to the facility, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:45:00Z"]
+          }
+        },
+        "type": "object",
+        "required": ["vehicleId", "estimatedArrival"],
+        "title": "EstimatedArrival"
+      },
       "Forbidden": {
         "properties": {
           "type": {
@@ -324,6 +392,49 @@
         "title": "RateLimitExceeded",
         "description": "This response is reserved by Product Gateway."
       },
+      "Request": {
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Location identifier",
+            "description": "Location identification number based on UN/LOCODE, IATA or other similar identification number of the transport location.",
+            "examples": ["FIOUL"]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start time",
+            "description": "The start time of the evaluation period, in RFC 3339 format.",
+            "examples": ["2023-04-12T23:20:50Z"]
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End time",
+            "description": "The end time of the evaluation period, in RFC 3339 format.",
+            "examples": ["2023-05-12T23:20:50Z"]
+          }
+        },
+        "type": "object",
+        "required": ["locationId", "startTime", "endTime"],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "estimatedArrivals": {
+            "items": {
+              "$ref": "#/components/schemas/EstimatedArrival"
+            },
+            "type": "array",
+            "title": "Estimated arrivals",
+            "description": "Estimated arrival times."
+          }
+        },
+        "type": "object",
+        "required": ["estimatedArrivals"],
+        "title": "Response"
+      },
       "ServiceUnavailable": {
         "properties": {
           "message": {
@@ -336,111 +447,6 @@
         "type": "object",
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
-      },
-      "TurnaroundTime": {
-        "properties": {
-          "vehicleId": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Vehicle identifier",
-            "description": "Licence plate number or similar identification number of the vehicle.",
-            "examples": ["ABC-123"]
-          },
-          "vehicleType": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Vehicle type",
-            "description": "The type of the vehicle.",
-            "examples": ["truck"]
-          },
-          "entryTime": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Entry time",
-            "description": "The time when the vehicle entered the facility.",
-            "examples": ["2023-04-12T22:20:50Z"]
-          },
-          "leaveTime": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Leave time",
-            "description": "The time when the vehicle left the facility.",
-            "examples": ["2023-04-12T23:20:50Z"]
-          },
-          "turnaroundTime": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Turnaround time (s)",
-            "description": "Turnaround time of the vehicle in seconds.",
-            "examples": [3600]
-          }
-        },
-        "type": "object",
-        "required": ["vehicleId", "entryTime"],
-        "title": "TurnaroundTime"
-      },
-      "TurnaroundTimeRequest": {
-        "properties": {
-          "locationId": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Location identifier",
-            "description": "Location identification number based on UN/LOCODE, or other similar identification number of the transport location or facility.",
-            "examples": ["FI OUL"]
-          },
-          "startTime": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Start time",
-            "description": "The start time of the time range to get turnaround times for, in RFC 3339 format.",
-            "examples": ["2023-04-12T23:20:50Z"]
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time",
-            "title": "End time",
-            "description": "The end time of the time range to get turnaround times for, in RFC 3339 format.",
-            "examples": ["2023-05-12T23:20:50Z"]
-          }
-        },
-        "type": "object",
-        "required": ["locationId", "startTime", "endTime"],
-        "title": "TurnaroundTimeRequest"
-      },
-      "TurnaroundTimeResponse": {
-        "properties": {
-          "turnaroundTimes": {
-            "items": {
-              "$ref": "#/components/schemas/TurnaroundTime"
-            },
-            "type": "array",
-            "title": "Turnaround times",
-            "description": "The list of turnaround times of vehicles within the facility."
-          }
-        },
-        "type": "object",
-        "required": ["turnaroundTimes"],
-        "title": "TurnaroundTimeResponse"
       },
       "Unauthorized": {
         "properties": {
