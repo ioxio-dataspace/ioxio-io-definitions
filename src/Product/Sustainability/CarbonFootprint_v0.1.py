@@ -22,13 +22,13 @@ class Request(CamelCaseModel):
     query_level: QueryLevel = Field(
         ...,
         title="Query level",
-        description="The query level of defining the product carbon footprint emissions.",
+        description="The query level of defining the product's carbon footprint emissions.",
         examples=[QueryLevel.BATCH],
     )
     id: str = Field(
         ...,
         title="ID",
-        description="If querying on model level an empty string is used. The batch id when querying on the batch level. The unique item id when querying on the item level.",
+        description="If querying on model level an empty string is used. The batch identifier when querying on the batch level. The unique item identifier when querying on the product item level.",
         max_length=40,
         examples=["batch-12345"],
     )
@@ -38,19 +38,19 @@ class Response(CamelCaseModel):
     material_footprint: Optional[float] = Field(
         None,
         title="Material footprint (kg of CO2e)",
-        description="The carbon footprint of all materials used for manufacturing the product calculated as kg of CO2e using Product Category Rules (PCR).",
+        description="The carbon footprint of all materials used for manufacturing the product calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
         examples=[4.8],
     )
     processing_footprint: Optional[float] = Field(
         None,
         title="Processing footprint (kg of CO2e)",
-        description="The carbon footprint generated from the manufacturing process of the product calculated as kg of CO2e using Product Category Rules (PCR).",
+        description="The carbon footprint generated from the manufacturing process of the product calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
         examples=[5.3],
     )
     logistics_footprint: Optional[float] = Field(
         None,
         title="Logistics footprint (kg of CO2e)",
-        description="The carbon footprint generated from the upstream logisitics of delivering the product materials to manufacturing calculated as kg of CO2e using Product Category Rules (PCR).",
+        description="The carbon footprint generated from the upstream logisitics of delivering the product materials to manufacturing calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
         examples=[0.3],
     )
 
@@ -58,7 +58,7 @@ class Response(CamelCaseModel):
 DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Product carbon footprint",
-    description="The carbon footprint of the product manufacturing",
+    description="The carbon footprint of manufacturing a product.",
     tags=["Carbon footprint", "PCR", "Product category rules"],
     request=Request,
     response=Response,
