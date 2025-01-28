@@ -196,7 +196,7 @@ DEFINITION = DataProductDefinition(
 
 ## Guides and help
 
-[Written guide for how to create data definitions](https://ioxio.com/guides/how-to-create-data-definitions)
+[Written guide for how to create data definitions](https://docs.ioxio.dev/guides/building-a-data-definition/)
 
 You can also check out our YouTube tutorial:
 
