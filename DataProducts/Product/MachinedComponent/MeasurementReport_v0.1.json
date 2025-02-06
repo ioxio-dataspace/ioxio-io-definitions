@@ -1,0 +1,701 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Machined component measurement report",
+    "description": "The quality measurement report for a batch of machined components.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/Product/MachinedComponent/MeasurementReport_v0.1": {
+      "post": {
+        "tags": ["Machinery and equipments", "Manufacturing"],
+        "summary": "Machined component measurement report",
+        "description": "The quality measurement report for a batch of machined components.",
+        "operationId": "request_Product_MachinedComponent_MeasurementReport_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitExceeded"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "ComponentIdentification": {
+        "properties": {
+          "purchaseOrder": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Purchase order ",
+            "description": "The number of the purchase order related to the component.",
+            "examples": ["12345"]
+          },
+          "componentName": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Component name",
+            "description": "The name of the component.",
+            "examples": ["valve xyz"]
+          },
+          "productionNumber": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Production number",
+            "description": "The production number related to the component manufacturing.",
+            "examples": ["pn-20240205-00123"]
+          }
+        },
+        "type": "object",
+        "required": ["purchaseOrder", "componentName", "productionNumber"],
+        "title": "ComponentIdentification"
+      },
+      "CustomerInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Name",
+            "description": "The name of the customer that has issued the component order.",
+            "examples": ["Company xyz"]
+          },
+          "department": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Department",
+            "description": "The responsible department of the customer that has issued the component order.",
+            "examples": ["Department xyz"]
+          }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "CustomerInformation"
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MeasurementResult": {
+        "properties": {
+          "featureName": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Feature name",
+            "description": "The name of the measured feature.",
+            "examples": ["valve diameter middle D84"]
+          },
+          "measuredValue": {
+            "type": "number",
+            "title": "Measured value (mm)",
+            "description": "The measured value of the feature in millimeters.",
+            "examples": [84.025]
+          },
+          "nominalValue": {
+            "type": "number",
+            "title": "Nominal value (mm)",
+            "description": "The nominal (theoretical) value of the measured feature in millimeters.",
+            "examples": [84.0]
+          },
+          "upperTolerance": {
+            "type": "number",
+            "title": "Upper tolerance (mm)",
+            "description": "The upper tolerance allowed for the measurement in millimeters.",
+            "examples": [0.055]
+          },
+          "lowerTolerance": {
+            "type": "number",
+            "title": "Lower tolerance (mm)",
+            "description": "The lower tolerance allowed for the measurement in millimeters.",
+            "examples": [0.055]
+          },
+          "deviation": {
+            "type": "number",
+            "title": "Deviation (mm)",
+            "description": "Deviation from the measurement value in millimeters.",
+            "examples": [0.03]
+          },
+          "toleranceStatus": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tolerance status",
+            "description": "The indicator if the measured value is within tolerance.",
+            "examples": [true]
+          }
+        },
+        "type": "object",
+        "required": [
+          "featureName",
+          "measuredValue",
+          "nominalValue",
+          "upperTolerance",
+          "lowerTolerance",
+          "deviation"
+        ],
+        "title": "MeasurementResult"
+      },
+      "MeasurementSetup": {
+        "properties": {
+          "remarks": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 400
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remarks",
+            "description": "The considerable notes regarding the measurement.",
+            "examples": [
+              "Measurement taken from the outer edge to center, following xyz standards."
+            ]
+          },
+          "measurementEquipments": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Measurement equipments",
+            "description": "The identifiers of the equipment used in the measuring of the component.",
+            "examples": ["ccm-123", "ccm-567"]
+          },
+          "cmmType": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "CMM type",
+            "description": "The type of the coordinate measuring machine.",
+            "examples": ["bridge ccm"]
+          },
+          "cmmSerialNumber": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "CMM serial number",
+            "description": "The serial number of the coordinate measuring machine.",
+            "examples": ["mfg-model-xxxx-yyyy"]
+          },
+          "measurementId": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Measurement ID",
+            "description": "The identifier of the quality measurement.",
+            "examples": ["1234567"]
+          },
+          "measurementTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Measurement timestamp",
+            "description": "The quality measurement time of the component in RFC 3339 format.",
+            "examples": ["2025-02-06T09:26:52Z"]
+          },
+          "measurementRunType": {
+            "type": "string",
+            "maxLength": 250,
+            "title": "Measurement run type",
+            "description": "The method used to perform measurements on the components.",
+            "examples": ["partial measurement"]
+          },
+          "measuredComponents": {
+            "type": "integer",
+            "title": "Measured components",
+            "description": "Then number of measured components from a batch.",
+            "examples": [50]
+          },
+          "batchSize": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Batch size",
+            "description": "The entire size of the batch applying to same quality measurements.",
+            "examples": [100]
+          },
+          "deviations": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deviations",
+            "description": "The number of deviations (red values) in the measured values.",
+            "examples": [5]
+          },
+          "duration": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration (s)",
+            "description": "The duration of the measurement process in seconds.",
+            "examples": [825]
+          }
+        },
+        "type": "object",
+        "required": [
+          "measurementEquipments",
+          "cmmType",
+          "measurementId",
+          "measurementTimestamp",
+          "measurementRunType",
+          "measuredComponents"
+        ],
+        "title": "MeasurementSetup"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "RateLimitExceeded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Rate limit exceeded"
+          }
+        },
+        "type": "object",
+        "title": "RateLimitExceeded",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Request": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "ID",
+            "description": "The unique identifier of the component.",
+            "examples": ["b1a-0723y-00165"]
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "componentIdentification": {
+            "$ref": "#/components/schemas/ComponentIdentification",
+            "title": "Component identification",
+            "description": "The identifiers related to the component."
+          },
+          "customerInformation": {
+            "$ref": "#/components/schemas/CustomerInformation",
+            "title": "Customer information",
+            "description": "The details of the customer issuing the order for the component."
+          },
+          "measurementSetup": {
+            "$ref": "#/components/schemas/MeasurementSetup",
+            "title": "Measurement setup",
+            "description": "The details describing the quality measurement setup."
+          },
+          "measurementResults": {
+            "items": {
+              "$ref": "#/components/schemas/MeasurementResult"
+            },
+            "type": "array",
+            "title": "Measurement results",
+            "description": "The results of the quality measurements."
+          }
+        },
+        "type": "object",
+        "required": [
+          "componentIdentification",
+          "customerInformation",
+          "measurementSetup",
+          "measurementResults"
+        ],
+        "title": "Response"
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
