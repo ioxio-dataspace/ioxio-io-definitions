@@ -5,6 +5,30 @@ from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
 
+class MeasurementEquipment(CamelCaseModel):
+    cmm_serial_number: str = Field(
+        ...,
+        title="CMM serial number",
+        description="The serial number of the coordinate measuring machine.",
+        max_length=40,
+        examples=["mfg-model-xxxx-yyyy"],
+    )
+    cmm_type: Optional[str] = Field(
+        None,
+        title="CMM type",
+        description="The type of the coordinate measuring machine.",
+        max_length=40,
+        examples=["bridge ccm"],
+    )
+    program_revision: Optional[str] = Field(
+        None,
+        title="Program revision",
+        description="The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
+        max_length=40,
+        examples=["mp-001-rv02"],
+    )
+
+
 class ComponentIdentification(CamelCaseModel):
     purchase_order: str = Field(
         ...,
@@ -56,26 +80,6 @@ class MeasurementSetup(CamelCaseModel):
             "Measurement taken from the outer edge to center, following xyz standards."
         ],
     )
-    measurement_equipments: list[str] = Field(
-        ...,
-        title="Measurement equipments",
-        description="The identifiers of the equipment used in the measuring of the component.",
-        examples=["ccm-123", "ccm-567"],
-    )
-    cmm_type: str = Field(
-        ...,
-        title="CMM type",
-        description="The type of the coordinate measuring machine.",
-        max_length=40,
-        examples=["bridge ccm"],
-    )
-    cmm_serial_number: Optional[str] = Field(
-        None,
-        title="CMM serial number",
-        description="The serial number of the coordinate measuring machine.",
-        max_length=40,
-        examples=["mfg-model-xxxx-yyyy"],
-    )
     measurement_id: str = Field(
         ...,
         title="Measurement ID",
@@ -120,6 +124,11 @@ class MeasurementSetup(CamelCaseModel):
         description="The duration of the measurement process in seconds.",
         examples=[825],
     )
+    measurement_equipment: list[MeasurementEquipment] = Field(
+        ...,
+        title="Measurement equipment",
+        description="The identifiers of the equipment used in the measuring of the component.",
+    )
 
 
 class MeasurementResult(CamelCaseModel):
@@ -158,7 +167,7 @@ class MeasurementResult(CamelCaseModel):
         ...,
         title="Deviation (mm)",
         description="Deviation from the measurement value in millimeters.",
-        examples=[0.03],
+        examples=[0.025],
     )
     tolerance_status: Optional[bool] = Field(
         None,
@@ -205,7 +214,7 @@ DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Machined component measurement report",
     description="The quality measurement report for a batch of machined components.",
-    tags=["Manufacturing", "Machinery and equipments"],
+    tags=["Manufacturing", "Machinery and equipment"],
     request=Request,
     response=Response,
 )

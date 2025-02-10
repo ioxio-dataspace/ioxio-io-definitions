@@ -8,7 +8,7 @@
   "paths": {
     "/Product/MachinedComponent/MeasurementReport_v0.1": {
       "post": {
-        "tags": ["Machinery and equipments", "Manufacturing"],
+        "tags": ["Machinery and equipment", "Manufacturing"],
         "summary": "Machined component measurement report",
         "description": "The quality measurement report for a batch of machined components.",
         "operationId": "request_Product_MachinedComponent_MeasurementReport_v0_1",
@@ -368,6 +368,48 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "MeasurementEquipment": {
+        "properties": {
+          "cmmSerialNumber": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "CMM serial number",
+            "description": "The serial number of the coordinate measuring machine.",
+            "examples": ["mfg-model-xxxx-yyyy"]
+          },
+          "cmmType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "CMM type",
+            "description": "The type of the coordinate measuring machine.",
+            "examples": ["bridge ccm"]
+          },
+          "programRevision": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Program revision",
+            "description": "The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
+            "examples": ["mp-001-rv02"]
+          }
+        },
+        "type": "object",
+        "required": ["cmmSerialNumber"],
+        "title": "MeasurementEquipment"
+      },
       "MeasurementResult": {
         "properties": {
           "featureName": {
@@ -405,7 +447,7 @@
             "type": "number",
             "title": "Deviation (mm)",
             "description": "Deviation from the measurement value in millimeters.",
-            "examples": [0.03]
+            "examples": [0.025]
           },
           "toleranceStatus": {
             "anyOf": [
@@ -449,36 +491,6 @@
             "examples": [
               "Measurement taken from the outer edge to center, following xyz standards."
             ]
-          },
-          "measurementEquipments": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Measurement equipments",
-            "description": "The identifiers of the equipment used in the measuring of the component.",
-            "examples": ["ccm-123", "ccm-567"]
-          },
-          "cmmType": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "CMM type",
-            "description": "The type of the coordinate measuring machine.",
-            "examples": ["bridge ccm"]
-          },
-          "cmmSerialNumber": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "CMM serial number",
-            "description": "The serial number of the coordinate measuring machine.",
-            "examples": ["mfg-model-xxxx-yyyy"]
           },
           "measurementId": {
             "type": "string",
@@ -545,16 +557,23 @@
             "title": "Duration (s)",
             "description": "The duration of the measurement process in seconds.",
             "examples": [825]
+          },
+          "measurementEquipment": {
+            "items": {
+              "$ref": "#/components/schemas/MeasurementEquipment"
+            },
+            "type": "array",
+            "title": "Measurement equipment",
+            "description": "The identifiers of the equipment used in the measuring of the component."
           }
         },
         "type": "object",
         "required": [
-          "measurementEquipments",
-          "cmmType",
           "measurementId",
           "measurementTimestamp",
           "measurementRunType",
-          "measuredComponents"
+          "measuredComponents",
+          "measurementEquipment"
         ],
         "title": "MeasurementSetup"
       },
