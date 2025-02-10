@@ -61,6 +61,7 @@ class ComponentIdentification(CamelCaseModel):
         None,
         title="Code nomenclature",
         description="The number identifying the component type according to EU harmonised system and Council Regulation (EEC) No 2658/87.",
+        pattern=r"^\d{4}(\d{2}){0,3}$",
         max_length=10,
         examples=["73269010"],
     )
@@ -84,18 +85,18 @@ class ManufacturerInformation(CamelCaseModel):
     )
 
 
-class MachiningCentre(CamelCaseModel):
+class MachiningCenter(CamelCaseModel):
     identifier: str = Field(
         ...,
         title="Identifier",
-        description="The identifier of the machining the centre.",
+        description="The identifier of the machining the center.",
         max_length=40,
         examples=["cnc-101"],
     )
     numerical_control_version: Optional[str] = Field(
         None,
         title="Numerical control version",
-        description="The version of the controller software used by the machining centre.",
+        description="The version of the controller software used by the machining center.",
         max_length=40,
         examples=["nc-v10.3"],
     )
@@ -149,7 +150,7 @@ class Response(CamelCaseModel):
         max_length=40,
         examples=["Rev A"],
     )
-    machining_centers: list[MachiningCentre] = Field(
+    machining_centers: list[MachiningCenter] = Field(
         ...,
         title="Machining centers",
         description="The details of the equipment used for machining the component.",
@@ -161,7 +162,7 @@ DEFINITION = DataProductDefinition(
     version="0.1.0",
     title="Machined component traceability",
     description="The traceability information of a machined component.",
-    tags=["Manufacturing", "Machinery and equipments"],
+    tags=["Manufacturing", "Machinery and equipment"],
     request=Request,
     response=Response,
 )

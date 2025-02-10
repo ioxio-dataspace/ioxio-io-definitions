@@ -8,7 +8,7 @@
   "paths": {
     "/Product/MachinedComponent/Traceability_v0.1": {
       "post": {
-        "tags": ["Machinery and equipments", "Manufacturing"],
+        "tags": ["Machinery and equipment", "Manufacturing"],
         "summary": "Machined component traceability",
         "description": "The traceability information of a machined component.",
         "operationId": "request_Product_MachinedComponent_Traceability_v0_1",
@@ -308,7 +308,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 10
+                "maxLength": 10,
+                "pattern": "^\\d{4}(\\d{2}){0,3}$"
               },
               {
                 "type": "null"
@@ -414,13 +415,13 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "MachiningCentre": {
+      "MachiningCenter": {
         "properties": {
           "identifier": {
             "type": "string",
             "maxLength": 40,
             "title": "Identifier",
-            "description": "The identifier of the machining the centre.",
+            "description": "The identifier of the machining the center.",
             "examples": ["cnc-101"]
           },
           "numericalControlVersion": {
@@ -434,7 +435,7 @@
               }
             ],
             "title": "Numerical control version",
-            "description": "The version of the controller software used by the machining centre.",
+            "description": "The version of the controller software used by the machining center.",
             "examples": ["nc-v10.3"]
           },
           "routingVersion": {
@@ -468,7 +469,7 @@
         },
         "type": "object",
         "required": ["identifier"],
-        "title": "MachiningCentre"
+        "title": "MachiningCenter"
       },
       "ManufacturerInformation": {
         "properties": {
@@ -591,7 +592,7 @@
           },
           "machiningCenters": {
             "items": {
-              "$ref": "#/components/schemas/MachiningCentre"
+              "$ref": "#/components/schemas/MachiningCenter"
             },
             "type": "array",
             "maxItems": 40,
