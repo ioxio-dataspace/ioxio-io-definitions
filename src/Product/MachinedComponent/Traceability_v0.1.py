@@ -48,7 +48,6 @@ class ComponentIdentification(CamelCaseModel):
         ...,
         title="Blank",
         description="The identification details of the the blank used for machining the component.",
-        max_length=40,
     )
     waybill: str = Field(
         ...,
@@ -154,7 +153,6 @@ class Response(CamelCaseModel):
         ...,
         title="Machining centers",
         description="The details of the equipment used for machining the component.",
-        max_length=40,
     )
 
 

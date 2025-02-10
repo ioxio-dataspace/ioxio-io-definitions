@@ -294,7 +294,6 @@
           },
           "blank": {
             "$ref": "#/components/schemas/Blank",
-            "maxLength": 40,
             "description": "The identification details of the the blank used for machining the component."
           },
           "waybill": {
@@ -595,7 +594,6 @@
               "$ref": "#/components/schemas/MachiningCenter"
             },
             "type": "array",
-            "maxItems": 40,
             "title": "Machining centers",
             "description": "The details of the equipment used for machining the component."
           }
