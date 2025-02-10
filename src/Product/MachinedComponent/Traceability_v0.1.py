@@ -5,6 +5,23 @@ from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
 
+class Blank(CamelCaseModel):
+    identifier: Optional[str] = Field(
+        None,
+        title="Identifier",
+        description="The identifier the blank used for machining the component.",
+        max_length=40,
+        examples=["st-42crmo4-blt-ht1234-btch5678"],
+    )
+    type: Optional[str] = Field(
+        None,
+        title="Type",
+        description="The type of the blank used for machining the component.",
+        max_length=40,
+        examples=["forging billet"],
+    )
+
+
 class ComponentIdentification(CamelCaseModel):
     purchase_order: str = Field(
         ...,
@@ -20,17 +37,23 @@ class ComponentIdentification(CamelCaseModel):
         max_length=40,
         examples=["wo-2025-0001"],
     )
-    forging_billet: Optional[str] = Field(
+    deviation_permit: Optional[str] = Field(
         None,
-        title="Forging billet",
-        description="The number identifying the forging billet batch used for manufacturing the component.",
+        title="Deviation permit",
+        description="The identifier of an approved exception allowing the use of a component that deviates from standard specifications.",
         max_length=40,
-        examples=["st-42crmo4-blt-ht1234-btch5678"],
+        examples=["el-2024-005"],
+    )
+    blank: Blank = Field(
+        ...,
+        title="Blank",
+        description="The identification details of the the blank used for machining the component.",
+        max_length=40,
     )
     waybill: str = Field(
         ...,
         title="Waybill",
-        description="The identifier for the component shipment from the manufacturer to the customer.",
+        description="The identifier for the component shipment from the component manufacturer to the customer.",
         max_length=40,
         examples=["1x999aa10123456784"],
     )
@@ -38,8 +61,8 @@ class ComponentIdentification(CamelCaseModel):
         None,
         title="Code nomenclature",
         description="The number identifying the component type according to EU harmonised system and Council Regulation (EEC) No 2658/87.",
-        max_length=6,
-        examples=["7326.9"],
+        max_length=10,
+        examples=["73269010"],
     )
 
 
@@ -58,6 +81,36 @@ class ManufacturerInformation(CamelCaseModel):
         pattern=r"^https://",
         max_length=2083,
         examples=["https://example.com/"],
+    )
+
+
+class MachiningCentre(CamelCaseModel):
+    identifier: str = Field(
+        ...,
+        title="Identifier",
+        description="The identifier of the machining the centre.",
+        max_length=40,
+        examples=["cnc-101"],
+    )
+    numerical_control_version: Optional[str] = Field(
+        None,
+        title="Numerical control version",
+        description="The version of the controller software used by the machining centre.",
+        max_length=40,
+        examples=["nc-v10.3"],
+    )
+    routing_version: Optional[str] = Field(
+        None,
+        title="Routing version",
+        description="The process sequence used for machining the component.",
+        max_length=40,
+        examples=["r001"],
+    )
+    modification_timestamp: Optional[datetime] = Field(
+        None,
+        title="Modification timestamp",
+        description="The latest timestamp used for updating the process routing in RFC 3339 format.",
+        examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
     )
 
 
@@ -96,25 +149,11 @@ class Response(CamelCaseModel):
         max_length=40,
         examples=["Rev A"],
     )
-    machining_center: Optional[str] = Field(
-        None,
-        title="Machining center",
-        description="An identifier or label assigned to a machining center used for machining the component.",
+    machining_centers: list[MachiningCentre] = Field(
+        ...,
+        title="Machining centers",
+        description="The details of the equipment used for machining the component.",
         max_length=40,
-        examples=["cnc-101"],
-    )
-    routing_version: Optional[str] = Field(
-        None,
-        title="Routing version",
-        description="The process sequence used for manufacturing the component.",
-        max_length=40,
-        examples=["r001"],
-    )
-    modification_timestamp: Optional[datetime] = Field(
-        None,
-        title="Modification timestamp",
-        description="The latest timestamp used for updating the process routing in RFC 3339 format.",
-        examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
     )
 
 

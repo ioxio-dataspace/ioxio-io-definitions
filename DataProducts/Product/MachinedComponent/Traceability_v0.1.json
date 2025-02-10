@@ -221,6 +221,40 @@
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
       },
+      "Blank": {
+        "properties": {
+          "identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identifier",
+            "description": "The identifier the blank used for machining the component.",
+            "examples": ["st-42crmo4-blt-ht1234-btch5678"]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "The type of the blank used for machining the component.",
+            "examples": ["forging billet"]
+          }
+        },
+        "type": "object",
+        "title": "Blank"
+      },
       "ComponentIdentification": {
         "properties": {
           "purchaseOrder": {
@@ -244,7 +278,7 @@
             "description": "The number of the manufacturing work order related to the component.",
             "examples": ["wo-2025-0001"]
           },
-          "forgingBillet": {
+          "deviationPermit": {
             "anyOf": [
               {
                 "type": "string",
@@ -254,22 +288,27 @@
                 "type": "null"
               }
             ],
-            "title": "Forging billet",
-            "description": "The number identifying the forging billet batch used for manufacturing the component.",
-            "examples": ["st-42crmo4-blt-ht1234-btch5678"]
+            "title": "Deviation permit",
+            "description": "The identifier of an approved exception allowing the use of a component that deviates from standard specifications.",
+            "examples": ["el-2024-005"]
+          },
+          "blank": {
+            "$ref": "#/components/schemas/Blank",
+            "maxLength": 40,
+            "description": "The identification details of the the blank used for machining the component."
           },
           "waybill": {
             "type": "string",
             "maxLength": 40,
             "title": "Waybill",
-            "description": "The identifier for the component shipment from the manufacturer to the customer.",
+            "description": "The identifier for the component shipment from the component manufacturer to the customer.",
             "examples": ["1x999aa10123456784"]
           },
           "codeNomenclature": {
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 6
+                "maxLength": 10
               },
               {
                 "type": "null"
@@ -277,11 +316,11 @@
             ],
             "title": "Code nomenclature",
             "description": "The number identifying the component type according to EU harmonised system and Council Regulation (EEC) No 2658/87.",
-            "examples": ["7326.9"]
+            "examples": ["73269010"]
           }
         },
         "type": "object",
-        "required": ["purchaseOrder", "waybill"],
+        "required": ["purchaseOrder", "blank", "waybill"],
         "title": "ComponentIdentification"
       },
       "DataSourceError": {
@@ -374,6 +413,62 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "MachiningCentre": {
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Identifier",
+            "description": "The identifier of the machining the centre.",
+            "examples": ["cnc-101"]
+          },
+          "numericalControlVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Numerical control version",
+            "description": "The version of the controller software used by the machining centre.",
+            "examples": ["nc-v10.3"]
+          },
+          "routingVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Routing version",
+            "description": "The process sequence used for machining the component.",
+            "examples": ["r001"]
+          },
+          "modificationTimestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modification timestamp",
+            "description": "The latest timestamp used for updating the process routing in RFC 3339 format.",
+            "examples": ["2025-02-06T09:26:52Z"]
+          }
+        },
+        "type": "object",
+        "required": ["identifier"],
+        "title": "MachiningCentre"
       },
       "ManufacturerInformation": {
         "properties": {
@@ -494,51 +589,22 @@
             "description": "The version of the component specification drawing.",
             "examples": ["Rev A"]
           },
-          "machiningCenter": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Machining center",
-            "description": "An identifier or label assigned to a machining center used for machining the component.",
-            "examples": ["cnc-101"]
-          },
-          "routingVersion": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Routing version",
-            "description": "The process sequence used for manufacturing the component.",
-            "examples": ["r001"]
-          },
-          "modificationTimestamp": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modification timestamp",
-            "description": "The latest timestamp used for updating the process routing in RFC 3339 format.",
-            "examples": ["2025-02-06T09:26:52Z"]
+          "machiningCenters": {
+            "items": {
+              "$ref": "#/components/schemas/MachiningCentre"
+            },
+            "type": "array",
+            "maxItems": 40,
+            "title": "Machining centers",
+            "description": "The details of the equipment used for machining the component."
           }
         },
         "type": "object",
-        "required": ["componentIdentification", "manufacturerInformation"],
+        "required": [
+          "componentIdentification",
+          "manufacturerInformation",
+          "machiningCenters"
+        ],
         "title": "Response"
       },
       "ServiceUnavailable": {
