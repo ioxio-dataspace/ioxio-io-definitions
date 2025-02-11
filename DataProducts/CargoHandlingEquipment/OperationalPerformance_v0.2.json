@@ -472,7 +472,14 @@
             "examples": [550.0]
           },
           "distance": {
-            "type": "number",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Distance (km)",
             "description": "The total distance driven in kilometers during the specified time range",
             "examples": [2500.0]
@@ -516,7 +523,7 @@
           }
         },
         "type": "object",
-        "required": ["runningHours", "distance"],
+        "required": ["runningHours"],
         "title": "OperationalPerformanceResponse"
       },
       "RateLimitExceeded": {

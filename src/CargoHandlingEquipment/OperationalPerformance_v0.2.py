@@ -59,8 +59,8 @@ class OperationalPerformanceResponse(CamelCaseModel):
         description="The running hours during the specified time range",
         examples=[550.0],
     )
-    distance: float = Field(
-        ...,
+    distance: Optional[float] = Field(
+        None,
         title="Distance (km)",
         description="The total distance driven in kilometers during the specified time range",
         examples=[2500.0],
