@@ -59,8 +59,8 @@ class OperationalPerformanceResponse(CamelCaseModel):
         description="The running hours during the specified time range",
         examples=[550.0],
     )
-    distance: float = Field(
-        ...,
+    distance: Optional[float] = Field(
+        None,
         title="Distance (km)",
         description="The total distance driven in kilometers during the specified time range",
         examples=[2500.0],
@@ -110,8 +110,7 @@ class OperationalPerformanceRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
-    deprecated=True,
+    version="0.2.0",
     title="Cargo handling equipment operational performance",
     description="General operational status data of a mobile work machine operating in "
     "a port",
