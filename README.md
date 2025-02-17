@@ -22,9 +22,6 @@ format in this repository, you can check these resources:
 
 # Getting started
 
-Press `Use this template` to create a new repo from this template and define your data
-products there.
-
 Please check the [Contribution guidelines](./CONTRIBUTING.md) to learn how to submit new
 data product definitions in this repo.
 
