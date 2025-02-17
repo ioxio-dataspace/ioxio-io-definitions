@@ -89,11 +89,11 @@ DataProductDefinition is a structure consisting of:
 
   Version is used in the info block of the OpenAPI spec. The data product definitions
   use [Semantic Versioning](https://semver.org/) of the form `MAJOR.MINOR.PATCH`, for
-  example `1.0.0`. Definitions in the `test` and `draft` folders must have versions of
-  the form `0.0.z` and the version number should not exist in the filename of the
-  definition. In all other definitions the version number needs to be `>= 0.1.0` and the
-  corresponding short version number needs to be included in the filename. For example
-  the version `0.1.0` of the `Foo/Bar` definition would correspond to the file
+  example `1.0.0`. Definitions in the `test` folder must have versions of the form
+  `0.0.z` and the version number should not exist in the filename of the definition. In
+  all other definitions the version number needs to be `>= 0.1.0` and the corresponding
+  short version number needs to be included in the filename. For example the version
+  `0.1.0` of the `Foo/Bar` definition would correspond to the file
   `src/Foo/Bar_v0.1.py`. For more details about versions and filenames see the
   [Versioning of definitions](CONTRIBUTING.md#versioning-of-definitions) section in the
   contribution guidelines.
