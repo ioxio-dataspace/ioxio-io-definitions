@@ -17,7 +17,6 @@ you finalize your pull requests.
   - [Adding new Data Product Definition](#adding-new-data-product-definition)
     - [Raw OpenApi spec](#raw-openapi-spec)
     - [Definition as a Python file](#definition-as-a-python-file)
-    - [Test version of definitions](#test-version-of-definitions)
   - [Pull Requests](#pull-requests)
   - [License](#license)
 
@@ -59,33 +58,9 @@ You have 2 options to use the converter:
 2. By creating a PR to the `main` branch. CI workflow will run the automation and push
    updated/generated files if needed.
 
-### Test version of definitions
-
-Everyone can submit to this repo whatever definitions they seem appropriate. It will
-allow to create data products using these definitions in a dataspace and experiment with
-the system. In order to do this:
-
-1. Fork this repository
-2. Create your definitions under `src/test/<your_github_username>/`
-3. Submit a PR and wait for CI Workflow to run and validate the changes
-4. Once PR is merged, it's possible to use the definitions in the dataspace
-
 ### Versioning of definitions
 
-#### Test definitions
-
-Definitions in `src/test/<your_github_username>/` should not have any version number in
-the filename and the version in the file needs to be of the form `0.0.x`. Each change to
-the definition should increment the version by one. Examples of `version` -> `filename`:
-
-- `0.0.1` -> `src/test/<your_github_username>/Foo/Bar.py`
-- `0.0.2` -> `src/test/<your_github_username>/Foo/Bar.py`
-- `0.0.3` -> `src/test/<your_github_username>/Foo/Bar.py`
-- ...
-
-#### Other definitions
-
-All other definitions have version numbers that are `>= 0.1.0` and they should follow
+Definitions have version numbers that are `>= 0.1.0` and they should follow
 [Semantic Versioning](https://semver.org/) of the form `MAJOR.MINOR.PATCH`.
 
 A general rule of thumb would be that the first definition should be versioned as
