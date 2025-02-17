@@ -83,12 +83,6 @@ the definition should increment the version by one. Examples of `version` -> `fi
 - `0.0.3` -> `src/test/<your_github_username>/Foo/Bar.py`
 - ...
 
-#### Draft definitions
-
-Definitions in `src/draft/` work the same way as the definitions in
-`src/test/<your_github_username>/`. They are however being phased out on the dataspaces
-where they still exist.
-
 #### Other definitions
 
 All other definitions have version numbers that are `>= 0.1.0` and they should follow
