@@ -17,7 +17,7 @@ class Location(CamelCaseModel):
     latitude: float = Field(
         ...,
         title="Latitude (°)",
-        description="The latitude coordinate in decimal degrees",
+        description="The latitude coordinate in decimal degrees.",
         ge=-90.0,
         le=90.0,
         examples=[60.192059],
@@ -25,7 +25,7 @@ class Location(CamelCaseModel):
     longitude: float = Field(
         ...,
         title="Longitude (°)",
-        description="The longitude coordinate in decimal degrees",
+        description="The longitude coordinate in decimal degrees.",
         ge=-180.0,
         le=180.0,
         examples=[24.945831],
@@ -36,7 +36,7 @@ class OperationalStatusResponse(CamelCaseModel):
     time: Optional[datetime.datetime] = Field(
         None,
         title="Time",
-        description="The time the status of the equipment was recorded, in RFC 3339 format",
+        description="The time the status of the equipment was recorded, in RFC 3339 format.",
         examples=[
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc),
         ],
@@ -44,19 +44,19 @@ class OperationalStatusResponse(CamelCaseModel):
     operational_state: OperationalState = Field(
         ...,
         title="Operational state",
-        description="The state of operation",
+        description="The state of operation.",
         examples=[OperationalState.OPERATING],
     )
     is_loaded: Optional[bool] = Field(
         None,
         title="Is loaded",
-        description="The cargo handling status that shows whether the equipment is loaded or not",
+        description="The cargo handling status that shows whether the equipment is loaded or not.",
         examples=[True],
     )
     fuel_level: Optional[float] = Field(
         None,
         title="Fuel level (%)",
-        description="The percent of fuel left as a number value between 0 and 100",
+        description="The percent of fuel left as a number value between 0 and 100.",
         ge=0.0,
         le=100.0,
         examples=[75.0],
@@ -64,7 +64,7 @@ class OperationalStatusResponse(CamelCaseModel):
     gas_level: Optional[float] = Field(
         None,
         title="Gas level (%)",
-        description="The percent of gas left as a number value between 0 and 100",
+        description="The percent of gas left as a number value between 0 and 100.",
         ge=0.0,
         le=100.0,
         examples=[75.0],
@@ -72,7 +72,7 @@ class OperationalStatusResponse(CamelCaseModel):
     charge_level: Optional[float] = Field(
         None,
         title="Charge level (%)",
-        description="The percent of battery capacity left as a number value between 0 and 100",
+        description="The percent of battery capacity left as a number value between 0 and 100.",
         ge=0.0,
         le=100.0,
         examples=[75.0],
@@ -80,7 +80,7 @@ class OperationalStatusResponse(CamelCaseModel):
     location: Optional[Location] = Field(
         None,
         title="Location",
-        description="The location in GPS coordinates",
+        description="The location in GPS coordinates.",
     )
 
 
@@ -89,7 +89,7 @@ class OperationalStatusRequest(CamelCaseModel):
         ...,
         max_length=40,
         title="ID",
-        description="The unique identifier of the product",
+        description="The unique identifier of the product.",
         examples=["71b51878-8a00-11ee-b9d1-0242ac120002"],
     )
     time: Optional[datetime.datetime] = Field(
@@ -103,10 +103,10 @@ class OperationalStatusRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.0",
+    version="0.2.1",
     title="Cargo handling equipment operational status",
     description="General operational status data of a cargo handling equipment "
-    "operating in a port",
+    "operating in a port.",
     request=OperationalStatusRequest,
     response=OperationalStatusResponse,
     tags=["Cargo handling equipment", "Port", "Freight terminal", "Logistics"],

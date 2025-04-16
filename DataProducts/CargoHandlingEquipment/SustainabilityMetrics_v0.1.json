@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Cargo handling equipment sustainability metrics",
-    "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations",
-    "version": "0.1.0"
+    "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations.",
+    "version": "0.1.1"
   },
   "paths": {
     "/CargoHandlingEquipment/SustainabilityMetrics_v0.1": {
@@ -17,7 +17,7 @@
           "Sustainability"
         ],
         "summary": "Cargo handling equipment sustainability metrics",
-        "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations",
+        "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations.",
         "operationId": "request_CargoHandlingEquipment_SustainabilityMetrics_v0_1",
         "parameters": [
           {
@@ -368,21 +368,21 @@
             "type": "string",
             "maxLength": 40,
             "title": "ID",
-            "description": "The unique identifier of the product",
+            "description": "The unique identifier of the product.",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
           "startTime": {
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "The start time of the metric period in RFC 3339 format",
+            "description": "The start time of the metric period in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
             "title": "End time",
-            "description": "The end time of the metric period in RFC 3339 format",
+            "description": "The end time of the metric period in RFC 3339 format.",
             "examples": ["2023-05-12T23:20:50Z"]
           }
         },
@@ -403,7 +403,7 @@
               }
             ],
             "title": "Fuel consumption (l)",
-            "description": "The total fuel consumption of the machine in litres",
+            "description": "The total fuel consumption of the machine in litres.",
             "examples": [1000.0]
           },
           "gasConsumption": {
@@ -417,7 +417,7 @@
               }
             ],
             "title": "Gas consumption (kg)",
-            "description": "The total gas consumption of the equipment in kilograms",
+            "description": "The total gas consumption of the equipment in kilograms.",
             "examples": [3000.0]
           },
           "electricityConsumption": {
@@ -431,7 +431,7 @@
               }
             ],
             "title": "Electricity consumption (kWh)",
-            "description": "The total cumulative electricity consumption of the equipment in kilowatt hours",
+            "description": "The total cumulative electricity consumption of the equipment in kilowatt hours.",
             "examples": [560.0]
           }
         },

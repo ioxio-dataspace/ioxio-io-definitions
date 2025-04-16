@@ -2,14 +2,14 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Current weather in metric units",
-    "description": "Common data points about the current weather with metric units in a given location",
+    "description": "Common data points about the current weather with metric units in a given location.",
     "version": "0.1.1"
   },
   "paths": {
     "/Weather/Current_v0.1": {
       "post": {
         "summary": "Current weather in metric units",
-        "description": "Common data points about the current weather with metric units in a given location",
+        "description": "Common data points about the current weather with metric units in a given location.",
         "operationId": "request_Weather_Current_v0_1",
         "deprecated": true,
         "parameters": [
@@ -408,7 +408,7 @@
             "maximum": 90.0,
             "minimum": -90.0,
             "title": "Latitude (°)",
-            "description": "The latitude coordinate of the desired location in degrees",
+            "description": "The latitude coordinate of the desired location in degrees.",
             "examples": [60.192059]
           },
           "longitude": {
@@ -416,7 +416,7 @@
             "maximum": 180.0,
             "minimum": -180.0,
             "title": "Longitude (°)",
-            "description": "The longitude coordinate of the desired location in degrees",
+            "description": "The longitude coordinate of the desired location in degrees.",
             "examples": [24.945831]
           }
         },
@@ -430,7 +430,7 @@
             "type": "number",
             "minimum": -273.15,
             "title": "Temperature (°C)",
-            "description": "Current temperature in degrees Celsius",
+            "description": "Current temperature in degrees Celsius.",
             "examples": [17.3]
           },
           "humidity": {
@@ -445,7 +445,7 @@
               }
             ],
             "title": "Humidity (%)",
-            "description": "Current relative air humidity percentage",
+            "description": "Current relative air humidity percentage.",
             "examples": [72]
           },
           "pressure": {
@@ -459,7 +459,7 @@
               }
             ],
             "title": "Pressure (hPa)",
-            "description": "Current air pressure in hectopascals",
+            "description": "Current air pressure in hectopascals.",
             "examples": [1007]
           },
           "windSpeed": {
@@ -473,7 +473,7 @@
               }
             ],
             "title": "Wind speed (m/s)",
-            "description": "Current wind speed in meters per second",
+            "description": "Current wind speed in meters per second.",
             "examples": [2.1]
           },
           "windDirection": {
@@ -488,7 +488,7 @@
               }
             ],
             "title": "Wind direction (°)",
-            "description": "Current wind direction in meteorological wind direction degrees",
+            "description": "Current wind direction in meteorological wind direction degrees.",
             "examples": [220.0]
           },
           "precipitation": {
@@ -503,7 +503,7 @@
               }
             ],
             "title": "Precipitation (mm/h)",
-            "description": "Current precipitation in millimeters per hour",
+            "description": "Current precipitation in millimeters per hour.",
             "examples": [120.0]
           },
           "visibility": {
@@ -518,7 +518,7 @@
               }
             ],
             "title": "Visibility (m)",
-            "description": "Visibility in meters",
+            "description": "Visibility in meters.",
             "examples": [320.0]
           }
         },

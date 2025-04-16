@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Cargo handling equipment operational performance",
-    "description": "General operational status data of a mobile work machine operating in a port",
+    "description": "General operational status data of a mobile work machine operating in a port.",
     "version": "0.1.1"
   },
   "paths": {
@@ -10,7 +10,7 @@
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
         "summary": "Cargo handling equipment operational performance",
-        "description": "General operational status data of a mobile work machine operating in a port",
+        "description": "General operational status data of a mobile work machine operating in a port.",
         "operationId": "request_CargoHandlingEquipment_OperationalPerformance_v0_1",
         "deprecated": true,
         "parameters": [
@@ -234,7 +234,7 @@
               }
             ],
             "title": "Number of pick moves",
-            "description": "Count of pick moves the cargo handling equipment has performed during the time period",
+            "description": "Count of pick moves the cargo handling equipment has performed during the time period.",
             "examples": [52]
           },
           "place": {
@@ -247,7 +247,7 @@
               }
             ],
             "title": "Number of place moves",
-            "description": "Count of place moves the cargo handling equipment has performed during the time period",
+            "description": "Count of place moves the cargo handling equipment has performed during the time period.",
             "examples": [53]
           }
         },
@@ -357,7 +357,7 @@
               }
             ],
             "title": "Number of lift moves",
-            "description": "Count of lifting moves the cargo handling equipment has performed during the time period",
+            "description": "Count of lifting moves the cargo handling equipment has performed during the time period.",
             "examples": [165]
           },
           "lower": {
@@ -370,7 +370,7 @@
               }
             ],
             "title": "Number of lowering moves",
-            "description": "Count of lowering moves the cargo handling equipment has performed during the time period",
+            "description": "Count of lowering moves the cargo handling equipment has performed during the time period.",
             "examples": [164]
           }
         },
@@ -400,7 +400,7 @@
             "type": "string",
             "maxLength": 40,
             "title": "ID",
-            "description": "The unique identifier of the product",
+            "description": "The unique identifier of the product.",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
           "startTime": {
@@ -414,7 +414,7 @@
               }
             ],
             "title": "Start time",
-            "description": "The start time of the performance period, in RFC 3339 format",
+            "description": "The start time of the performance period, in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
@@ -428,7 +428,7 @@
               }
             ],
             "title": "End time",
-            "description": "The end time of the performance period in, RFC 3339 format",
+            "description": "The end time of the performance period in, RFC 3339 format.",
             "examples": ["2023-05-12T23:20:50Z"]
           }
         },
@@ -449,7 +449,7 @@
               }
             ],
             "title": "Start time",
-            "description": "The start time of the performance period, in RFC 3339 format",
+            "description": "The start time of the performance period, in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "endTime": {
@@ -463,19 +463,19 @@
               }
             ],
             "title": "End time",
-            "description": "The end time of the performance period, in RFC 3339 format",
+            "description": "The end time of the performance period, in RFC 3339 format.",
             "examples": ["2023-05-12T23:20:50Z"]
           },
           "runningHours": {
             "type": "number",
             "title": "Running hours (h)",
-            "description": "The running hours during the specified time range",
+            "description": "The running hours during the specified time range.",
             "examples": [550.0]
           },
           "distance": {
             "type": "number",
             "title": "Distance (km)",
-            "description": "The total distance driven in kilometers during the specified time range",
+            "description": "The total distance driven in kilometers during the specified time range.",
             "examples": [2500.0]
           },
           "cargoMoves": {
@@ -488,7 +488,7 @@
               }
             ],
             "title": "Cargo moves",
-            "description": "Counts of cargo handling moves per type (pick or place)"
+            "description": "Counts of cargo handling moves per type (pick or place)."
           },
           "hoistMoves": {
             "anyOf": [
@@ -500,7 +500,7 @@
               }
             ],
             "title": "Hoist moves",
-            "description": "Counts of hoist moves per type (lift or lower)"
+            "description": "Counts of hoist moves per type (lift or lower)."
           },
           "cargoWeightProcessed": {
             "anyOf": [
@@ -512,7 +512,7 @@
               }
             ],
             "title": "Cargo weight processed (kg)",
-            "description": "The total cargo weight processed kilograms",
+            "description": "The total cargo weight processed kilograms.",
             "examples": [75.0]
           }
         },
