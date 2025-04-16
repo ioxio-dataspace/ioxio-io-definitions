@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment data sheet",
     "description": "General as-built data of a cargo handling equipment operating in a port.",
-    "version": "0.2.2"
+    "version": "0.2.1"
   },
   "paths": {
     "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.2": {
