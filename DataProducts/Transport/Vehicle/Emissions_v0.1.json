@@ -3,12 +3,12 @@
   "info": {
     "title": "Transport vehicle emissions",
     "description": "The emissions of a transport vehicle.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Transport/Vehicle/Emissions_v0.1": {
       "post": {
-        "tags": ["Emissions", "Logistics", "Road transport", "Truck"],
+        "tags": ["Emissions", "Environment", "Logistics", "Road transport"],
         "summary": "Transport vehicle emissions",
         "description": "The emissions of a transport vehicle.",
         "operationId": "request_Transport_Vehicle_Emissions_v0_1",

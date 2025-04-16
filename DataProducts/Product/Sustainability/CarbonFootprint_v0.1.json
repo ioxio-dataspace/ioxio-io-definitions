@@ -3,12 +3,12 @@
   "info": {
     "title": "Product carbon footprint",
     "description": "The carbon footprint of manufacturing a product.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Product/Sustainability/CarbonFootprint_v0.1": {
       "post": {
-        "tags": ["Carbon footprint", "PCR", "Product category rules"],
+        "tags": ["Carbon footprint", "Environment"],
         "summary": "Product carbon footprint",
         "description": "The carbon footprint of manufacturing a product.",
         "operationId": "request_Product_Sustainability_CarbonFootprint_v0_1",

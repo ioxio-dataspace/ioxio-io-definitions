@@ -61,10 +61,10 @@ class EmissionsResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Transport vehicle emissions",
     description="The emissions of a transport vehicle.",
-    tags=["Road transport", "Logistics", "Truck", "Emissions"],
+    tags=["Road transport", "Logistics", "Environment", "Emissions"],
     request=EmissionsRequest,
     response=EmissionsResponse,
 )
