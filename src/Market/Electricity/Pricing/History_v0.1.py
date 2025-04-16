@@ -87,9 +87,10 @@ class EnergyPriceResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Electricity market price",
     description="Electricity price per MWh",
+    tags=["Electricity", "Pricing", "Market"],
     request=EnergyPriceRequest,
     response=EnergyPriceResponse,
 )

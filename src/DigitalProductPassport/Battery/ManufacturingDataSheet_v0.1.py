@@ -394,10 +394,11 @@ class ManufacturingDataSheetRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
     title="Battery Manufacturing Data Sheet",
     description="Manufacturing data sheet as required by Battery Passport "
     "specification of the European Commission's Battery Act (2023/1542)",
+    tags=["Digital Product Passport", "Manufacturing"],
     request=ManufacturingDataSheetRequest,
     response=ManufacturingDataSheetResponse,
 )

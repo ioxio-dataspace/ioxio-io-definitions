@@ -3,12 +3,12 @@
   "info": {
     "title": "Estimated arrival times",
     "description": "Estimated arrival times of vehicles within a transport location.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Transport/Vehicle/EstimatedArrivalTimes_v0.1": {
       "post": {
-        "tags": ["ETA", "Logistics"],
+        "tags": ["Logistics"],
         "summary": "Estimated arrival times",
         "description": "Estimated arrival times of vehicles within a transport location.",
         "operationId": "request_Transport_Vehicle_EstimatedArrivalTimes_v0_1",

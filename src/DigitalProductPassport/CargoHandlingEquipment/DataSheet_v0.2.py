@@ -175,11 +175,17 @@ class DataSheetRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.0",
+    version="0.2.2",
     title="Cargo handling equipment data sheet",
     description="General as-built data of a cargo handling equipment operating in a "
     "port",
     request=DataSheetRequest,
     response=DataSheetResponse,
-    tags=["Cargo handling equipment", "Port", "Freight terminal", "Logistics"],
+    tags=[
+        "Digital Product Passport",
+        "Cargo handling equipment",
+        "Port",
+        "Freight terminal",
+        "Logistics",
+    ],
 )

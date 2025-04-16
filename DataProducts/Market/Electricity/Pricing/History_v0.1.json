@@ -3,11 +3,12 @@
   "info": {
     "title": "Electricity market price",
     "description": "Electricity price per MWh",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Market/Electricity/Pricing/History_v0.1": {
       "post": {
+        "tags": ["Electricity", "Market", "Pricing"],
         "summary": "Electricity market price",
         "description": "Electricity price per MWh",
         "operationId": "request_Market_Electricity_Pricing_History_v0_1",
