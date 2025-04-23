@@ -1,22 +1,31 @@
 from datetime import datetime
+from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
 
 
+class QueryLevel(str, Enum):
+    MODEL = "model"
+    BATCH = "batch"
+    ITEM = "item"
+
+
 class MeasurementEquipment(CamelCaseModel):
-    cmm_serial_number: str = Field(
+    machine_serial_number: str = Field(
         ...,
-        title="CMM serial number",
-        description="The serial number of the coordinate measuring machine.",
+        title="Machine serial number",
+        description="The serial number of the measuring machine.",
+        min_length=0,
         max_length=40,
         examples=["mfg-model-xxxx-yyyy"],
     )
-    cmm_type: Optional[str] = Field(
+    machine_type: Optional[str] = Field(
         None,
-        title="CMM type",
-        description="The type of the coordinate measuring machine.",
+        title="Machine type",
+        description="The type of the measuring machine.",
+        min_length=0,
         max_length=40,
         examples=["bridge ccm"],
     )
@@ -24,6 +33,7 @@ class MeasurementEquipment(CamelCaseModel):
         None,
         title="Program revision",
         description="The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
+        min_length=0,
         max_length=40,
         examples=["mp-001-rv02"],
     )
@@ -32,8 +42,9 @@ class MeasurementEquipment(CamelCaseModel):
 class ComponentIdentification(CamelCaseModel):
     purchase_order: str = Field(
         ...,
-        title="Purchase order ",
+        title="Purchase order",
         description="The number of the purchase order related to the component.",
+        min_length=0,
         max_length=40,
         examples=["12345"],
     )
@@ -41,6 +52,7 @@ class ComponentIdentification(CamelCaseModel):
         ...,
         title="Component name",
         description="The name of the component.",
+        min_length=0,
         max_length=250,
         examples=["valve xyz"],
     )
@@ -48,8 +60,17 @@ class ComponentIdentification(CamelCaseModel):
         ...,
         title="Production number",
         description="The production number related to the component manufacturing.",
+        min_length=0,
         max_length=40,
         examples=["pn-20240205-00123"],
+    )
+    drawing_number: str = Field(
+        ...,
+        title="Drawing number",
+        description="The drawing number related to the component.",
+        min_length=0,
+        max_length=40,
+        examples=["xy00012345687"],
     )
 
 
@@ -58,6 +79,7 @@ class CustomerInformation(CamelCaseModel):
         ...,
         title="Name",
         description="The name of the customer that has issued the component order.",
+        min_length=0,
         max_length=250,
         examples=["Company xyz"],
     )
@@ -65,6 +87,7 @@ class CustomerInformation(CamelCaseModel):
         None,
         title="Department",
         description="The responsible department of the customer that has issued the component order.",
+        min_length=0,
         max_length=250,
         examples=["Department xyz"],
     )
@@ -74,7 +97,8 @@ class MeasurementSetup(CamelCaseModel):
     remarks: Optional[str] = Field(
         None,
         title="Remarks",
-        description="The considerable notes regarding the measurement.",
+        description="The notes to consider regarding the measurement.",
+        min_length=0,
         max_length=400,
         examples=[
             "Measurement taken from the outer edge to center, following xyz standards."
@@ -84,32 +108,34 @@ class MeasurementSetup(CamelCaseModel):
         ...,
         title="Measurement ID",
         description="The identifier of the quality measurement.",
+        min_length=0,
         max_length=40,
         examples=["1234567"],
     )
     measurement_timestamp: datetime = Field(
         ...,
         title="Measurement timestamp",
-        description="The quality measurement time of the component in RFC 3339 format.",
+        description="Timestamp of the quality measurement of the component, in RFC 3339 format.",
         examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
     )
     measurement_run_type: str = Field(
         ...,
         title="Measurement run type",
         description="The method used to perform measurements on the components.",
+        min_length=0,
         max_length=250,
         examples=["partial measurement"],
     )
-    measured_components: int = Field(
-        ...,
+    measured_components: Optional[int] = Field(
+        None,
         title="Measured components",
-        description="Then number of measured components from a batch.",
+        description="The number of measured components from the batch.",
         examples=[50],
     )
     batch_size: Optional[int] = Field(
         None,
         title="Batch size",
-        description="The entire size of the batch applying to same quality measurements.",
+        description="The entire size of the batch that was measured.",
         examples=[100],
     )
     deviations: Optional[int] = Field(
@@ -127,7 +153,7 @@ class MeasurementSetup(CamelCaseModel):
     measurement_equipment: list[MeasurementEquipment] = Field(
         ...,
         title="Measurement equipment",
-        description="The identifiers of the equipment used in the measuring of the component.",
+        description="The identifiers of the equipment used to measure the component.",
     )
 
 
@@ -136,6 +162,7 @@ class MeasurementResult(CamelCaseModel):
         ...,
         title="Feature name",
         description="The name of the measured feature.",
+        min_length=0,
         max_length=250,
         examples=["valve diameter middle D84"],
     )
@@ -145,45 +172,60 @@ class MeasurementResult(CamelCaseModel):
         description="The measured value of the feature in millimeters.",
         examples=[84.0250],
     )
-    nominal_value: float = Field(
-        ...,
+    nominal_value: Optional[float] = Field(
+        None,
         title="Nominal value (mm)",
         description="The nominal (theoretical) value of the measured feature in millimeters.",
         examples=[84.0000],
     )
-    upper_tolerance: float = Field(
-        ...,
+    upper_tolerance: Optional[float] = Field(
+        None,
         title="Upper tolerance (mm)",
         description="The upper tolerance allowed for the measurement in millimeters.",
         examples=[0.0550],
     )
-    lower_tolerance: float = Field(
-        ...,
+    lower_tolerance: Optional[float] = Field(
+        None,
         title="Lower tolerance (mm)",
         description="The lower tolerance allowed for the measurement in millimeters.",
         examples=[0.0550],
     )
-    deviation: float = Field(
-        ...,
+    deviation: Optional[float] = Field(
+        None,
         title="Deviation (mm)",
         description="Deviation from the measurement value in millimeters.",
         examples=[0.025],
     )
-    tolerance_status: Optional[bool] = Field(
+    is_within_tolerance: Optional[bool] = Field(
         None,
-        title="Tolerance status",
-        description="The indicator if the measured value is within tolerance.",
+        title="Is within tolerance",
+        description="[object Object]",
         examples=[True],
     )
 
 
 class Request(CamelCaseModel):
+    product: str = Field(
+        ...,
+        title="Product",
+        description="The product code used for identifying the product model.",
+        min_length=0,
+        max_length=150,
+        examples=["product-modelX-1234"],
+    )
+    query_level: QueryLevel = Field(
+        ...,
+        title="Query level",
+        description="The query level used to define the product's quality measurement report.",
+        examples=[QueryLevel.BATCH],
+    )
     id: str = Field(
         ...,
         title="ID",
-        description="The unique identifier of the component.",
+        description="If querying on model level an empty string is used. The batch identifier is used when querying on the batch level. The unique item identifier is used when querying on the product item level.",
+        min_length=0,
         max_length=40,
-        examples=["b1a-0723y-00165"],
+        examples=["batch-12345"],
     )
 
 
@@ -211,10 +253,9 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
-    deprecated=True,
-    title="Machined component measurement report",
-    description="The quality measurement report for a batch of machined components.",
+    version="0.2.0",
+    title="Metal component measurement report",
+    description="The quality measurement report for metal components.",
     tags=["Manufacturing", "Machinery and equipment"],
     request=Request,
     response=Response,

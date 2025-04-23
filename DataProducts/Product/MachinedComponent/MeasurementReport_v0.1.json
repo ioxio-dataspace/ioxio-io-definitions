@@ -12,6 +12,7 @@
         "summary": "Machined component measurement report",
         "description": "The quality measurement report for a batch of machined components.",
         "operationId": "request_Product_MachinedComponent_MeasurementReport_v0_1",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",

@@ -1,18 +1,17 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Machined component traceability",
-    "description": "The traceability information of a machined component.",
-    "version": "0.1.0"
+    "title": "Metal component measurement report",
+    "description": "The quality measurement report for metal components.",
+    "version": "0.2.0"
   },
   "paths": {
-    "/Product/MachinedComponent/Traceability_v0.1": {
+    "/Product/MachinedComponent/MeasurementReport_v0.2": {
       "post": {
         "tags": ["Machinery and equipment", "Manufacturing"],
-        "summary": "Machined component traceability",
-        "description": "The traceability information of a machined component.",
-        "operationId": "request_Product_MachinedComponent_Traceability_v0_1",
-        "deprecated": true,
+        "summary": "Metal component measurement report",
+        "description": "The quality measurement report for metal components.",
+        "operationId": "request_Product_MachinedComponent_MeasurementReport_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -222,107 +221,79 @@
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
       },
-      "Blank": {
-        "properties": {
-          "identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Identifier",
-            "description": "The identifier the blank used for machining the component.",
-            "examples": ["st-42crmo4-blt-ht1234-btch5678"]
-          },
-          "type": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Type",
-            "description": "The type of the blank used for machining the component.",
-            "examples": ["forging billet"]
-          }
-        },
-        "type": "object",
-        "title": "Blank"
-      },
       "ComponentIdentification": {
         "properties": {
           "purchaseOrder": {
             "type": "string",
             "maxLength": 40,
+            "minLength": 0,
             "title": "Purchase order",
             "description": "The number of the purchase order related to the component.",
-            "examples": ["2345"]
+            "examples": ["12345"]
           },
-          "workOrder": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Work order",
-            "description": "The number of the manufacturing work order related to the component.",
-            "examples": ["wo-2025-0001"]
+          "componentName": {
+            "type": "string",
+            "maxLength": 250,
+            "minLength": 0,
+            "title": "Component name",
+            "description": "The name of the component.",
+            "examples": ["valve xyz"]
           },
-          "deviationPermit": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Deviation permit",
-            "description": "The identifier of an approved exception allowing the use of a component that deviates from standard specifications.",
-            "examples": ["el-2024-005"]
-          },
-          "blank": {
-            "$ref": "#/components/schemas/Blank",
-            "description": "The identification details of the the blank used for machining the component."
-          },
-          "waybill": {
+          "productionNumber": {
             "type": "string",
             "maxLength": 40,
-            "title": "Waybill",
-            "description": "The identifier for the component shipment from the component manufacturer to the customer.",
-            "examples": ["1x999aa10123456784"]
+            "minLength": 0,
+            "title": "Production number",
+            "description": "The production number related to the component manufacturing.",
+            "examples": ["pn-20240205-00123"]
           },
-          "codeNomenclature": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 10,
-                "pattern": "^\\d{4}(\\d{2}){0,3}$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Code nomenclature",
-            "description": "The number identifying the component type according to EU harmonised system and Council Regulation (EEC) No 2658/87.",
-            "examples": ["73269010"]
+          "drawingNumber": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Drawing number",
+            "description": "The drawing number related to the component.",
+            "examples": ["xy00012345687"]
           }
         },
         "type": "object",
-        "required": ["purchaseOrder", "blank", "waybill"],
+        "required": [
+          "purchaseOrder",
+          "componentName",
+          "productionNumber",
+          "drawingNumber"
+        ],
         "title": "ComponentIdentification"
+      },
+      "CustomerInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "minLength": 0,
+            "title": "Name",
+            "description": "The name of the customer that has issued the component order.",
+            "examples": ["Company xyz"]
+          },
+          "department": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Department",
+            "description": "The responsible department of the customer that has issued the component order.",
+            "examples": ["Department xyz"]
+          }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "CustomerInformation"
       },
       "DataSourceError": {
         "properties": {
@@ -415,96 +386,248 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "MachiningCenter": {
+      "MeasurementEquipment": {
         "properties": {
-          "identifier": {
+          "machineSerialNumber": {
             "type": "string",
             "maxLength": 40,
-            "title": "Identifier",
-            "description": "The identifier of the machining the center.",
-            "examples": ["cnc-101"]
+            "minLength": 0,
+            "title": "Machine serial number",
+            "description": "The serial number of the measuring machine.",
+            "examples": ["mfg-model-xxxx-yyyy"]
           },
-          "numericalControlVersion": {
+          "machineType": {
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 40
+                "maxLength": 40,
+                "minLength": 0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Numerical control version",
-            "description": "The version of the controller software used by the machining center.",
-            "examples": ["nc-v10.3"]
+            "title": "Machine type",
+            "description": "The type of the measuring machine.",
+            "examples": ["bridge ccm"]
           },
-          "routingVersion": {
+          "programRevision": {
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 40
+                "maxLength": 40,
+                "minLength": 0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Routing version",
-            "description": "The process sequence used for machining the component.",
-            "examples": ["r001"]
-          },
-          "modificationTimestamp": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Modification timestamp",
-            "description": "The latest timestamp used for updating the process routing in RFC 3339 format.",
-            "examples": ["2025-02-06T09:26:52Z"]
+            "title": "Program revision",
+            "description": "The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
+            "examples": ["mp-001-rv02"]
           }
         },
         "type": "object",
-        "required": ["identifier"],
-        "title": "MachiningCenter"
+        "required": ["machineSerialNumber"],
+        "title": "MeasurementEquipment"
       },
-      "ManufacturerInformation": {
+      "MeasurementResult": {
         "properties": {
-          "name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 250
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Name",
-            "description": "The registered trade name of the manufacturer company.",
-            "examples": ["Company xyz"]
+          "featureName": {
+            "type": "string",
+            "maxLength": 250,
+            "minLength": 0,
+            "title": "Feature name",
+            "description": "The name of the measured feature.",
+            "examples": ["valve diameter middle D84"]
           },
-          "website": {
+          "measuredValue": {
+            "type": "number",
+            "title": "Measured value (mm)",
+            "description": "The measured value of the feature in millimeters.",
+            "examples": [84.025]
+          },
+          "nominalValue": {
             "anyOf": [
               {
-                "type": "string",
-                "maxLength": 2083,
-                "pattern": "^https://"
+                "type": "number"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Website",
-            "description": "The website of the manufacturer.",
-            "examples": ["https://example.com/"]
+            "title": "Nominal value (mm)",
+            "description": "The nominal (theoretical) value of the measured feature in millimeters.",
+            "examples": [84.0]
+          },
+          "upperTolerance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper tolerance (mm)",
+            "description": "The upper tolerance allowed for the measurement in millimeters.",
+            "examples": [0.055]
+          },
+          "lowerTolerance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower tolerance (mm)",
+            "description": "The lower tolerance allowed for the measurement in millimeters.",
+            "examples": [0.055]
+          },
+          "deviation": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deviation (mm)",
+            "description": "Deviation from the measurement value in millimeters.",
+            "examples": [0.025]
+          },
+          "isWithinTolerance": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is within tolerance",
+            "description": "[object Object]",
+            "examples": [true]
           }
         },
         "type": "object",
-        "title": "ManufacturerInformation"
+        "required": ["featureName", "measuredValue"],
+        "title": "MeasurementResult"
+      },
+      "MeasurementSetup": {
+        "properties": {
+          "remarks": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 400,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remarks",
+            "description": "The notes to consider regarding the measurement.",
+            "examples": [
+              "Measurement taken from the outer edge to center, following xyz standards."
+            ]
+          },
+          "measurementId": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Measurement ID",
+            "description": "The identifier of the quality measurement.",
+            "examples": ["1234567"]
+          },
+          "measurementTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Measurement timestamp",
+            "description": "Timestamp of the quality measurement of the component, in RFC 3339 format.",
+            "examples": ["2025-02-06T09:26:52Z"]
+          },
+          "measurementRunType": {
+            "type": "string",
+            "maxLength": 250,
+            "minLength": 0,
+            "title": "Measurement run type",
+            "description": "The method used to perform measurements on the components.",
+            "examples": ["partial measurement"]
+          },
+          "measuredComponents": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measured components",
+            "description": "The number of measured components from the batch.",
+            "examples": [50]
+          },
+          "batchSize": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Batch size",
+            "description": "The entire size of the batch that was measured.",
+            "examples": [100]
+          },
+          "deviations": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deviations",
+            "description": "The number of deviations (red values) in the measured values.",
+            "examples": [5]
+          },
+          "duration": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration (s)",
+            "description": "The duration of the measurement process in seconds.",
+            "examples": [825]
+          },
+          "measurementEquipment": {
+            "items": {
+              "$ref": "#/components/schemas/MeasurementEquipment"
+            },
+            "type": "array",
+            "title": "Measurement equipment",
+            "description": "The identifiers of the equipment used to measure the component."
+          }
+        },
+        "type": "object",
+        "required": [
+          "measurementId",
+          "measurementTimestamp",
+          "measurementRunType",
+          "measurementEquipment"
+        ],
+        "title": "MeasurementSetup"
       },
       "NotFound": {
         "properties": {
@@ -523,6 +646,11 @@
         "required": ["type", "message"],
         "title": "NotFound"
       },
+      "QueryLevel": {
+        "type": "string",
+        "enum": ["model", "batch", "item"],
+        "title": "QueryLevel"
+      },
       "RateLimitExceeded": {
         "properties": {
           "message": {
@@ -538,16 +666,31 @@
       },
       "Request": {
         "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 0,
+            "title": "Product",
+            "description": "The product code used for identifying the product model.",
+            "examples": ["product-modelX-1234"]
+          },
+          "queryLevel": {
+            "$ref": "#/components/schemas/QueryLevel",
+            "title": "Query level",
+            "description": "The query level used to define the product's quality measurement report.",
+            "examples": ["batch"]
+          },
           "id": {
             "type": "string",
             "maxLength": 40,
+            "minLength": 0,
             "title": "ID",
-            "description": "The unique identifier of the component.",
-            "examples": ["b1a-0723y-00165"]
+            "description": "If querying on model level an empty string is used. The batch identifier is used when querying on the batch level. The unique item identifier is used when querying on the product item level.",
+            "examples": ["batch-12345"]
           }
         },
         "type": "object",
-        "required": ["id"],
+        "required": ["product", "queryLevel", "id"],
         "title": "Request"
       },
       "Response": {
@@ -557,53 +700,31 @@
             "title": "Component identification",
             "description": "The identifiers related to the component."
           },
-          "manufacturerInformation": {
-            "$ref": "#/components/schemas/ManufacturerInformation",
-            "title": "Manufacturer information",
-            "description": "The details of the component manufacturer."
+          "customerInformation": {
+            "$ref": "#/components/schemas/CustomerInformation",
+            "title": "Customer information",
+            "description": "The details of the customer issuing the order for the component."
           },
-          "drawingNumber": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Drawing number",
-            "description": "The number identifying the component specification drawing.",
-            "examples": ["12345"]
+          "measurementSetup": {
+            "$ref": "#/components/schemas/MeasurementSetup",
+            "title": "Measurement setup",
+            "description": "The details describing the quality measurement setup."
           },
-          "drawingRevision": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Drawing revision",
-            "description": "The version of the component specification drawing.",
-            "examples": ["Rev A"]
-          },
-          "machiningCenters": {
+          "measurementResults": {
             "items": {
-              "$ref": "#/components/schemas/MachiningCenter"
+              "$ref": "#/components/schemas/MeasurementResult"
             },
             "type": "array",
-            "title": "Machining centers",
-            "description": "The details of the equipment used for machining the component."
+            "title": "Measurement results",
+            "description": "The results of the quality measurements."
           }
         },
         "type": "object",
         "required": [
           "componentIdentification",
-          "manufacturerInformation",
-          "machiningCenters"
+          "customerInformation",
+          "measurementSetup",
+          "measurementResults"
         ],
         "title": "Response"
       },
