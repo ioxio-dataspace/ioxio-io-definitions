@@ -122,7 +122,7 @@ class ManufacturerInformation(CamelCaseModel):
     identification: CompanyIdentification = Field(
         ...,
         title="Identification",
-        description="The identification of the company responsible for manufacturing the component. ",
+        description="The identification of the company responsible for manufacturing the component.",
     )
     address: Optional[str] = Field(
         None,

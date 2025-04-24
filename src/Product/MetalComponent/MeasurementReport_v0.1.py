@@ -199,7 +199,7 @@ class MeasurementResult(CamelCaseModel):
     is_within_tolerance: Optional[bool] = Field(
         None,
         title="Is within tolerance",
-        description="[object Object]",
+        description="The indicator whether the measured value is within tolerance.",
         examples=[True],
     )
 
