@@ -509,7 +509,7 @@
               }
             ],
             "title": "Is within tolerance",
-            "description": "[object Object]",
+            "description": "The indicator whether the measured value is within tolerance.",
             "examples": [true]
           }
         },

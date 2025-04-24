@@ -220,7 +220,7 @@ class Response(CamelCaseModel):
         ...,
         title="Surface treatments",
         description="Details of the surface treatments applied to the component.",
-        examples=[["phosphating"], ["powder coating"]],
+        examples=[["phosphating", "powder coating"]],
     )
 
 

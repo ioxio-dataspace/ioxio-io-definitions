@@ -526,7 +526,7 @@
           "identification": {
             "$ref": "#/components/schemas/CompanyIdentification",
             "title": "Identification",
-            "description": "The identification of the company responsible for manufacturing the component. "
+            "description": "The identification of the company responsible for manufacturing the component."
           },
           "address": {
             "anyOf": [
@@ -654,7 +654,7 @@
             "type": "array",
             "title": "Surface treatments",
             "description": "Details of the surface treatments applied to the component.",
-            "examples": [["phosphating"], ["powder coating"]]
+            "examples": [["phosphating", "powder coating"]]
           }
         },
         "type": "object",
