@@ -1,0 +1,730 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Machined component traceability information",
+    "description": "The traceability information of a machined metal component.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/Product/MetalComponent/Traceability_v0.1": {
+      "post": {
+        "tags": ["Machinery and equipment", "Manufacturing"],
+        "summary": "Machined component traceability information",
+        "description": "The traceability information of a machined metal component.",
+        "operationId": "request_Product_MetalComponent_Traceability_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitExceeded"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Blank": {
+        "properties": {
+          "identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identifier",
+            "description": "The identifier of the blank used for machining the component.",
+            "examples": ["st-42crmo4-blt-ht1234-btch5678"]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "The type of the blank used for machining the component.",
+            "examples": ["forging billet"]
+          }
+        },
+        "type": "object",
+        "title": "Blank"
+      },
+      "CompanyIdentification": {
+        "properties": {
+          "identifierScheme": {
+            "$ref": "#/components/schemas/CompanyIdentifierScheme",
+            "title": "Identifier scheme",
+            "description": "The identification scheme in use for the company. ",
+            "examples": ["gln"]
+          },
+          "identifier": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 0,
+            "title": "Identifier",
+            "description": "The identification number according to the selected scheme.",
+            "examples": ["1234567890123"]
+          }
+        },
+        "type": "object",
+        "required": ["identifierScheme", "identifier"],
+        "title": "CompanyIdentification"
+      },
+      "CompanyIdentifierScheme": {
+        "type": "string",
+        "enum": ["gln", "nationalBusinessId", "duns"],
+        "title": "CompanyIdentifierScheme"
+      },
+      "ComponentIdentification": {
+        "properties": {
+          "purchaseOrder": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Purchase order",
+            "description": "The number of the purchase order related to the component.",
+            "examples": ["2345"]
+          },
+          "workOrder": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Work order",
+            "description": "The number of the manufacturing work order related to the component.",
+            "examples": ["wo-2025-0001"]
+          },
+          "waybill": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Waybill",
+            "description": "The identifier for the component shipment from the component manufacturer to the customer.",
+            "examples": ["1x999aa10123456784"]
+          },
+          "blank": {
+            "$ref": "#/components/schemas/Blank",
+            "description": "The identification details of the the blank used for machining the component."
+          },
+          "codeNomenclature": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code nomenclature",
+            "description": "The number identifying the component type according to EU harmonised system and Council Regulation (EEC) No 2658/87.",
+            "examples": ["73269010"]
+          },
+          "drawingNumber": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Drawing number",
+            "description": "The number identifying the component specification drawing.",
+            "examples": ["12345"]
+          },
+          "drawingRevision": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Drawing revision",
+            "description": "The version of the component specification drawing.",
+            "examples": ["Rev A"]
+          }
+        },
+        "type": "object",
+        "required": ["purchaseOrder", "waybill", "blank", "drawingNumber"],
+        "title": "ComponentIdentification"
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MachiningCenter": {
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Identifier",
+            "description": "The identifier of the machining center.",
+            "examples": ["cnc-101"]
+          },
+          "numericalControlVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Numerical control version",
+            "description": "The version of the controller software used by the machining center.",
+            "examples": ["nc-v10.3"]
+          },
+          "routingVersion": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Routing version",
+            "description": "The process sequence used for machining the component.",
+            "examples": ["r001"]
+          },
+          "modificationTimestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modification timestamp",
+            "description": "The latest timestamp used for updating the process routing, in RFC 3339 format.",
+            "examples": ["2025-02-06T09:26:52Z"]
+          }
+        },
+        "type": "object",
+        "required": ["identifier"],
+        "title": "MachiningCenter"
+      },
+      "ManufacturerInformation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "Name",
+            "description": "The registered trade name of the manufacturer company.",
+            "examples": ["Company xyz"]
+          },
+          "identification": {
+            "$ref": "#/components/schemas/CompanyIdentification",
+            "title": "Identification",
+            "description": "The identification of the company responsible for manufacturing the component."
+          },
+          "address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address",
+            "description": "The address of the manufacturing site.",
+            "examples": ["Rue des Lilas 12, 1050 Bruxelles, Belgium"]
+          },
+          "contactEmail": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact email",
+            "description": "The designated email contact for inquiries related to component manufacturing.",
+            "examples": ["contact@company.com"]
+          }
+        },
+        "type": "object",
+        "required": ["name", "identification"],
+        "title": "ManufacturerInformation"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "QueryLevel": {
+        "type": "string",
+        "enum": ["model", "batch", "item"],
+        "title": "QueryLevel"
+      },
+      "RateLimitExceeded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Rate limit exceeded"
+          }
+        },
+        "type": "object",
+        "title": "RateLimitExceeded",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Request": {
+        "properties": {
+          "product": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 0,
+            "title": "Product",
+            "description": "The product code used for identifying the product model.",
+            "examples": ["product-modelX-1234"]
+          },
+          "queryLevel": {
+            "$ref": "#/components/schemas/QueryLevel",
+            "title": "Query level",
+            "description": "The query level used to define the product's traceability information.",
+            "examples": ["batch"]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "ID",
+            "description": "If querying on model level an empty string is used. The batch identifier is used when querying on the batch level. The unique item identifier is used when querying on the product item level.",
+            "examples": ["batch-12345"]
+          }
+        },
+        "type": "object",
+        "required": ["product", "queryLevel", "id"],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "componentIdentification": {
+            "$ref": "#/components/schemas/ComponentIdentification",
+            "title": "Component identification",
+            "description": "The identifiers related to the component."
+          },
+          "manufacturerInformation": {
+            "$ref": "#/components/schemas/ManufacturerInformation",
+            "title": "Manufacturer information",
+            "description": "The details of the component manufacturer."
+          },
+          "machiningCenters": {
+            "items": {
+              "$ref": "#/components/schemas/MachiningCenter"
+            },
+            "type": "array",
+            "title": "Machining centers",
+            "description": "The details of the equipment used for machining the component."
+          },
+          "surfaceTreatments": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Surface treatments",
+            "description": "Details of the surface treatments applied to the component.",
+            "examples": [["phosphating", "powder coating"]]
+          }
+        },
+        "type": "object",
+        "required": [
+          "componentIdentification",
+          "manufacturerInformation",
+          "machiningCenters",
+          "surfaceTreatments"
+        ],
+        "title": "Response"
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
