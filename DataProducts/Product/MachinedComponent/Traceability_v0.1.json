@@ -12,7 +12,6 @@
         "summary": "Machined component traceability",
         "description": "The traceability information of a machined component.",
         "operationId": "request_Product_MachinedComponent_Traceability_v0_1",
-        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",
