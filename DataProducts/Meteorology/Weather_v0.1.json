@@ -3,7 +3,7 @@
   "info": {
     "title": "Weather in metric units",
     "description": "Weather information for a given location, either current weather prediction or historical weather observations, using metric units.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Meteorology/Weather_v0.1": {
