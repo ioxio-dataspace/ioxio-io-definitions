@@ -2,14 +2,15 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Electricity market price",
-    "description": "Electricity price per MWh",
-    "version": "0.1.0"
+    "description": "Electricity price per MWh.",
+    "version": "0.1.1"
   },
   "paths": {
     "/Market/Electricity/Pricing/History_v0.1": {
       "post": {
+        "tags": ["Electricity", "Market", "Pricing"],
         "summary": "Electricity market price",
-        "description": "Electricity price per MWh",
+        "description": "Electricity price per MWh.",
         "operationId": "request_Market_Electricity_Pricing_History_v0_1",
         "parameters": [
           {
@@ -273,21 +274,21 @@
           "location": {
             "type": "string",
             "title": "Location",
-            "description": "E.g. the country in ISO 3166-1 alpha-3 or other location identifier",
+            "description": "E.g. the country in ISO 3166-1 alpha-3 or other location identifier.",
             "examples": ["FIN"]
           },
           "startTime": {
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "Start time of the requested time period, in RFC 3339",
+            "description": "Start time of the requested time period, in RFC 3339.",
             "examples": ["2024-01-01T00:00:00+02:00"]
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
             "title": "End time",
-            "description": "End time of the requested time period, in RFC 3339",
+            "description": "End time of the requested time period, in RFC 3339.",
             "examples": ["2024-01-01T23:59:59+02:00"]
           }
         },
@@ -301,7 +302,7 @@
             "type": "string",
             "pattern": "^[A-Z]{3}$",
             "title": "Currency",
-            "description": "Three letter currency code for the price, from ISO 4217",
+            "description": "Three letter currency code for the price, from ISO 4217.",
             "examples": ["EUR", "USD"]
           },
           "prices": {
@@ -310,7 +311,7 @@
             },
             "type": "array",
             "title": "Prices",
-            "description": "List of the prices for the given time period"
+            "description": "List of the prices for the given time period."
           }
         },
         "type": "object",
@@ -382,14 +383,14 @@
           "price": {
             "type": "number",
             "title": "Price (per MWh)",
-            "description": "Market price per megawatt-hour for this pricing period",
+            "description": "Market price per megawatt-hour for this pricing period.",
             "examples": [29.12]
           },
           "startTime": {
             "type": "string",
             "format": "date-time",
             "title": "Start time",
-            "description": "Start time of the pricing period, in RFC 3339",
+            "description": "Start time of the pricing period, in RFC 3339.",
             "examples": ["2024-01-01T02:00:00+02:00"]
           }
         },

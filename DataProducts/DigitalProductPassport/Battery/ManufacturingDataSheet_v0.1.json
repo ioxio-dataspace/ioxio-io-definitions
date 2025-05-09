@@ -2,14 +2,15 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Battery Manufacturing Data Sheet",
-    "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542)",
-    "version": "0.1.2"
+    "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542).",
+    "version": "0.1.3"
   },
   "paths": {
     "/DigitalProductPassport/Battery/ManufacturingDataSheet_v0.1": {
       "post": {
+        "tags": ["Digital Product Passport", "Manufacturing"],
         "summary": "Battery Manufacturing Data Sheet",
-        "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542)",
+        "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542).",
         "operationId": "request_DigitalProductPassport_Battery_ManufacturingDataSheet_v0_1",
         "parameters": [
           {
@@ -291,7 +292,7 @@
               }
             ],
             "title": "Cycle Life",
-            "description": "Minimum number of cycles the battery can be recharged to at least 80% of initial capacity",
+            "description": "Minimum number of cycles the battery can be recharged to at least 80% of initial capacity.",
             "examples": [5000]
           },
           "referenceTest": {
@@ -305,7 +306,7 @@
               }
             ],
             "title": "Reference Test",
-            "description": "The details of the reference test used for defining the expected lifetime",
+            "description": "The details of the reference test used for defining the expected lifetime.",
             "examples": ["Accelerated cycle life testing"]
           },
           "cycleRate": {
@@ -318,7 +319,7 @@
               }
             ],
             "title": "Cycle Rate",
-            "description": "The C-rate used in the cycle life test",
+            "description": "The C-rate used in the cycle life test.",
             "examples": ["1C"]
           }
         },
@@ -380,7 +381,7 @@
               }
             ],
             "title": "Battery Act Compliance",
-            "description": "The indicator if the battery complies with the requirements of the battery act or not",
+            "description": "The indicator if the battery complies with the requirements of the battery act or not.",
             "examples": [true]
           },
           "requirementConformity": {
@@ -389,7 +390,7 @@
             },
             "type": "array",
             "title": "Requirement Conformity",
-            "description": "The compliance of the battery with other legal and standard requirements",
+            "description": "The compliance of the battery with other legal and standard requirements.",
             "examples": [["ROHS", "CE HSE", "IEC62619"]]
           },
           "conformityDeclaration": {
@@ -404,7 +405,7 @@
               }
             ],
             "title": "Conformity Declaration",
-            "description": "The link to the EU declaration of conformity documentation",
+            "description": "The link to the EU declaration of conformity documentation.",
             "examples": ["https://example.com/EUdeclaration"]
           }
         },
@@ -425,7 +426,7 @@
               }
             ],
             "title": "Name",
-            "description": "The registered trade name of the manufacturer company",
+            "description": "The registered trade name of the manufacturer company.",
             "examples": ["Battery Manufacturer A"]
           },
           "streetName": {
@@ -439,7 +440,7 @@
               }
             ],
             "title": "Street Name",
-            "description": "The street address of the manufacturer's headquarters",
+            "description": "The street address of the manufacturer's headquarters.",
             "examples": ["Example Street 100"]
           },
           "postalCode": {
@@ -453,7 +454,7 @@
               }
             ],
             "title": "Postal Code",
-            "description": "The postal code of the manufacturer's headquarters",
+            "description": "The postal code of the manufacturer's headquarters.",
             "examples": ["75034"]
           },
           "city": {
@@ -467,7 +468,7 @@
               }
             ],
             "title": "City",
-            "description": "The city of the manufacturer's headquarters",
+            "description": "The city of the manufacturer's headquarters.",
             "examples": ["Seattle"]
           },
           "country": {
@@ -481,7 +482,7 @@
               }
             ],
             "title": "Country",
-            "description": "The country code of the manufacturer's headquarters location in Alpha-3 format",
+            "description": "The country code of the manufacturer's headquarters location in Alpha-3 format.",
             "examples": ["USA"]
           },
           "website": {
@@ -496,7 +497,7 @@
               }
             ],
             "title": "Website",
-            "description": "The website of the manufacturer",
+            "description": "The website of the manufacturer.",
             "examples": ["https://example.com/"]
           },
           "email": {
@@ -510,7 +511,7 @@
               }
             ],
             "title": "Email",
-            "description": "The email address of the manufacturer",
+            "description": "The email address of the manufacturer.",
             "examples": ["info@example.com"]
           }
         },
@@ -523,14 +524,14 @@
             "type": "string",
             "maxLength": 150,
             "title": "Product",
-            "description": "The product code used for identifying the product type",
+            "description": "The product code used for identifying the product type.",
             "examples": ["sodium-ion-75kWh"]
           },
           "id": {
             "type": "string",
             "maxLength": 40,
             "title": "Id",
-            "description": "The unique identifier of the product",
+            "description": "The unique identifier of the product.",
             "examples": ["660e8400-e29b-41d4-a716-446655440000"]
           }
         },
@@ -550,7 +551,7 @@
               }
             ],
             "title": "Product Name",
-            "description": "The official sales name of the product",
+            "description": "The official sales name of the product.",
             "examples": ["Battery Model A"]
           },
           "batteryModel": {
@@ -564,7 +565,7 @@
               }
             ],
             "title": "Battery Model",
-            "description": "The model of the battery",
+            "description": "The model of the battery.",
             "examples": ["Z37-310-76"]
           },
           "batteryCategory": {
@@ -577,7 +578,7 @@
               }
             ],
             "title": "Battery Category",
-            "description": "The category of the battery based on its intended use",
+            "description": "The category of the battery based on its intended use.",
             "examples": ["industrial battery"]
           },
           "manufacturerInformation": {
@@ -590,7 +591,7 @@
               }
             ],
             "title": "Manufacturer Information",
-            "description": "The details of the battery manufacturer"
+            "description": "The details of the battery manufacturer."
           },
           "manufacturingLocation": {
             "anyOf": [
@@ -602,7 +603,7 @@
               }
             ],
             "title": "Manufacturing Location",
-            "description": "The details of the location of the battery manufacturing plant"
+            "description": "The details of the location of the battery manufacturing plant."
           },
           "manufacturingDate": {
             "anyOf": [
@@ -615,7 +616,7 @@
               }
             ],
             "title": "Manufacturing Date",
-            "description": "The date of manufacture using month and year",
+            "description": "The date of manufacture using month and year.",
             "examples": ["2023-07"]
           },
           "weight": {
@@ -627,8 +628,8 @@
                 "type": "null"
               }
             ],
-            "title": "Weight",
-            "description": "The total net weight of the product in kilograms (kg)",
+            "title": "Weight (kg)",
+            "description": "The total net weight of the product in kilograms.",
             "examples": [450.0]
           },
           "capacity": {
@@ -640,8 +641,8 @@
                 "type": "null"
               }
             ],
-            "title": "Capacity",
-            "description": "The total number of ampere-hours (Ah) that can be withdrawn from a fully charged battery under reference conditions",
+            "title": "Capacity (Ah)",
+            "description": "The total number of ampere-hours that can be withdrawn from a fully charged battery under reference conditions.",
             "examples": [100.0]
           },
           "power": {
@@ -653,8 +654,8 @@
                 "type": "null"
               }
             ],
-            "title": "Power",
-            "description": "The original power capability of the battery in Watts",
+            "title": "Power (W)",
+            "description": "The original power capability of the battery in Watts.",
             "examples": [25000.0]
           },
           "cellType": {
@@ -668,7 +669,7 @@
               }
             ],
             "title": "Cell Type",
-            "description": "The type of cells used in the battery pack",
+            "description": "The type of cells used in the battery pack.",
             "examples": ["sodium-ion"]
           },
           "resistance": {
@@ -680,8 +681,8 @@
                 "type": "null"
               }
             ],
-            "title": "Resistance",
-            "description": "The internal resistance of the battery pack in ohms (Ω)",
+            "title": "Resistance (Ω)",
+            "description": "The internal resistance of the battery pack in ohms.",
             "examples": [0]
           },
           "roundTripEfficiency": {
@@ -694,7 +695,7 @@
               }
             ],
             "title": "Round Trip Efficiency",
-            "description": "The details of the round trip energy efficiency in energy storages"
+            "description": "The details of the round trip energy efficiency in energy storages."
           },
           "voltageLevels": {
             "anyOf": [
@@ -706,7 +707,7 @@
               }
             ],
             "title": "Voltage Levels",
-            "description": "The details of the voltage levels of the battery"
+            "description": "The details of the voltage levels of the battery."
           },
           "temperatureRange": {
             "anyOf": [
@@ -718,7 +719,7 @@
               }
             ],
             "title": "Temperature Range",
-            "description": "The details of the acceptable environment temperature values for the battery"
+            "description": "The details of the acceptable environment temperature values for the battery."
           },
           "expectedLifetime": {
             "anyOf": [
@@ -730,7 +731,7 @@
               }
             ],
             "title": "Expected Lifetime",
-            "description": "The details of the battery lifetime"
+            "description": "The details of the battery lifetime."
           },
           "materialComposition": {
             "anyOf": [
@@ -742,7 +743,7 @@
               }
             ],
             "title": "Material Composition",
-            "description": "The details of the material composition of the battery"
+            "description": "The details of the material composition of the battery."
           },
           "recycledContent": {
             "items": {
@@ -750,7 +751,7 @@
             },
             "type": "array",
             "title": "Recycled Content",
-            "description": "The recycled content information present in the battery"
+            "description": "The recycled content information present in the battery."
           },
           "renewableContent": {
             "items": {
@@ -758,7 +759,7 @@
             },
             "type": "array",
             "title": "Renewable Content",
-            "description": "The renewable content information present in the battery"
+            "description": "The renewable content information present in the battery."
           },
           "extinguishingAgents": {
             "items": {
@@ -766,7 +767,7 @@
             },
             "type": "array",
             "title": "Extinguishing Agents",
-            "description": "The type of the fire extinguishing agents that can be used for the battery",
+            "description": "The type of the fire extinguishing agents that can be used for the battery.",
             "examples": [["foam", "carbon dioxide"]]
           },
           "legalConformity": {
@@ -779,7 +780,7 @@
               }
             ],
             "title": "Legal Conformity",
-            "description": "The details of the conformity of the battery with the legal and harmonized standards"
+            "description": "The details of the conformity of the battery with the legal and harmonized standards."
           },
           "warranty": {
             "anyOf": [
@@ -792,7 +793,7 @@
               }
             ],
             "title": "Warranty",
-            "description": "The date when the battery warranty expires",
+            "description": "The date when the battery warranty expires.",
             "examples": ["2028-07"]
           }
         },
@@ -813,7 +814,7 @@
               }
             ],
             "title": "Country",
-            "description": "The country code of the battery manufacturing location in Alpha-3 format",
+            "description": "The country code of the battery manufacturing location in Alpha-3 format.",
             "examples": ["DEU"]
           },
           "city": {
@@ -827,7 +828,7 @@
               }
             ],
             "title": "City",
-            "description": "The city of the battery manufacturing location",
+            "description": "The city of the battery manufacturing location.",
             "examples": ["Hamburg"]
           }
         },
@@ -842,7 +843,7 @@
             },
             "type": "array",
             "title": "Chemistry",
-            "description": "The chemical composition of the battery",
+            "description": "The chemical composition of the battery.",
             "examples": [["Sodium", "Cobalt"]]
           },
           "hazardousSubstances": {
@@ -851,7 +852,7 @@
             },
             "type": "array",
             "title": "Hazardous Substances",
-            "description": "The hazardous substances present in the battery",
+            "description": "The hazardous substances present in the battery.",
             "examples": [["Sulphuric acid"]]
           },
           "criticalRawMaterials": {
@@ -860,7 +861,7 @@
             },
             "type": "array",
             "title": "Critical Raw Materials",
-            "description": "The critical raw materials present in the battery in a concentration of more than 0.1% weight by weight",
+            "description": "The critical raw materials present in the battery in a concentration of more than 0.1% weight by weight.",
             "examples": [["Cobalt"]]
           }
         },
@@ -911,7 +912,7 @@
               }
             ],
             "title": "Substance Name",
-            "description": "The name of the substance that has recycled content",
+            "description": "The name of the substance that has recycled content.",
             "examples": ["Cobalt"]
           },
           "recyclingRate": {
@@ -924,7 +925,7 @@
               }
             ],
             "title": "Recycling Rate",
-            "description": "The amount of recycled content in the substance in percentage (%) by weight",
+            "description": "The amount of recycled content in the substance in percentage (%) by weight.",
             "examples": [8.5]
           }
         },
@@ -944,7 +945,7 @@
               }
             ],
             "title": "Substance Name",
-            "description": "The name of the substance that has renewable content",
+            "description": "The name of the substance that has renewable content.",
             "examples": ["Ligning"]
           },
           "proportion": {
@@ -957,7 +958,7 @@
               }
             ],
             "title": "Proportion",
-            "description": "The share of the renewable content present in the battery in percentage (%) by weight",
+            "description": "The share of the renewable content present in the battery in percentage (%) by weight.",
             "examples": [2.0]
           }
         },
@@ -976,7 +977,7 @@
               }
             ],
             "title": "Initial Energy Efficiency",
-            "description": "The initial round trip energy efficiency of a battery in percentage (%)",
+            "description": "The initial round trip energy efficiency of a battery in percentage (%).",
             "examples": [75.0]
           },
           "degradedEnergyEfficiency": {
@@ -989,7 +990,7 @@
               }
             ],
             "title": "Degraded Energy Efficiency",
-            "description": "The round trip energy efficiency of an energy storage battery in percentage (%) at 50% of expected cycle life",
+            "description": "The round trip energy efficiency of an energy storage battery in percentage (%) at 50% of expected cycle life.",
             "examples": [60.0]
           }
         },
@@ -1022,8 +1023,8 @@
                 "type": "null"
               }
             ],
-            "title": "Minimum Temperature",
-            "description": "The minimum environment temperature the battery can withstand in Celsius degrees",
+            "title": "Minimum Temperature (°C)",
+            "description": "The minimum environment temperature the battery can withstand in Celsius degrees.",
             "examples": [-40.0]
           },
           "maximumTemperature": {
@@ -1037,8 +1038,8 @@
                 "type": "null"
               }
             ],
-            "title": "Maximum Temperature",
-            "description": "The maximum environment temperature the battery can withstand in Celsius degrees",
+            "title": "Maximum Temperature (°C)",
+            "description": "The maximum environment temperature the battery can withstand in Celsius degrees.",
             "examples": [50.0]
           }
         },
@@ -1103,7 +1104,7 @@
               }
             ],
             "title": "Nominal Voltage",
-            "description": "The average voltage the battery output when fully charged",
+            "description": "The average voltage the battery output when fully charged.",
             "examples": [550.0]
           },
           "maximumVoltage": {
@@ -1116,7 +1117,7 @@
               }
             ],
             "title": "Maximum Voltage",
-            "description": "The highest level the battery voltage can reach",
+            "description": "The highest level the battery voltage can reach.",
             "examples": [620.0]
           },
           "minimumVoltage": {
@@ -1129,7 +1130,7 @@
               }
             ],
             "title": "Minimum Voltage",
-            "description": "The lowest level the battery voltage can reach",
+            "description": "The lowest level the battery voltage can reach.",
             "examples": [180.0]
           }
         },

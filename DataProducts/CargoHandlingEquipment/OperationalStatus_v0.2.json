@@ -2,15 +2,15 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Cargo handling equipment operational status",
-    "description": "General operational status data of a cargo handling equipment operating in a port",
-    "version": "0.2.0"
+    "description": "General operational status data of a cargo handling equipment operating in a port.",
+    "version": "0.2.1"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalStatus_v0.2": {
       "post": {
         "tags": ["Cargo handling equipment", "Freight terminal", "Logistics", "Port"],
         "summary": "Cargo handling equipment operational status",
-        "description": "General operational status data of a cargo handling equipment operating in a port",
+        "description": "General operational status data of a cargo handling equipment operating in a port.",
         "operationId": "request_CargoHandlingEquipment_OperationalStatus_v0_2",
         "parameters": [
           {
@@ -319,7 +319,7 @@
             "maximum": 90.0,
             "minimum": -90.0,
             "title": "Latitude (°)",
-            "description": "The latitude coordinate in decimal degrees",
+            "description": "The latitude coordinate in decimal degrees.",
             "examples": [60.192059]
           },
           "longitude": {
@@ -327,7 +327,7 @@
             "maximum": 180.0,
             "minimum": -180.0,
             "title": "Longitude (°)",
-            "description": "The longitude coordinate in decimal degrees",
+            "description": "The longitude coordinate in decimal degrees.",
             "examples": [24.945831]
           }
         },
@@ -363,7 +363,7 @@
             "type": "string",
             "maxLength": 40,
             "title": "ID",
-            "description": "The unique identifier of the product",
+            "description": "The unique identifier of the product.",
             "examples": ["71b51878-8a00-11ee-b9d1-0242ac120002"]
           },
           "time": {
@@ -398,13 +398,13 @@
               }
             ],
             "title": "Time",
-            "description": "The time the status of the equipment was recorded, in RFC 3339 format",
+            "description": "The time the status of the equipment was recorded, in RFC 3339 format.",
             "examples": ["2023-04-12T23:20:50Z"]
           },
           "operationalState": {
             "$ref": "#/components/schemas/OperationalState",
             "title": "Operational state",
-            "description": "The state of operation",
+            "description": "The state of operation.",
             "examples": ["operating"]
           },
           "isLoaded": {
@@ -417,7 +417,7 @@
               }
             ],
             "title": "Is loaded",
-            "description": "The cargo handling status that shows whether the equipment is loaded or not",
+            "description": "The cargo handling status that shows whether the equipment is loaded or not.",
             "examples": [true]
           },
           "fuelLevel": {
@@ -432,7 +432,7 @@
               }
             ],
             "title": "Fuel level (%)",
-            "description": "The percent of fuel left as a number value between 0 and 100",
+            "description": "The percent of fuel left as a number value between 0 and 100.",
             "examples": [75.0]
           },
           "gasLevel": {
@@ -447,7 +447,7 @@
               }
             ],
             "title": "Gas level (%)",
-            "description": "The percent of gas left as a number value between 0 and 100",
+            "description": "The percent of gas left as a number value between 0 and 100.",
             "examples": [75.0]
           },
           "chargeLevel": {
@@ -462,7 +462,7 @@
               }
             ],
             "title": "Charge level (%)",
-            "description": "The percent of battery capacity left as a number value between 0 and 100",
+            "description": "The percent of battery capacity left as a number value between 0 and 100.",
             "examples": [75.0]
           },
           "location": {
@@ -475,7 +475,7 @@
               }
             ],
             "title": "Location",
-            "description": "The location in GPS coordinates"
+            "description": "The location in GPS coordinates."
           }
         },
         "type": "object",
