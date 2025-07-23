@@ -3,16 +3,15 @@
   "info": {
     "title": "Metal component measurement report",
     "description": "The quality measurement report for metal components.",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "paths": {
-    "/Product/MetalComponent/MeasurementReport_v0.1": {
+    "/Product/MetalComponent/MeasurementReport_v0.2": {
       "post": {
         "tags": ["Machinery and equipment", "Manufacturing"],
         "summary": "Metal component measurement report",
         "description": "The quality measurement report for metal components.",
-        "operationId": "request_Product_MetalComponent_MeasurementReport_v0_1",
-        "deprecated": true,
+        "operationId": "request_Product_MetalComponent_MeasurementReport_v0_2",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -390,46 +389,22 @@
       "MeasurementEquipment": {
         "properties": {
           "machineSerialNumber": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Machine serial number",
             "description": "The serial number of the measuring machine.",
             "examples": ["mfg-model-xxxx-yyyy"]
-          },
-          "machineType": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40,
-                "minLength": 0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Machine type",
-            "description": "The type of the measuring machine.",
-            "examples": ["bridge ccm"]
-          },
-          "programRevision": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 40,
-                "minLength": 0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Program revision",
-            "description": "The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
-            "examples": ["mp-001-rv02"]
           }
         },
         "type": "object",
-        "required": ["machineSerialNumber"],
         "title": "MeasurementEquipment"
       },
       "MeasurementResult": {
@@ -538,40 +513,48 @@
             ]
           },
           "measurementId": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
-            "title": "Measurement ID",
-            "description": "The identifier of the quality measurement.",
-            "examples": ["1234567"]
-          },
-          "measurementTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Measurement timestamp",
-            "description": "Timestamp of the quality measurement of the component, in RFC 3339 format.",
-            "examples": ["2025-02-06T09:26:52Z"]
-          },
-          "measurementRunType": {
-            "type": "string",
-            "maxLength": 250,
-            "minLength": 0,
-            "title": "Measurement run type",
-            "description": "The method used to perform measurements on the components.",
-            "examples": ["partial measurement"]
-          },
-          "measuredComponents": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Measured components",
-            "description": "The number of measured components from the batch.",
-            "examples": [50]
+            "title": "Measurement ID",
+            "description": "The identifier of the quality measurement.",
+            "examples": ["1234567"]
+          },
+          "measurementTimestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measurement timestamp",
+            "description": "Timestamp of the quality measurement of the component, in RFC 3339 format.",
+            "examples": ["2025-02-06T09:26:52Z"]
+          },
+          "measurementRunType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measurement run type",
+            "description": "The method used to perform measurements on the components.",
+            "examples": ["partial measurement"]
           },
           "batchSize": {
             "anyOf": [
@@ -583,8 +566,21 @@
               }
             ],
             "title": "Batch size",
-            "description": "The entire size of the batch that was measured.",
+            "description": "The entire size of the batch that was manufactured under the same id.",
             "examples": [100]
+          },
+          "measuredItems": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measured items",
+            "description": "The number of measured components from the batch.",
+            "examples": [50]
           },
           "deviations": {
             "anyOf": [
@@ -596,8 +592,7 @@
               }
             ],
             "title": "Deviations",
-            "description": "The number of deviations (red values) in the measured values.",
-            "examples": [5]
+            "description": "The number of values that fall outside tolerance in the measured batch (red values)."
           },
           "duration": {
             "anyOf": [
@@ -622,12 +617,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "measurementId",
-          "measurementTimestamp",
-          "measurementRunType",
-          "measurementEquipment"
-        ],
+        "required": ["measurementEquipment"],
         "title": "MeasurementSetup"
       },
       "NotFound": {
@@ -679,7 +669,7 @@
             "$ref": "#/components/schemas/QueryLevel",
             "title": "Query level",
             "description": "The query level used to define the product's quality measurement report.",
-            "examples": ["batch"]
+            "examples": ["model"]
           },
           "id": {
             "type": "string",

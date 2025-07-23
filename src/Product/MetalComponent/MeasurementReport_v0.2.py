@@ -12,33 +12,6 @@ class QueryLevel(str, Enum):
     ITEM = "item"
 
 
-class MeasurementEquipment(CamelCaseModel):
-    machine_serial_number: str = Field(
-        ...,
-        title="Machine serial number",
-        description="The serial number of the measuring machine.",
-        min_length=0,
-        max_length=40,
-        examples=["mfg-model-xxxx-yyyy"],
-    )
-    machine_type: Optional[str] = Field(
-        None,
-        title="Machine type",
-        description="The type of the measuring machine.",
-        min_length=0,
-        max_length=40,
-        examples=["bridge ccm"],
-    )
-    program_revision: Optional[str] = Field(
-        None,
-        title="Program revision",
-        description="The version of a set of instructions or guidelines used to measure the dimensions and quality of components.",
-        min_length=0,
-        max_length=40,
-        examples=["mp-001-rv02"],
-    )
-
-
 class ComponentIdentification(CamelCaseModel):
     purchase_order: str = Field(
         ...,
@@ -93,70 +66,6 @@ class CustomerInformation(CamelCaseModel):
     )
 
 
-class MeasurementSetup(CamelCaseModel):
-    remarks: Optional[str] = Field(
-        None,
-        title="Remarks",
-        description="The notes to consider regarding the measurement.",
-        min_length=0,
-        max_length=400,
-        examples=[
-            "Measurement taken from the outer edge to center, following xyz standards."
-        ],
-    )
-    measurement_id: str = Field(
-        ...,
-        title="Measurement ID",
-        description="The identifier of the quality measurement.",
-        min_length=0,
-        max_length=40,
-        examples=["1234567"],
-    )
-    measurement_timestamp: datetime = Field(
-        ...,
-        title="Measurement timestamp",
-        description="Timestamp of the quality measurement of the component, in RFC 3339 format.",
-        examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
-    )
-    measurement_run_type: str = Field(
-        ...,
-        title="Measurement run type",
-        description="The method used to perform measurements on the components.",
-        min_length=0,
-        max_length=250,
-        examples=["partial measurement"],
-    )
-    measured_components: Optional[int] = Field(
-        None,
-        title="Measured components",
-        description="The number of measured components from the batch.",
-        examples=[50],
-    )
-    batch_size: Optional[int] = Field(
-        None,
-        title="Batch size",
-        description="The entire size of the batch that was measured.",
-        examples=[100],
-    )
-    deviations: Optional[int] = Field(
-        None,
-        title="Deviations",
-        description="The number of deviations (red values) in the measured values.",
-        examples=[5],
-    )
-    duration: Optional[int] = Field(
-        None,
-        title="Duration (s)",
-        description="The duration of the measurement process in seconds.",
-        examples=[825],
-    )
-    measurement_equipment: list[MeasurementEquipment] = Field(
-        ...,
-        title="Measurement equipment",
-        description="The identifiers of the equipment used to measure the component.",
-    )
-
-
 class MeasurementResult(CamelCaseModel):
     feature_name: str = Field(
         ...,
@@ -204,6 +113,80 @@ class MeasurementResult(CamelCaseModel):
     )
 
 
+class MeasurementEquipment(CamelCaseModel):
+    machine_serial_number: Optional[str] = Field(
+        None,
+        title="Machine serial number",
+        description="The serial number of the measuring machine.",
+        min_length=0,
+        max_length=40,
+        examples=["mfg-model-xxxx-yyyy"],
+    )
+
+
+class MeasurementSetup(CamelCaseModel):
+    remarks: Optional[str] = Field(
+        None,
+        title="Remarks",
+        description="The notes to consider regarding the measurement.",
+        min_length=0,
+        max_length=400,
+        examples=[
+            "Measurement taken from the outer edge to center, following xyz standards."
+        ],
+    )
+    measurement_id: Optional[str] = Field(
+        None,
+        title="Measurement ID",
+        description="The identifier of the quality measurement.",
+        min_length=0,
+        max_length=40,
+        examples=["1234567"],
+    )
+    measurement_timestamp: Optional[datetime] = Field(
+        None,
+        title="Measurement timestamp",
+        description="Timestamp of the quality measurement of the component, in RFC 3339 format.",
+        examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
+    )
+    measurement_run_type: Optional[str] = Field(
+        None,
+        title="Measurement run type",
+        description="The method used to perform measurements on the components.",
+        min_length=0,
+        max_length=250,
+        examples=["partial measurement"],
+    )
+    batch_size: Optional[int] = Field(
+        None,
+        title="Batch size",
+        description="The entire size of the batch that was manufactured under the same id.",
+        examples=[100],
+    )
+    measured_items: Optional[int] = Field(
+        None,
+        title="Measured items",
+        description="The number of measured components from the batch.",
+        examples=[50],
+    )
+    deviations: Optional[int] = Field(
+        None,
+        title="Deviations",
+        description="The number of values that fall outside tolerance in the measured batch (red values).",
+    )
+    duration: Optional[int] = Field(
+        None,
+        title="Duration (s)",
+        description="The duration of the measurement process in seconds.",
+        examples=[825],
+    )
+    measurement_equipment: list[MeasurementEquipment] = Field(
+        ...,
+        title="Measurement equipment",
+        description="The identifiers of the equipment used to measure the component.",
+    )
+
+
 class Request(CamelCaseModel):
     product: str = Field(
         ...,
@@ -217,7 +200,7 @@ class Request(CamelCaseModel):
         ...,
         title="Query level",
         description="The query level used to define the product's quality measurement report.",
-        examples=[QueryLevel.BATCH],
+        examples=[QueryLevel.MODEL],
     )
     id: str = Field(
         ...,
@@ -253,8 +236,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    deprecated=True,
-    version="0.1.0",
+    version="0.2.0",
     title="Metal component measurement report",
     description="The quality measurement report for metal components.",
     tags=["Manufacturing", "Machinery and equipment"],

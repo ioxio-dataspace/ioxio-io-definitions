@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from enum import Enum
 from typing import Optional
 
@@ -7,7 +7,6 @@ from pydantic import Field
 
 
 class QueryLevel(str, Enum):
-    MODEL = "model"
     BATCH = "batch"
     ITEM = "item"
 
@@ -15,7 +14,25 @@ class QueryLevel(str, Enum):
 class CompanyIdentifierScheme(str, Enum):
     GLN = "gln"
     NATIONAL_BUSINESS_ID = "nationalBusinessId"
-    DUNS = "duns"
+
+
+class SubComponent(CamelCaseModel):
+    name: Optional[str] = Field(
+        None,
+        title="Name",
+        description="The name of the subcomponent.",
+        min_length=0,
+        max_length=150,
+        examples=["metal fastener"],
+    )
+    identifier: Optional[str] = Field(
+        None,
+        title="Identifier",
+        description="The identifier of the subcomponent either on a batch or item level.",
+        min_length=0,
+        max_length=20,
+        examples=["batch-2024-ssbolt-0037"],
+    )
 
 
 class Blank(CamelCaseModel):
@@ -42,7 +59,7 @@ class CompanyIdentification(CamelCaseModel):
         ...,
         title="Identifier scheme",
         description="The identification scheme in use for the company. ",
-        examples=["gln"],
+        examples=[CompanyIdentifierScheme.GLN],
     )
     identifier: str = Field(
         ...,
@@ -54,7 +71,30 @@ class CompanyIdentification(CamelCaseModel):
     )
 
 
+class ProcessIdentification(CamelCaseModel):
+    identifier: Optional[str] = Field(
+        None,
+        title="Identifier",
+        description="A unique identifier for the full sequence of manufacturing steps applied to a metal component or batch, including forming, cutting, machining, surface treatment, and related processes.",
+        min_length=0,
+        max_length=40,
+        examples=["procset-metal-2024-0458"],
+    )
+
+
 class ComponentIdentification(CamelCaseModel):
+    name: Optional[str] = Field(
+        None,
+        title="Name",
+        description="The name of the component.",
+        min_length=0,
+        max_length=150,
+    )
+    sub_component_declaration: list[SubComponent] = Field(
+        ...,
+        title="Sub component declaration",
+        description="List of declared subcomponents used in the component assembly.",
+    )
     purchase_order: str = Field(
         ...,
         title="Purchase order",
@@ -63,26 +103,26 @@ class ComponentIdentification(CamelCaseModel):
         max_length=40,
         examples=["2345"],
     )
-    work_order: Optional[str] = Field(
-        None,
+    work_order: str = Field(
+        ...,
         title="Work order",
         description="The number of the manufacturing work order related to the component.",
         min_length=0,
         max_length=40,
         examples=["wo-2025-0001"],
     )
-    waybill: str = Field(
-        ...,
-        title="Waybill",
-        description="The identifier for the component shipment from the component manufacturer to the customer.",
+    shipment_id: Optional[str] = Field(
+        None,
+        title="ShipmentId",
+        description="A unique identifier representing the release of goods from a location as part of a specific delivery or shipment.",
         min_length=0,
         max_length=40,
-        examples=["1x999aa10123456784"],
+        examples=["19910123456784"],
     )
-    blank: Blank = Field(
+    blanks: list[Blank] = Field(
         ...,
-        title="Blank",
-        description="The identification details of the the blank used for machining the component.",
+        title="Blanks",
+        description="The identification details of the the blanks used for manufacturing the component.",
     )
     code_nomenclature: Optional[str] = Field(
         None,
@@ -122,7 +162,7 @@ class ManufacturerInformation(CamelCaseModel):
     identification: CompanyIdentification = Field(
         ...,
         title="Identification",
-        description="The identification of the company responsible for manufacturing the component.",
+        description="The identification of the company responsible for manufacturing the component. ",
     )
     address: Optional[str] = Field(
         None,
@@ -139,39 +179,6 @@ class ManufacturerInformation(CamelCaseModel):
         min_length=0,
         max_length=40,
         examples=["contact@company.com"],
-    )
-
-
-class MachiningCenter(CamelCaseModel):
-    identifier: str = Field(
-        ...,
-        title="Identifier",
-        description="The identifier of the machining center.",
-        min_length=0,
-        max_length=40,
-        examples=["cnc-101"],
-    )
-    numerical_control_version: Optional[str] = Field(
-        None,
-        title="Numerical control version",
-        description="The version of the controller software used by the machining center.",
-        min_length=0,
-        max_length=40,
-        examples=["nc-v10.3"],
-    )
-    routing_version: Optional[str] = Field(
-        None,
-        title="Routing version",
-        description="The process sequence used for machining the component.",
-        min_length=0,
-        max_length=40,
-        examples=["r001"],
-    )
-    modification_timestamp: Optional[datetime] = Field(
-        None,
-        title="Modification timestamp",
-        description="The latest timestamp used for updating the process routing, in RFC 3339 format.",
-        examples=[datetime.fromisoformat("2025-02-06T09:26:52+00:00")],
     )
 
 
@@ -193,7 +200,7 @@ class Request(CamelCaseModel):
     id: str = Field(
         ...,
         title="ID",
-        description="If querying on model level an empty string is used. The batch identifier is used when querying on the batch level. The unique item identifier is used when querying on the product item level.",
+        description="The batch identifier is used when querying on the batch level. The unique item identifier is used when querying on the product item level.",
         min_length=0,
         max_length=40,
         examples=["batch-12345"],
@@ -201,6 +208,18 @@ class Request(CamelCaseModel):
 
 
 class Response(CamelCaseModel):
+    manufacturing_date: Optional[date] = Field(
+        None,
+        title="Manufacturing date",
+        description="The manufacturing date of the product batch or item. ",
+        examples=[date.fromisoformat("2025-02-06")],
+    )
+    delivery_date: Optional[date] = Field(
+        None,
+        title="Delivery date",
+        description="The recorded date on which the component was shipped or handed over for delivery.",
+        examples=[date.fromisoformat("2025-03-07")],
+    )
     component_identification: ComponentIdentification = Field(
         ...,
         title="Component identification",
@@ -211,24 +230,17 @@ class Response(CamelCaseModel):
         title="Manufacturer information",
         description="The details of the component manufacturer.",
     )
-    machining_centers: list[MachiningCenter] = Field(
+    process_identification: ProcessIdentification = Field(
         ...,
-        title="Machining centers",
-        description="The details of the equipment used for machining the component.",
-    )
-    surface_treatments: list[str] = Field(
-        ...,
-        title="Surface treatments",
-        description="Details of the surface treatments applied to the component.",
-        examples=[["phosphating", "powder coating"]],
+        title="Process identification",
+        description=None,
     )
 
 
 DEFINITION = DataProductDefinition(
-    deprecated=True,
-    version="0.1.0",
-    title="Machined component traceability information",
-    description="The traceability information of a machined metal component.",
+    version="0.2.0",
+    title="Metal component traceability information",
+    description="The traceability information of a metal component.",
     tags=["Manufacturing", "Machinery and equipment"],
     request=Request,
     response=Response,
