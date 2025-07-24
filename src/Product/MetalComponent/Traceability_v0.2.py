@@ -14,6 +14,7 @@ class QueryLevel(str, Enum):
 class CompanyIdentifierScheme(str, Enum):
     GLN = "gln"
     NATIONAL_BUSINESS_ID = "nationalBusinessId"
+    DUNS = "duns"
 
 
 class SubComponent(CamelCaseModel):

@@ -280,7 +280,7 @@
       },
       "CompanyIdentifierScheme": {
         "type": "string",
-        "enum": ["gln", "nationalBusinessId"],
+        "enum": ["gln", "nationalBusinessId", "duns"],
         "title": "CompanyIdentifierScheme"
       },
       "ComponentIdentification": {
