@@ -158,6 +158,7 @@ class Response(CamelCaseModel):
 
 DEFINITION = DataProductDefinition(
     version="0.1.0",
+    deprecated=True,
     title="Machined component traceability",
     description="The traceability information of a machined component.",
     tags=["Manufacturing", "Machinery and equipment"],
