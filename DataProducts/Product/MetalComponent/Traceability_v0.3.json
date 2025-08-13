@@ -260,22 +260,35 @@
       "CompanyIdentification": {
         "properties": {
           "identifierScheme": {
-            "$ref": "#/components/schemas/CompanyIdentifierScheme",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanyIdentifierScheme"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Identifier scheme",
             "description": "The identification scheme in use for the company. ",
             "examples": ["gln"]
           },
           "identifier": {
-            "type": "string",
-            "maxLength": 20,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Identifier",
             "description": "The identification number according to the selected scheme.",
             "examples": ["1234567890123"]
           }
         },
         "type": "object",
-        "required": ["identifierScheme", "identifier"],
         "title": "CompanyIdentification"
       },
       "CompanyIdentifierScheme": {
@@ -308,17 +321,31 @@
             "description": "List of declared subcomponents used in the component assembly."
           },
           "purchaseOrder": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Purchase order",
             "description": "The number of the purchase order related to the component.",
             "examples": ["2345"]
           },
           "workOrder": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Work order",
             "description": "The number of the manufacturing work order related to the component.",
             "examples": ["wo-2025-0001"]
@@ -362,9 +389,16 @@
             "examples": ["73269010"]
           },
           "drawingNumber": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Drawing number",
             "description": "The number identifying the component specification drawing.",
             "examples": ["12345"]
@@ -386,13 +420,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "subComponentDeclaration",
-          "purchaseOrder",
-          "workOrder",
-          "blanks",
-          "drawingNumber"
-        ],
+        "required": ["subComponentDeclaration", "blanks"],
         "title": "ComponentIdentification"
       },
       "DataSourceError": {
@@ -489,9 +517,16 @@
       "ManufacturerInformation": {
         "properties": {
           "name": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Name",
             "description": "The registered trade name of the manufacturer company.",
             "examples": ["Company xyz"]
@@ -533,7 +568,7 @@
           }
         },
         "type": "object",
-        "required": ["name", "identification"],
+        "required": ["identification"],
         "title": "ManufacturerInformation"
       },
       "NotFound": {
