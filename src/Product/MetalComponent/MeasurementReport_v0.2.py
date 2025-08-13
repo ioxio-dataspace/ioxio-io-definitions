@@ -236,7 +236,8 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.0",
+    version="0.2.1",
+    deprecated=True,
     title="Metal component measurement report",
     description="The quality measurement report for metal components.",
     tags=["Manufacturing", "Machinery and equipment"],

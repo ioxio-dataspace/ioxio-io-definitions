@@ -239,7 +239,8 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.0",
+    version="0.2.1",
+    deprecated=True,
     title="Metal component traceability information",
     description="The traceability information of a metal component.",
     tags=["Manufacturing", "Machinery and equipment"],

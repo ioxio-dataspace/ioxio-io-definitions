@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component measurement report",
     "description": "The quality measurement report for metal components.",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "paths": {
     "/Product/MetalComponent/MeasurementReport_v0.2": {
@@ -12,6 +12,7 @@
         "summary": "Metal component measurement report",
         "description": "The quality measurement report for metal components.",
         "operationId": "request_Product_MetalComponent_MeasurementReport_v0_2",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",

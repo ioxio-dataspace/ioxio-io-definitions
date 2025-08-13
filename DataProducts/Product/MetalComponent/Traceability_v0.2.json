@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component traceability information",
     "description": "The traceability information of a metal component.",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "paths": {
     "/Product/MetalComponent/Traceability_v0.2": {
@@ -12,6 +12,7 @@
         "summary": "Metal component traceability information",
         "description": "The traceability information of a metal component.",
         "operationId": "request_Product_MetalComponent_Traceability_v0_2",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",
