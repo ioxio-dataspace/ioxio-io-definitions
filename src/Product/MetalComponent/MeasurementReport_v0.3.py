@@ -13,32 +13,32 @@ class QueryLevel(str, Enum):
 
 
 class ComponentIdentification(CamelCaseModel):
-    purchase_order: str = Field(
-        ...,
+    purchase_order: Optional[str] = Field(
+        None,
         title="Purchase order",
         description="The number of the purchase order related to the component.",
         min_length=0,
         max_length=40,
         examples=["12345"],
     )
-    component_name: str = Field(
-        ...,
+    component_name: Optional[str] = Field(
+        None,
         title="Component name",
         description="The name of the component.",
         min_length=0,
         max_length=250,
         examples=["valve xyz"],
     )
-    production_number: str = Field(
-        ...,
+    production_number: Optional[str] = Field(
+        None,
         title="Production number",
         description="The production number related to the component manufacturing.",
         min_length=0,
         max_length=40,
         examples=["pn-20240205-00123"],
     )
-    drawing_number: str = Field(
-        ...,
+    drawing_number: Optional[str] = Field(
+        None,
         title="Drawing number",
         description="The drawing number related to the component.",
         min_length=0,
@@ -48,8 +48,8 @@ class ComponentIdentification(CamelCaseModel):
 
 
 class CustomerInformation(CamelCaseModel):
-    name: str = Field(
-        ...,
+    name: Optional[str] = Field(
+        None,
         title="Name",
         description="The name of the customer that has issued the component order.",
         min_length=0,
@@ -67,16 +67,16 @@ class CustomerInformation(CamelCaseModel):
 
 
 class MeasurementResult(CamelCaseModel):
-    feature_name: str = Field(
-        ...,
+    feature_name: Optional[str] = Field(
+        None,
         title="Feature name",
         description="The name of the measured feature.",
         min_length=0,
         max_length=250,
         examples=["valve diameter middle D84"],
     )
-    measured_value: float = Field(
-        ...,
+    measured_value: Optional[float] = Field(
+        None,
         title="Measured value (mm)",
         description="The measured value of the feature in millimeters.",
         examples=[84.0250],

@@ -224,53 +224,82 @@
       "ComponentIdentification": {
         "properties": {
           "purchaseOrder": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Purchase order",
             "description": "The number of the purchase order related to the component.",
             "examples": ["12345"]
           },
           "componentName": {
-            "type": "string",
-            "maxLength": 250,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Component name",
             "description": "The name of the component.",
             "examples": ["valve xyz"]
           },
           "productionNumber": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Production number",
             "description": "The production number related to the component manufacturing.",
             "examples": ["pn-20240205-00123"]
           },
           "drawingNumber": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Drawing number",
             "description": "The drawing number related to the component.",
             "examples": ["xy00012345687"]
           }
         },
         "type": "object",
-        "required": [
-          "purchaseOrder",
-          "componentName",
-          "productionNumber",
-          "drawingNumber"
-        ],
         "title": "ComponentIdentification"
       },
       "CustomerInformation": {
         "properties": {
           "name": {
-            "type": "string",
-            "maxLength": 250,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Name",
             "description": "The name of the customer that has issued the component order.",
             "examples": ["Company xyz"]
@@ -292,7 +321,6 @@
           }
         },
         "type": "object",
-        "required": ["name"],
         "title": "CustomerInformation"
       },
       "DataSourceError": {
@@ -410,15 +438,29 @@
       "MeasurementResult": {
         "properties": {
           "featureName": {
-            "type": "string",
-            "maxLength": 250,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 250,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Feature name",
             "description": "The name of the measured feature.",
             "examples": ["valve diameter middle D84"]
           },
           "measuredValue": {
-            "type": "number",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Measured value (mm)",
             "description": "The measured value of the feature in millimeters.",
             "examples": [84.025]
@@ -490,7 +532,6 @@
           }
         },
         "type": "object",
-        "required": ["featureName", "measuredValue"],
         "title": "MeasurementResult"
       },
       "MeasurementSetup": {
