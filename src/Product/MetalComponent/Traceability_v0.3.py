@@ -56,14 +56,14 @@ class Blank(CamelCaseModel):
 
 
 class CompanyIdentification(CamelCaseModel):
-    identifier_scheme: CompanyIdentifierScheme = Field(
-        ...,
+    identifier_scheme: Optional[CompanyIdentifierScheme] = Field(
+        None,
         title="Identifier scheme",
         description="The identification scheme in use for the company. ",
         examples=[CompanyIdentifierScheme.GLN],
     )
-    identifier: str = Field(
-        ...,
+    identifier: Optional[str] = Field(
+        None,
         title="Identifier",
         description="The identification number according to the selected scheme.",
         min_length=0,
@@ -96,16 +96,16 @@ class ComponentIdentification(CamelCaseModel):
         title="Sub component declaration",
         description="List of declared subcomponents used in the component assembly.",
     )
-    purchase_order: str = Field(
-        ...,
+    purchase_order: Optional[str] = Field(
+        None,
         title="Purchase order",
         description="The number of the purchase order related to the component.",
         min_length=0,
         max_length=40,
         examples=["2345"],
     )
-    work_order: str = Field(
-        ...,
+    work_order: Optional[str] = Field(
+        None,
         title="Work order",
         description="The number of the manufacturing work order related to the component.",
         min_length=0,
@@ -133,8 +133,8 @@ class ComponentIdentification(CamelCaseModel):
         max_length=10,
         examples=["73269010"],
     )
-    drawing_number: str = Field(
-        ...,
+    drawing_number: Optional[str] = Field(
+        None,
         title="Drawing number",
         description="The number identifying the component specification drawing.",
         min_length=0,
@@ -152,8 +152,8 @@ class ComponentIdentification(CamelCaseModel):
 
 
 class ManufacturerInformation(CamelCaseModel):
-    name: str = Field(
-        ...,
+    name: Optional[str] = Field(
+        None,
         title="Name",
         description="The registered trade name of the manufacturer company.",
         min_length=0,
@@ -239,8 +239,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.1",
-    deprecated=True,
+    version="0.3.0",
     title="Metal component traceability information",
     description="The traceability information of a metal component.",
     tags=["Manufacturing", "Machinery and equipment"],

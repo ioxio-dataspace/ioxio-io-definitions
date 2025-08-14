@@ -3,16 +3,15 @@
   "info": {
     "title": "Metal component traceability information",
     "description": "The traceability information of a metal component.",
-    "version": "0.2.1"
+    "version": "0.3.0"
   },
   "paths": {
-    "/Product/MetalComponent/Traceability_v0.2": {
+    "/Product/MetalComponent/Traceability_v0.3": {
       "post": {
         "tags": ["Machinery and equipment", "Manufacturing"],
         "summary": "Metal component traceability information",
         "description": "The traceability information of a metal component.",
-        "operationId": "request_Product_MetalComponent_Traceability_v0_2",
-        "deprecated": true,
+        "operationId": "request_Product_MetalComponent_Traceability_v0_3",
         "parameters": [
           {
             "name": "x-consent-token",
@@ -261,22 +260,35 @@
       "CompanyIdentification": {
         "properties": {
           "identifierScheme": {
-            "$ref": "#/components/schemas/CompanyIdentifierScheme",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanyIdentifierScheme"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Identifier scheme",
             "description": "The identification scheme in use for the company. ",
             "examples": ["gln"]
           },
           "identifier": {
-            "type": "string",
-            "maxLength": 20,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Identifier",
             "description": "The identification number according to the selected scheme.",
             "examples": ["1234567890123"]
           }
         },
         "type": "object",
-        "required": ["identifierScheme", "identifier"],
         "title": "CompanyIdentification"
       },
       "CompanyIdentifierScheme": {
@@ -309,17 +321,31 @@
             "description": "List of declared subcomponents used in the component assembly."
           },
           "purchaseOrder": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Purchase order",
             "description": "The number of the purchase order related to the component.",
             "examples": ["2345"]
           },
           "workOrder": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Work order",
             "description": "The number of the manufacturing work order related to the component.",
             "examples": ["wo-2025-0001"]
@@ -363,9 +389,16 @@
             "examples": ["73269010"]
           },
           "drawingNumber": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Drawing number",
             "description": "The number identifying the component specification drawing.",
             "examples": ["12345"]
@@ -387,13 +420,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "subComponentDeclaration",
-          "purchaseOrder",
-          "workOrder",
-          "blanks",
-          "drawingNumber"
-        ],
+        "required": ["subComponentDeclaration", "blanks"],
         "title": "ComponentIdentification"
       },
       "DataSourceError": {
@@ -490,9 +517,16 @@
       "ManufacturerInformation": {
         "properties": {
           "name": {
-            "type": "string",
-            "maxLength": 40,
-            "minLength": 0,
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Name",
             "description": "The registered trade name of the manufacturer company.",
             "examples": ["Company xyz"]
@@ -534,7 +568,7 @@
           }
         },
         "type": "object",
-        "required": ["name", "identification"],
+        "required": ["identification"],
         "title": "ManufacturerInformation"
       },
       "NotFound": {
