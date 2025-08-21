@@ -114,7 +114,7 @@ class ComponentIdentification(CamelCaseModel):
     )
     shipment_id: Optional[str] = Field(
         None,
-        title="ShipmentId",
+        title="Shipment ID",
         description="A unique identifier representing the release of goods from a location as part of a specific delivery or shipment.",
         min_length=0,
         max_length=40,
@@ -239,7 +239,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.3.0",
+    version="0.3.1",
     title="Metal component traceability information",
     description="The traceability information of a metal component.",
     tags=["Manufacturing", "Machinery and equipment"],

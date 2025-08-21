@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component traceability information",
     "description": "The traceability information of a metal component.",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "paths": {
     "/Product/MetalComponent/Traceability_v0.3": {
@@ -361,7 +361,7 @@
                 "type": "null"
               }
             ],
-            "title": "ShipmentId",
+            "title": "Shipment ID",
             "description": "A unique identifier representing the release of goods from a location as part of a specific delivery or shipment.",
             "examples": ["19910123456784"]
           },
