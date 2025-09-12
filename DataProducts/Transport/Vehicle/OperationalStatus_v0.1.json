@@ -3,7 +3,7 @@
   "info": {
     "title": "Transport vehicle operational status",
     "description": "General operational status data of a transport vehicle.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Transport/Vehicle/OperationalStatus_v0.1": {
@@ -528,5 +528,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

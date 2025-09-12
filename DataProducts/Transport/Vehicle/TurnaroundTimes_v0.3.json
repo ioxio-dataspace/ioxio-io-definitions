@@ -3,7 +3,7 @@
   "info": {
     "title": "Vehicle turnaround times",
     "description": "Turnaround times of vehicles within a facility.",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "paths": {
     "/Transport/Vehicle/TurnaroundTimes_v0.3": {
@@ -507,5 +507,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

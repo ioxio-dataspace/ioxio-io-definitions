@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -19,11 +19,11 @@ repos:
         args: ["--fix=crlf"]
         files: \.bat$
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.11.0
+    rev: 0.13.0
     hooks:
       - id: data-product-definition-converter
         # TODO: convert only the file that was changed
@@ -34,12 +34,12 @@ repos:
             DataProducts/.*json|
             src/.*py
           )$
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v2.7.1
+  - repo: https://github.com/rbubley/mirrors-prettier/
+    rev: v3.6.2
     hooks:
       - id: prettier
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
@@ -48,13 +48,13 @@ repos:
       - id: black
         language_version: python3
   - repo: https://github.com/ioxiocom/openapi-to-fastapi
-    rev: 0.18.2
+    rev: 0.20.0
     hooks:
       - id: openapi-validator
         files: ".*?DataProducts/.*?json$"
         args: ["--path", "./DataProducts"]
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.11.0
+    rev: 0.13.0
     hooks:
       - id: data-product-definition-validator
         files: ".*?DataProducts/.*?json$"

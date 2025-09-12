@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment operational performance",
     "description": "General operational status data of a mobile work machine operating in a port.",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalPerformance_v0.1": {
@@ -593,5 +593,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

@@ -3,7 +3,7 @@
   "info": {
     "title": "Machined component measurement report",
     "description": "The quality measurement report for a batch of machined components.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Product/MachinedComponent/MeasurementReport_v0.1": {
@@ -717,5 +717,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

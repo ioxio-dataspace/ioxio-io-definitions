@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component measurement report",
     "description": "The quality measurement report for metal components.",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "paths": {
     "/Product/MetalComponent/MeasurementReport_v0.3": {
@@ -820,5 +820,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

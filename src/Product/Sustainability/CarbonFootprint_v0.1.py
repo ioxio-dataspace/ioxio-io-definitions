@@ -56,7 +56,8 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.2",
+    strict_validation=False,
     title="Product carbon footprint",
     description="The carbon footprint of manufacturing a product.",
     tags=["Carbon footprint", "Environment"],

@@ -103,7 +103,8 @@ class OperationalStatusRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.1",
+    version="0.2.2",
+    strict_validation=False,
     title="Cargo handling equipment operational status",
     description="General operational status data of a cargo handling equipment "
     "operating in a port.",

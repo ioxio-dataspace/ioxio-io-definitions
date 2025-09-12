@@ -3,7 +3,7 @@
   "info": {
     "title": "Electricity market price",
     "description": "Electricity price per MWh.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Market/Electricity/Pricing/History_v0.1": {
@@ -471,5 +471,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

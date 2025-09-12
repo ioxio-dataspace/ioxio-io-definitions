@@ -3,7 +3,7 @@
   "info": {
     "title": "Transport vehicle operational performance",
     "description": "General operational performance data of a transport vehicle.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Transport/Vehicle/OperationalPerformance_v0.1": {
@@ -543,5 +543,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

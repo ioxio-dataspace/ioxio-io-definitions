@@ -3,7 +3,7 @@
   "info": {
     "title": "Estimated arrival times",
     "description": "Estimated arrival times of vehicles within a transport location.",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "paths": {
     "/Transport/Vehicle/EstimatedArrivalTimes_v0.2": {
@@ -503,5 +503,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

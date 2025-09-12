@@ -123,7 +123,8 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
+    strict_validation=False,
     title="Total emissions for a transport chain",
     description="Total emissions for a transport chain compliant with GHG protocol Scope 3 transport emissions.",
     tags=["Logistics"],

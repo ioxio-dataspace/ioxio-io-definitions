@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component traceability information",
     "description": "The traceability information of a metal component.",
-    "version": "0.3.1"
+    "version": "0.3.2"
   },
   "paths": {
     "/Product/MetalComponent/Traceability_v0.3": {
@@ -805,5 +805,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

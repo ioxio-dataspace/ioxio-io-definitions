@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo metrics",
     "description": "The key metrics of the transported cargo",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "paths": {
     "/Cargo/Metrics_v0.1": {
@@ -552,5 +552,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

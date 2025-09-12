@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment operational status",
     "description": "General operational status data of a cargo handling equipment operating in a port.",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalStatus_v0.2": {
@@ -555,5 +555,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }
