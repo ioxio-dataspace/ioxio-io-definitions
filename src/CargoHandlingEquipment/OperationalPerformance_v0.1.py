@@ -110,7 +110,8 @@ class OperationalPerformanceRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
+    strict_validation=False,
     deprecated=True,
     title="Cargo handling equipment operational performance",
     description="General operational status data of a mobile work machine operating in "

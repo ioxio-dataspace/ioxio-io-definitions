@@ -79,7 +79,8 @@ class OperationalPerformanceResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.2",
+    strict_validation=False,
     title="Transport vehicle operational performance",
     description="General operational performance data of a transport vehicle.",
     tags=["Road transport", "Logistics"],

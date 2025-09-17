@@ -57,7 +57,8 @@ class SustainabilityRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.2",
+    strict_validation=False,
     title="Cargo handling equipment sustainability metrics",
     description="The power source consumption for the sustainability evaluation of the "
     "cargo handling equipment operations.",

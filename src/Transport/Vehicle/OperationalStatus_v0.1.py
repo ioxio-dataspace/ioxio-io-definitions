@@ -77,7 +77,8 @@ class OperationalStatusResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
+    strict_validation=False,
     title="Transport vehicle operational status",
     description="General operational status data of a transport vehicle.",
     tags=["Road transport", "Logistics", "Truck"],

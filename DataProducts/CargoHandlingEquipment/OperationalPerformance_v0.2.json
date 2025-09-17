@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment operational performance",
     "description": "General operational status data of a mobile work machine operating in a port.",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalPerformance_v0.2": {
@@ -217,6 +217,7 @@
     "schemas": {
       "BadGateway": {
         "properties": {},
+        "additionalProperties": false,
         "type": "object",
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
@@ -266,6 +267,7 @@
             "description": "Error description"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": ["type", "message"],
         "title": "DataSourceError"
@@ -279,6 +281,7 @@
             "default": "Data source not found"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "DataSourceNotFound",
         "description": "This response is reserved by Product Gateway."
@@ -296,6 +299,7 @@
             "description": "HTTP status code returned from the data source"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": ["data_source_status_code"],
         "title": "DoesNotConformToDefinition",
@@ -314,6 +318,7 @@
             "description": "Error description"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": ["type", "message"],
         "title": "Forbidden"
@@ -327,6 +332,7 @@
             "default": ""
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "GatewayTimeout",
         "description": "This response is reserved by Product Gateway."
@@ -389,6 +395,7 @@
             "description": "Error description"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": ["type", "message"],
         "title": "NotFound"
@@ -535,6 +542,7 @@
             "default": "Rate limit exceeded"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "RateLimitExceeded",
         "description": "This response is reserved by Product Gateway."
@@ -548,6 +556,7 @@
             "default": ""
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
@@ -565,6 +574,7 @@
             "description": "Error description"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": ["type", "message"],
         "title": "Unauthorized"
@@ -599,5 +609,6 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "x-strict-validation": false
 }

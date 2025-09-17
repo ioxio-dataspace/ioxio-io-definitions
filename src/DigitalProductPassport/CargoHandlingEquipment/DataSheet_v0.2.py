@@ -175,7 +175,8 @@ class DataSheetRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.2.1",
+    version="0.2.2",
+    strict_validation=False,
     title="Cargo handling equipment data sheet",
     description="General as-built data of a cargo handling equipment operating in a "
     "port.",
