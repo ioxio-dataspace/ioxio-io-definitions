@@ -1,0 +1,601 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Total carbon footprint for a transport chain",
+    "description": "Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/Logistics/TransportChain/CarbonFootprint_v0.1": {
+      "post": {
+        "tags": ["Logistics"],
+        "summary": "Total carbon footprint for a transport chain",
+        "description": "Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
+        "operationId": "request_Logistics_TransportChain_CarbonFootprint_v0_1",
+        "parameters": [
+          {
+            "name": "x-consent-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Optional consent token",
+              "default": "",
+              "title": "X-Consent-Token"
+            },
+            "description": "Optional consent token"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "The login token. Value should be \"Bearer [token]\"",
+              "default": "",
+              "title": "Authorization"
+            },
+            "description": "The login token. Value should be \"Bearer [token]\""
+          },
+          {
+            "name": "x-authorization-provider",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The bare domain of the system that provided the token.",
+              "title": "X-Authorization-Provider"
+            },
+            "description": "The bare domain of the system that provided the token."
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-API-Key",
+              "description": "API key or token"
+            },
+            "description": "API key or token"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitExceeded"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "444": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceNotFound"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataSourceError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadGateway"
+                }
+              }
+            },
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceUnavailable"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "content": {
+              "text/plain": {},
+              "text/html": {},
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatewayTimeout"
+                }
+              }
+            },
+            "description": "Gateway Timeout"
+          },
+          "550": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DoesNotConformToDefinition"
+                }
+              }
+            },
+            "description": "Additional Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BadGateway": {
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BadGateway",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DataSourceError": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "DataSourceError"
+      },
+      "DataSourceNotFound": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Data source not found"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "DataSourceNotFound",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "DoesNotConformToDefinition": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": "Response from data source does not conform to definition"
+          },
+          "data_source_status_code": {
+            "type": "integer",
+            "title": "Data source status code",
+            "description": "HTTP status code returned from the data source"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["data_source_status_code"],
+        "title": "DoesNotConformToDefinition",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Forbidden": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Forbidden"
+      },
+      "GatewayTimeout": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "GatewayTimeout",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Location": {
+        "properties": {
+          "locationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location identifier",
+            "description": "Location identification number based on UN/LOCODE number of the transport location.",
+            "examples": ["DEHAM"]
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 0,
+            "title": "City",
+            "description": "The name of the city.",
+            "examples": ["Hamburg"]
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 2,
+            "minLength": 2,
+            "pattern": "^[A-Z]{2}$",
+            "title": "Country",
+            "description": "The country code in Alpha-2 format.",
+            "examples": ["DE"]
+          }
+        },
+        "type": "object",
+        "required": ["city", "country"],
+        "title": "Location"
+      },
+      "NotFound": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "NotFound"
+      },
+      "RateLimitExceeded": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": "Rate limit exceeded"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RateLimitExceeded",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "Request": {
+        "properties": {
+          "idType": {
+            "type": "string",
+            "title": "ID type",
+            "description": "The type of identifier used to query total emissions in the transport chain for a cargo delivery.",
+            "examples": ["dispatchId"]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 0,
+            "title": "ID",
+            "description": "A unique identifier used to track the shipment throughout the entire transport chain, from the origin to the destination.",
+            "examples": ["29771_01"]
+          }
+        },
+        "type": "object",
+        "required": ["idType", "id"],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/Location",
+            "title": "Origin",
+            "description": "The origin of the transport chain."
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Location",
+            "title": "Destination",
+            "description": "The destination of the transport chain."
+          },
+          "transportChainFootprint": {
+            "type": "number",
+            "title": "Transport chain footprint (kg of CO2e)",
+            "description": "The total greenhouse gas (GHG) emissions of the transports and related logistics hub operations measured in kilograms of CO2e.",
+            "examples": [5.8]
+          },
+          "calculationMethod": {
+            "type": "string",
+            "maxLength": 400,
+            "minLength": 0,
+            "title": "Calculation method",
+            "description": "A brief description of the method used to calculate the transport emissions.",
+            "examples": [
+              "Used primary measured data from the following ISO 14083 standardized transport chain elements (TCE): transport and transfer operations."
+            ]
+          },
+          "distance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance (km)",
+            "description": "The distance of the transport chain in kilometers.",
+            "examples": [484]
+          },
+          "legCount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leg count",
+            "description": "The total number of transport legs in the delivery chain, based on changes in the mode of transport.",
+            "examples": [2]
+          },
+          "transportModes": {
+            "items": {
+              "$ref": "#/components/schemas/TransportMode"
+            },
+            "type": "array",
+            "title": "Transport modes",
+            "description": "The mode(s) of transport used in the transport chain, reported once per distinct mode as defined by ISO 14083.",
+            "examples": [["rail", "road"]]
+          },
+          "fossilShare": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fossil share (%)",
+            "description": "The share of emissions from fossil sources, expressed as a percentage of total emissions.",
+            "examples": [25.0],
+            "gte": 0,
+            "lte": 100
+          },
+          "biogenicShare": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Biogenic share (%)",
+            "description": "The share of emissions from biogenic sources (e.g. biofuels), expressed as a percentage of total emissions.",
+            "examples": [50.0],
+            "gte": 0,
+            "lte": 100
+          },
+          "lulucShare": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "LULUC share (%)",
+            "description": "The share of emissions from land use and land-use change associated with biomass or biofuel production, expressed as a percentage of total emissions.",
+            "examples": [25.0],
+            "gte": 0,
+            "lte": 100
+          }
+        },
+        "type": "object",
+        "required": [
+          "origin",
+          "destination",
+          "transportChainFootprint",
+          "calculationMethod",
+          "transportModes"
+        ],
+        "title": "Response"
+      },
+      "ServiceUnavailable": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ServiceUnavailable",
+        "description": "This response is reserved by Product Gateway."
+      },
+      "TransportMode": {
+        "type": "string",
+        "enum": ["air", "rail", "road", "sea", "inlandWaterway"],
+        "title": "TransportMode"
+      },
+      "Unauthorized": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Error type",
+            "description": "Error identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "Error description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "Unauthorized"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "x-strict-validation": true
+}
