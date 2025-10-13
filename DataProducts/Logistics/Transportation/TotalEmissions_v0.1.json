@@ -3,7 +3,7 @@
   "info": {
     "title": "Total emissions for a transport chain",
     "description": "Total emissions for a transport chain compliant with GHG protocol Scope 3 transport emissions.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Logistics/Transportation/TotalEmissions_v0.1": {
@@ -12,6 +12,7 @@
         "summary": "Total emissions for a transport chain",
         "description": "Total emissions for a transport chain compliant with GHG protocol Scope 3 transport emissions.",
         "operationId": "request_Logistics_Transportation_TotalEmissions_v0_1",
+        "deprecated": true,
         "parameters": [
           {
             "name": "x-consent-token",
