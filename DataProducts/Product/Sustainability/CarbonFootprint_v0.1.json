@@ -95,6 +95,16 @@
               }
             }
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
           "401": {
             "content": {
               "application/json": {
@@ -216,23 +226,63 @@
   "components": {
     "schemas": {
       "BadGateway": {
-        "properties": {},
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "bad_gateway",
+            "title": "Error type",
+            "description": "An identifier for the type of error."
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "A human readable description of the error.",
+            "examples": ["Bad Gateway"]
+          }
+        },
         "additionalProperties": false,
         "type": "object",
+        "required": ["type", "message"],
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
+      },
+      "BadRequest": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]*$",
+            "title": "Error type",
+            "description": "An identifier for the type of error.",
+            "examples": ["validation_error"]
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "A human readable description of the error.",
+            "examples": ["Validation failed for fieldName: error description."]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "BadRequest"
       },
       "DataSourceError": {
         "properties": {
           "type": {
             "type": "string",
+            "pattern": "^[a-z0-9_]*$",
             "title": "Error type",
-            "description": "Error identifier"
+            "description": "An identifier for the type of error.",
+            "examples": ["upstream_error"]
           },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description"
+            "description": "A human readable description of the error.",
+            "examples": [
+              "Failed to connect to the upstream service, please try again later."
+            ]
           }
         },
         "additionalProperties": false,
@@ -242,34 +292,49 @@
       },
       "DataSourceNotFound": {
         "properties": {
+          "type": {
+            "type": "string",
+            "const": "data_source_not_found",
+            "title": "Error type",
+            "description": "An identifier for the type of error."
+          },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description",
-            "default": "Data source not found"
+            "description": "A human readable description of the error.",
+            "examples": ["Data source not found"]
           }
         },
         "additionalProperties": false,
         "type": "object",
+        "required": ["type", "message"],
         "title": "DataSourceNotFound",
         "description": "This response is reserved by Product Gateway."
       },
       "DoesNotConformToDefinition": {
         "properties": {
+          "type": {
+            "type": "string",
+            "const": "does_not_conform_to_definition",
+            "title": "Error type",
+            "description": "An identifier for the type of error."
+          },
           "message": {
             "type": "string",
-            "title": "Message",
-            "default": "Response from data source does not conform to definition"
+            "title": "Error message",
+            "description": "A human readable description of the error.",
+            "examples": ["Response from data source does not conform to definition"]
           },
           "data_source_status_code": {
             "type": "integer",
             "title": "Data source status code",
-            "description": "HTTP status code returned from the data source"
+            "description": "HTTP status code returned from the data source",
+            "examples": [200]
           }
         },
         "additionalProperties": false,
         "type": "object",
-        "required": ["data_source_status_code"],
+        "required": ["type", "message", "data_source_status_code"],
         "title": "DoesNotConformToDefinition",
         "description": "This response is reserved by Product Gateway."
       },
@@ -277,13 +342,16 @@
         "properties": {
           "type": {
             "type": "string",
+            "pattern": "^[a-z0-9_]*$",
             "title": "Error type",
-            "description": "Error identifier"
+            "description": "An identifier for the type of error.",
+            "examples": ["forbidden"]
           },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description"
+            "description": "A human readable description of the error.",
+            "examples": ["No access to requested data for group 'example'."]
           }
         },
         "additionalProperties": false,
@@ -293,15 +361,22 @@
       },
       "GatewayTimeout": {
         "properties": {
+          "type": {
+            "type": "string",
+            "const": "gateway_timeout",
+            "title": "Error type",
+            "description": "An identifier for the type of error."
+          },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description",
-            "default": ""
+            "description": "A human readable description of the error.",
+            "examples": ["Gateway Timeout"]
           }
         },
         "additionalProperties": false,
         "type": "object",
+        "required": ["type", "message"],
         "title": "GatewayTimeout",
         "description": "This response is reserved by Product Gateway."
       },
@@ -322,13 +397,16 @@
         "properties": {
           "type": {
             "type": "string",
+            "pattern": "^[a-z0-9_]*$",
             "title": "Error type",
-            "description": "Error identifier"
+            "description": "An identifier for the type of error.",
+            "examples": ["not_found"]
           },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description"
+            "description": "A human readable description of the error.",
+            "examples": ["Not found"]
           }
         },
         "additionalProperties": false,
@@ -343,15 +421,23 @@
       },
       "RateLimitExceeded": {
         "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]*$",
+            "title": "Error type",
+            "description": "An identifier for the type of error.",
+            "examples": ["rate_limit_exceeded"]
+          },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description",
-            "default": "Rate limit exceeded"
+            "description": "A human readable description of the error.",
+            "examples": ["Rate limit exceeded"]
           }
         },
         "additionalProperties": false,
         "type": "object",
+        "required": ["type", "message"],
         "title": "RateLimitExceeded",
         "description": "This response is reserved by Product Gateway."
       },
@@ -429,15 +515,22 @@
       },
       "ServiceUnavailable": {
         "properties": {
+          "type": {
+            "type": "string",
+            "const": "service_unavailable",
+            "title": "Error type",
+            "description": "An identifier for the type of error."
+          },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description",
-            "default": ""
+            "description": "A human readable description of the error.",
+            "examples": ["Service Unavailable"]
           }
         },
         "additionalProperties": false,
         "type": "object",
+        "required": ["type", "message"],
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
       },
@@ -445,13 +538,16 @@
         "properties": {
           "type": {
             "type": "string",
+            "pattern": "^[a-z0-9_]*$",
             "title": "Error type",
-            "description": "Error identifier"
+            "description": "An identifier for the type of error.",
+            "examples": ["api_token_missing_or_invalid"]
           },
           "message": {
             "type": "string",
             "title": "Error message",
-            "description": "Error description"
+            "description": "A human readable description of the error.",
+            "examples": ["The API token has expired"]
           }
         },
         "additionalProperties": false,
