@@ -95,6 +95,16 @@
               }
             }
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
           "401": {
             "content": {
               "application/json": {
@@ -235,6 +245,27 @@
         "required": ["type", "message"],
         "title": "BadGateway",
         "description": "This response is reserved by Product Gateway."
+      },
+      "BadRequest": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]*$",
+            "title": "Error type",
+            "description": "An identifier for the type of error.",
+            "examples": ["validation_error"]
+          },
+          "message": {
+            "type": "string",
+            "title": "Error message",
+            "description": "A human readable description of the error.",
+            "examples": ["Validation failed for fieldName: error description."]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["type", "message"],
+        "title": "BadRequest"
       },
       "CargoMoves": {
         "properties": {
