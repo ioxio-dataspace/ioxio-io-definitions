@@ -3,7 +3,7 @@
   "info": {
     "title": "Vehicle turnaround times",
     "description": "Turnaround times of vehicles within a facility.",
-    "version": "0.3.1"
+    "version": "0.3.2"
   },
   "paths": {
     "/Transport/Vehicle/TurnaroundTimes_v0.3": {
@@ -13,48 +13,6 @@
         "description": "Turnaround times of vehicles within a facility.",
         "operationId": "request_Transport_Vehicle_TurnaroundTimes_v0_3",
         "parameters": [
-          {
-            "name": "x-consent-token",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Optional consent token",
-              "default": "",
-              "title": "X-Consent-Token"
-            },
-            "description": "Optional consent token"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "The login token. Value should be \"Bearer [token]\"",
-              "default": "",
-              "title": "Authorization"
-            },
-            "description": "The login token. Value should be \"Bearer [token]\""
-          },
-          {
-            "name": "x-authorization-provider",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The bare domain of the system that provided the token.",
-              "title": "X-Authorization-Provider"
-            },
-            "description": "The bare domain of the system that provided the token."
-          },
           {
             "name": "x-api-key",
             "in": "header",

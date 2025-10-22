@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: shellcheck
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.16.0
+    rev: 0.17.0
     hooks:
       - id: data-product-definition-converter
         # TODO: convert only the file that was changed
@@ -54,7 +54,7 @@ repos:
         files: ".*?DataProducts/.*?json$"
         args: ["--path", "./DataProducts"]
   - repo: https://github.com/ioxio-dataspace/ioxio-data-product-definition-tooling
-    rev: 0.16.0
+    rev: 0.17.0
     hooks:
       - id: data-product-definition-validator
         files: ".*?DataProducts/.*?json$"

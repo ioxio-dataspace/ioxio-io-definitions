@@ -3,7 +3,7 @@
   "info": {
     "title": "Machined component measurement report",
     "description": "The quality measurement report for a batch of machined components.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Product/MachinedComponent/MeasurementReport_v0.1": {
@@ -14,48 +14,6 @@
         "operationId": "request_Product_MachinedComponent_MeasurementReport_v0_1",
         "deprecated": true,
         "parameters": [
-          {
-            "name": "x-consent-token",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Optional consent token",
-              "default": "",
-              "title": "X-Consent-Token"
-            },
-            "description": "Optional consent token"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "The login token. Value should be \"Bearer [token]\"",
-              "default": "",
-              "title": "Authorization"
-            },
-            "description": "The login token. Value should be \"Bearer [token]\""
-          },
-          {
-            "name": "x-authorization-provider",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The bare domain of the system that provided the token.",
-              "title": "X-Authorization-Provider"
-            },
-            "description": "The bare domain of the system that provided the token."
-          },
           {
             "name": "x-api-key",
             "in": "header",

@@ -88,7 +88,7 @@ class CargoMetricsResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.2",
     strict_validation=False,
     title="Cargo metrics",
     description="The key metrics of the transported cargo",

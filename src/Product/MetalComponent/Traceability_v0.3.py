@@ -239,7 +239,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.3.2",
+    version="0.3.3",
     strict_validation=False,
     title="Metal component traceability information",
     description="The traceability information of a metal component.",

@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment data sheet",
     "description": "General as-built data of a cargo handling equipment operating in a port.",
-    "version": "0.2.2"
+    "version": "0.2.3"
   },
   "paths": {
     "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.2": {
@@ -19,48 +19,6 @@
         "description": "General as-built data of a cargo handling equipment operating in a port.",
         "operationId": "request_DigitalProductPassport_CargoHandlingEquipment_DataSheet_v0_2",
         "parameters": [
-          {
-            "name": "x-consent-token",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Optional consent token",
-              "default": "",
-              "title": "X-Consent-Token"
-            },
-            "description": "Optional consent token"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "The login token. Value should be \"Bearer [token]\"",
-              "default": "",
-              "title": "Authorization"
-            },
-            "description": "The login token. Value should be \"Bearer [token]\""
-          },
-          {
-            "name": "x-authorization-provider",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "The bare domain of the system that provided the token.",
-              "title": "X-Authorization-Provider"
-            },
-            "description": "The bare domain of the system that provided the token."
-          },
           {
             "name": "x-api-key",
             "in": "header",
