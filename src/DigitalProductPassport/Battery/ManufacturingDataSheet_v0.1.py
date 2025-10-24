@@ -394,7 +394,7 @@ class ManufacturingDataSheetRequest(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.5",
+    version="0.1.6",
     strict_validation=False,
     title="Battery manufacturing data sheet",
     description="Manufacturing data sheet as required by Battery Passport "

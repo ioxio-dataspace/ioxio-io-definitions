@@ -89,7 +89,7 @@ class WeatherResponse(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
     strict_validation=False,
     title="Weather in metric units",
     description="Weather information for a given location, either current "

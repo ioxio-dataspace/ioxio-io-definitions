@@ -136,7 +136,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Total carbon footprint for a transport chain",
     description="Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
     tags=["Logistics"],

@@ -112,7 +112,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Monthly carbon footprint for logistics transport chains",
     description="Monthly logistics carbon footprint for a cargo owner compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
     tags=["Logistics", "Carbon footprint", "Emissions"],

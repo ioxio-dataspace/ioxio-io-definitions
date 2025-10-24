@@ -236,7 +236,7 @@ class Response(CamelCaseModel):
 
 
 DEFINITION = DataProductDefinition(
-    version="0.3.1",
+    version="0.3.2",
     strict_validation=False,
     title="Metal component measurement report",
     description="The quality measurement report for metal components.",
