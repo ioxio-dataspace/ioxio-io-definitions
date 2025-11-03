@@ -3,15 +3,15 @@
   "info": {
     "title": "Total carbon footprint for a transport chain",
     "description": "Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
-    "version": "0.1.2"
+    "version": "0.1.0"
   },
   "paths": {
-    "/Logistics/TransportChain/CarbonFootprint_v0.1": {
+    "/Logistics/TransportChain/CarbonFootprint/Push_v0.1": {
       "post": {
         "tags": ["Logistics"],
         "summary": "Total carbon footprint for a transport chain",
         "description": "Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
-        "operationId": "request_Logistics_TransportChain_CarbonFootprint_v0_1",
+        "operationId": "request_Logistics_TransportChain_CarbonFootprint_Push_v0_1",
         "parameters": [
           {
             "name": "x-api-key",
@@ -448,14 +448,7 @@
             "title": "ID",
             "description": "A unique identifier used to track the shipment throughout the entire transport chain, from the origin to the destination.",
             "examples": ["29771_01"]
-          }
-        },
-        "type": "object",
-        "required": ["idType", "id"],
-        "title": "Request"
-      },
-      "Response": {
-        "properties": {
+          },
           "origin": {
             "$ref": "#/components/schemas/Location",
             "title": "Origin",
@@ -565,12 +558,28 @@
         },
         "type": "object",
         "required": [
+          "idType",
+          "id",
           "origin",
           "destination",
           "transportChainFootprint",
           "calculationMethod",
           "transportModes"
         ],
+        "title": "Request"
+      },
+      "Response": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "OK",
+            "title": "Status",
+            "description": "Status confirming the submission of data was successfully received.",
+            "examples": ["OK"]
+          }
+        },
+        "type": "object",
+        "required": ["status"],
         "title": "Response"
       },
       "ServiceUnavailable": {
