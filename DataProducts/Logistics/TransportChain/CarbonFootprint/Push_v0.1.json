@@ -572,10 +572,10 @@
         "properties": {
           "status": {
             "type": "string",
-            "const": "OK",
+            "const": "ok",
             "title": "Status",
             "description": "Status confirming the submission of data was successfully received.",
-            "examples": ["OK"]
+            "examples": ["ok"]
           }
         },
         "type": "object",
