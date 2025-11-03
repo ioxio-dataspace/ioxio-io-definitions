@@ -133,11 +133,11 @@ class Request(CamelCaseModel):
 
 
 class Response(CamelCaseModel):
-    status: Literal["OK"] = Field(
+    status: Literal["ok"] = Field(
         ...,
         title="Status",
         description="Status confirming the submission of data was successfully received.",
-        examples=["OK"],
+        examples=["ok"],
     )
 
 
