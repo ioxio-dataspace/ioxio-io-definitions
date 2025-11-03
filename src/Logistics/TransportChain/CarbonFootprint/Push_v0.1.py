@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional
+from typing import Literal, Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
 from pydantic import Field
@@ -62,9 +62,6 @@ class Request(CamelCaseModel):
         max_length=30,
         examples=["29771_01"],
     )
-
-
-class Response(CamelCaseModel):
     origin: Location = Field(
         ...,
         title="Origin",
@@ -135,8 +132,17 @@ class Response(CamelCaseModel):
     )
 
 
+class Response(CamelCaseModel):
+    status: Literal["ok"] = Field(
+        ...,
+        title="Status",
+        description="Status confirming the submission of data was successfully received.",
+        examples=["ok"],
+    )
+
+
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.0",
     title="Total carbon footprint for a transport chain",
     description="Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
     tags=["Logistics"],
