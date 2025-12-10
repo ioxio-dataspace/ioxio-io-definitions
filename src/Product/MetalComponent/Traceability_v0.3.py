@@ -99,6 +99,7 @@ class ComponentIdentification(CamelCaseModel):
         min_length=0,
         max_length=150,
     )
+    # TODO: subcomponent_declaration
     sub_component_declaration: list[Subcomponent] = Field(
         ...,
         title="Subcomponent declaration",
