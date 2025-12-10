@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment data sheet",
     "description": "General as-built data of a cargo handling equipment operating in a port.",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "paths": {
     "/DigitalProductPassport/CargoHandlingEquipment/DataSheet_v0.2": {
@@ -326,7 +326,7 @@
         },
         "type": "object",
         "required": ["product", "id"],
-        "title": "DataSheetRequest"
+        "title": "Data sheet request"
       },
       "DataSheetResponse": {
         "properties": {
@@ -360,7 +360,6 @@
           },
           "manufacturerInformation": {
             "$ref": "#/components/schemas/ManufacturerInformation",
-            "title": "Manufacturer information",
             "description": "The details of the manufacturer."
           },
           "powerSource": {
@@ -439,7 +438,7 @@
           "netVehicleMass",
           "maxLoadCapacity"
         ],
-        "title": "DataSheetResponse"
+        "title": "Data sheet response"
       },
       "DataSourceError": {
         "properties": {
@@ -579,7 +578,7 @@
             "maxLength": 250,
             "title": "Name",
             "description": "The registered trade name of the manufacturer company.",
-            "examples": ["Equipment Manufacturer Company X"]
+            "examples": ["Equipment Manufacturer Example LTD"]
           },
           "website": {
             "anyOf": [
@@ -599,7 +598,7 @@
         },
         "type": "object",
         "required": ["name"],
-        "title": "ManufacturerInformation"
+        "title": "Manufacturer information"
       },
       "NotFound": {
         "properties": {

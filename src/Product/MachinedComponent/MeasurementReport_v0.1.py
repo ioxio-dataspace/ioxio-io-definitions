@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class MeasurementEquipment(CamelCaseModel):
@@ -28,11 +28,13 @@ class MeasurementEquipment(CamelCaseModel):
         examples=["mp-001-rv02"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Measurement equipment")
+
 
 class ComponentIdentification(CamelCaseModel):
     purchase_order: str = Field(
         ...,
-        title="Purchase order ",
+        title="Purchase order",
         description="The number of the purchase order related to the component.",
         max_length=40,
         examples=["12345"],
@@ -52,6 +54,8 @@ class ComponentIdentification(CamelCaseModel):
         examples=["pn-20240205-00123"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Component identification")
+
 
 class CustomerInformation(CamelCaseModel):
     name: str = Field(
@@ -59,15 +63,17 @@ class CustomerInformation(CamelCaseModel):
         title="Name",
         description="The name of the customer that has issued the component order.",
         max_length=250,
-        examples=["Company xyz"],
+        examples=["Example LLC"],
     )
     department: Optional[str] = Field(
         None,
         title="Department",
         description="The responsible department of the customer that has issued the component order.",
         max_length=250,
-        examples=["Department xyz"],
+        examples=["Department Name"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Customer information")
 
 
 class MeasurementSetup(CamelCaseModel):
@@ -130,6 +136,8 @@ class MeasurementSetup(CamelCaseModel):
         description="The identifiers of the equipment used in the measuring of the component.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Measurement setup")
+
 
 class MeasurementResult(CamelCaseModel):
     feature_name: str = Field(
@@ -176,6 +184,8 @@ class MeasurementResult(CamelCaseModel):
         examples=[True],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Measurement result")
+
 
 class Request(CamelCaseModel):
     id: str = Field(
@@ -185,6 +195,8 @@ class Request(CamelCaseModel):
         max_length=40,
         examples=["b1a-0723y-00165"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Request")
 
 
 class Response(CamelCaseModel):
@@ -209,9 +221,11 @@ class Response(CamelCaseModel):
         description="The results of the quality measurements.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
     strict_validation=False,
     deprecated=True,
     title="Machined component measurement report",

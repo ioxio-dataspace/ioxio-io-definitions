@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List, Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import EmailStr, Field
+from pydantic import ConfigDict, EmailStr, Field
 
 
 class ManufacturingLocation(CamelCaseModel):
@@ -10,7 +10,7 @@ class ManufacturingLocation(CamelCaseModel):
         None,
         title="Country",
         pattern=r"^[A-Z]{3}$",
-        description="The country code of the battery manufacturing location in Alpha-3 "
+        description="The country code of the battery manufacturing location in ISO 3166-1 alpha-3 "
         "format.",
         examples=["DEU"],
     )
@@ -21,6 +21,8 @@ class ManufacturingLocation(CamelCaseModel):
         description="The city of the battery manufacturing location.",
         examples=["Hamburg"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Manufacturing location")
 
 
 class ManufacturerInformation(CamelCaseModel):
@@ -57,7 +59,7 @@ class ManufacturerInformation(CamelCaseModel):
         title="Country",
         pattern=r"^[A-Z]{3}$",
         description="The country code of the manufacturer's headquarters location in "
-        "Alpha-3 format.",
+        "ISO 3166-1 alpha-3 format.",
         examples=["USA"],
     )
     website: Optional[str] = Field(
@@ -74,6 +76,8 @@ class ManufacturerInformation(CamelCaseModel):
         description="The email address of the manufacturer.",
         examples=["info@example.com"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Manufacturer information")
 
 
 class BatteryCategory(str, Enum):
@@ -99,6 +103,8 @@ class RoundTripEfficiency(CamelCaseModel):
         examples=[60.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Round trip efficiency")
+
 
 class VoltageLevels(CamelCaseModel):
     nominal_voltage: Optional[float] = Field(
@@ -120,6 +126,8 @@ class VoltageLevels(CamelCaseModel):
         examples=[180.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Voltage levels")
+
 
 class TemperatureRange(CamelCaseModel):
     minimum_temperature: Optional[float] = Field(
@@ -140,6 +148,8 @@ class TemperatureRange(CamelCaseModel):
         le=100,
         ge=-100,
     )
+
+    model_config: ConfigDict = ConfigDict(title="Temperature range")
 
 
 class ExpectedLifetime(CamelCaseModel):
@@ -166,6 +176,8 @@ class ExpectedLifetime(CamelCaseModel):
         examples=["1C"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Expected lifetime")
+
 
 class MaterialComposition(CamelCaseModel):
     chemistry: List[str] = Field(
@@ -188,6 +200,8 @@ class MaterialComposition(CamelCaseModel):
         examples=[["Cobalt"]],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Material composition")
+
 
 class RecycledContent(CamelCaseModel):
     substance_name: Optional[str] = Field(
@@ -205,6 +219,8 @@ class RecycledContent(CamelCaseModel):
         examples=[8.5],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Recycled content")
+
 
 class RenewableContent(CamelCaseModel):
     substance_name: Optional[str] = Field(
@@ -221,6 +237,8 @@ class RenewableContent(CamelCaseModel):
         "percentage by weight.",
         examples=[2.0],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Renewable content")
 
 
 class LegalConformity(CamelCaseModel):
@@ -246,6 +264,8 @@ class LegalConformity(CamelCaseModel):
         max_length=2083,
         examples=["https://example.com/EUdeclaration"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Legal conformity")
 
 
 class ManufacturingDataSheetResponse(CamelCaseModel):
@@ -315,7 +335,7 @@ class ManufacturingDataSheetResponse(CamelCaseModel):
         None,
         title="Resistance (Ω)",
         description="The internal resistance of the battery pack in ohms.",
-        examples=[0],
+        examples=[0.1],
     )
     round_trip_efficiency: Optional[RoundTripEfficiency] = Field(
         None,
@@ -375,6 +395,8 @@ class ManufacturingDataSheetResponse(CamelCaseModel):
         examples=[["foam", "carbon dioxide"]],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Manufacturing data sheet response")
+
 
 class ManufacturingDataSheetRequest(CamelCaseModel):
     product: str = Field(
@@ -387,14 +409,16 @@ class ManufacturingDataSheetRequest(CamelCaseModel):
     id: str = Field(
         ...,
         max_length=40,
-        title="Id",
+        title="ID",
         description="The unique identifier of the product.",
         examples=["660e8400-e29b-41d4-a716-446655440000"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Manufacturing data sheet request")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.6",
+    version="0.1.7",
     strict_validation=False,
     title="Battery manufacturing data sheet",
     description="Manufacturing data sheet as required by Battery Passport "

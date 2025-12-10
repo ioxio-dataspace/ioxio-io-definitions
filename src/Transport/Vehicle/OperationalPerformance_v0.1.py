@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class OperationalPerformanceRequest(CamelCaseModel):
@@ -25,6 +25,8 @@ class OperationalPerformanceRequest(CamelCaseModel):
         description="The end time of the performance period in, RFC 3339 format.",
         examples=[datetime.fromisoformat("2023-05-12T23:20:50Z")],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Operational performance request")
 
 
 class OperationalPerformanceResponse(CamelCaseModel):
@@ -77,9 +79,11 @@ class OperationalPerformanceResponse(CamelCaseModel):
         examples=[50.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational performance response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Transport vehicle operational performance",
     description="General operational performance data of a transport vehicle.",

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class EmissionsRequest(CamelCaseModel):
@@ -26,6 +26,8 @@ class EmissionsRequest(CamelCaseModel):
         examples=[datetime.fromisoformat("2023-05-12T23:20:50Z")],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Emissions request")
+
 
 class EmissionsResponse(CamelCaseModel):
     start_time: Optional[datetime] = Field(
@@ -44,7 +46,7 @@ class EmissionsResponse(CamelCaseModel):
         ...,
         title="Carbon dioxide (kg)",
         description="The mass of the carbon dioxide (CO2) emissions in kilograms.",
-        examples=[4000],
+        examples=[4000.0],
     )
     nitrogen_oxides: float = Field(
         ...,
@@ -59,9 +61,11 @@ class EmissionsResponse(CamelCaseModel):
         examples=[0.05],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Emissions response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Transport vehicle emissions",
     description="The emissions of a transport vehicle.",

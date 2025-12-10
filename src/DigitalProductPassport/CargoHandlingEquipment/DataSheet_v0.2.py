@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List, Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class EquipmentType(str, Enum):
@@ -33,7 +33,7 @@ class ManufacturerInformation(CamelCaseModel):
         max_length=250,
         title="Name",
         description="The registered trade name of the manufacturer company.",
-        examples=["Equipment Manufacturer Company X"],
+        examples=["Equipment Manufacturer Example LTD"],
     )
     website: Optional[str] = Field(
         None,
@@ -43,6 +43,8 @@ class ManufacturerInformation(CamelCaseModel):
         description="The website of the manufacturer.",
         examples=["https://example.com/"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Manufacturer information")
 
 
 class Batteries(CamelCaseModel):
@@ -83,6 +85,8 @@ class Batteries(CamelCaseModel):
         examples=[75.0],
         ge=0,
     )
+
+    model_config: ConfigDict = ConfigDict(title="Batteries")
 
 
 class DataSheetResponse(CamelCaseModel):
@@ -156,6 +160,8 @@ class DataSheetResponse(CamelCaseModel):
         examples=[6000.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Data sheet response")
+
 
 class DataSheetRequest(CamelCaseModel):
     product: str = Field(
@@ -173,9 +179,11 @@ class DataSheetRequest(CamelCaseModel):
         examples=["71b51878-8a00-11ee-b9d1-0242ac120002"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Data sheet request")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.2.3",
+    version="0.2.4",
     strict_validation=False,
     title="Cargo handling equipment data sheet",
     description="General as-built data of a cargo handling equipment operating in a "

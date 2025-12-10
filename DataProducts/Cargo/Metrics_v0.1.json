@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo metrics",
     "description": "The key metrics of the transported cargo",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "paths": {
     "/Cargo/Metrics_v0.1": {
@@ -238,7 +238,7 @@
             ],
             "title": "Weight (kg)",
             "description": "The weight of the cargo item in kilograms.",
-            "examples": [2000]
+            "examples": [2000.0]
           },
           "volume": {
             "anyOf": [
@@ -294,7 +294,7 @@
           }
         },
         "type": "object",
-        "title": "CargoItem"
+        "title": "Cargo item"
       },
       "CargoMetricsRequest": {
         "properties": {
@@ -308,7 +308,7 @@
         },
         "type": "object",
         "required": ["waybillNumber"],
-        "title": "CargoMetricsRequest"
+        "title": "Cargo metrics request"
       },
       "CargoMetricsResponse": {
         "properties": {
@@ -329,7 +329,7 @@
             ],
             "title": "Weight (kg)",
             "description": "The weight of the cargo within the delivery in kilograms.",
-            "examples": [20000]
+            "examples": [20000.0]
           },
           "volume": {
             "anyOf": [
@@ -342,7 +342,7 @@
             ],
             "title": "Volume (m^3)",
             "description": "The volume of the cargo within the delivery in cubic meters.",
-            "examples": [50]
+            "examples": [50.0]
           },
           "cargoUnits": {
             "anyOf": [
@@ -368,7 +368,7 @@
         },
         "type": "object",
         "required": ["cargoType", "cargoItems"],
-        "title": "CargoMetricsResponse"
+        "title": "Cargo metrics response"
       },
       "CargoType": {
         "type": "string",

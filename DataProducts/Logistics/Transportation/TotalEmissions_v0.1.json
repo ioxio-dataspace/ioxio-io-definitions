@@ -3,7 +3,7 @@
   "info": {
     "title": "Total emissions for a transport chain",
     "description": "Total emissions for a transport chain compliant with GHG protocol Scope 3 transport emissions.",
-    "version": "0.1.3"
+    "version": "0.1.4"
   },
   "paths": {
     "/Logistics/Transportation/TotalEmissions_v0.1": {
@@ -370,7 +370,7 @@
             "type": "string",
             "pattern": "^[A-Z]{2}$",
             "title": "Country",
-            "description": "The country code in Alpha-2 format.",
+            "description": "The country code in ISO 3166-1 alpha-2 format.",
             "examples": ["DE"]
           }
         },
@@ -479,7 +479,7 @@
             ],
             "title": "Distance (km)",
             "description": "The distance of the transport chain in kilometers.",
-            "examples": [484]
+            "examples": [484.1]
           },
           "legCount": {
             "anyOf": [

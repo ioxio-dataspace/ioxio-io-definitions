@@ -3,7 +3,7 @@
   "info": {
     "title": "Total carbon footprint for a transport chain",
     "description": "Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "paths": {
     "/Logistics/TransportChain/CarbonFootprint_v0.1": {
@@ -382,7 +382,7 @@
             "minLength": 2,
             "pattern": "^[A-Z]{2}$",
             "title": "Country",
-            "description": "The country code in Alpha-2 format.",
+            "description": "The country code in ISO 3166-1 alpha-2 format.",
             "examples": ["DE"]
           }
         },
@@ -493,7 +493,7 @@
             ],
             "title": "Distance (km)",
             "description": "The distance of the transport chain in kilometers.",
-            "examples": [484]
+            "examples": [484.1]
           },
           "legCount": {
             "anyOf": [

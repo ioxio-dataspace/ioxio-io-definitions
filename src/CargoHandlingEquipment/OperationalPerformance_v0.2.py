@@ -2,7 +2,7 @@ import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class CargoMoves(CamelCaseModel):
@@ -20,6 +20,8 @@ class CargoMoves(CamelCaseModel):
         examples=[53],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Cargo moves")
+
 
 class HoistMoves(CamelCaseModel):
     lift: Optional[int] = Field(
@@ -34,6 +36,8 @@ class HoistMoves(CamelCaseModel):
         description="Count of lowering moves the cargo handling equipment has performed during the time period.",
         examples=[164],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Hoist moves")
 
 
 class OperationalPerformanceResponse(CamelCaseModel):
@@ -82,6 +86,8 @@ class OperationalPerformanceResponse(CamelCaseModel):
         examples=[75.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational performance response")
+
 
 class OperationalPerformanceRequest(CamelCaseModel):
     id: str = Field(
@@ -108,9 +114,11 @@ class OperationalPerformanceRequest(CamelCaseModel):
         ],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational performance request")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.2.3",
+    version="0.2.4",
     strict_validation=False,
     title="Cargo handling equipment operational performance",
     description="General operational status data of a mobile work machine operating in "

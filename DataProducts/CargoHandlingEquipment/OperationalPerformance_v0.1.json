@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment operational performance",
     "description": "General operational status data of a mobile work machine operating in a port.",
-    "version": "0.1.4"
+    "version": "0.1.5"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalPerformance_v0.1": {
@@ -256,7 +256,7 @@
           }
         },
         "type": "object",
-        "title": "CargoMoves"
+        "title": "Cargo moves"
       },
       "DataSourceError": {
         "properties": {
@@ -414,7 +414,7 @@
           }
         },
         "type": "object",
-        "title": "HoistMoves"
+        "title": "Hoist moves"
       },
       "NotFound": {
         "properties": {
@@ -477,7 +477,7 @@
         },
         "type": "object",
         "required": ["id"],
-        "title": "OperationalPerformanceRequest"
+        "title": "Operational performance request"
       },
       "OperationalPerformanceResponse": {
         "properties": {
@@ -561,7 +561,7 @@
         },
         "type": "object",
         "required": ["runningHours", "distance"],
-        "title": "OperationalPerformanceResponse"
+        "title": "Operational performance response"
       },
       "RateLimitExceeded": {
         "properties": {

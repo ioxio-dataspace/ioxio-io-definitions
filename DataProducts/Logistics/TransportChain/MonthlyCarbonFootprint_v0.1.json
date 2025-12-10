@@ -3,7 +3,7 @@
   "info": {
     "title": "Monthly carbon footprint for logistics transport chains",
     "description": "Monthly logistics carbon footprint for a cargo owner compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "paths": {
     "/Logistics/TransportChain/MonthlyCarbonFootprint_v0.1": {
@@ -382,7 +382,7 @@
             "minLength": 2,
             "pattern": "^[A-Z]{2}$",
             "title": "Country",
-            "description": "The country code in Alpha-2 format.",
+            "description": "The country code in ISO 3166-1 alpha-2 format.",
             "examples": ["DE"]
           }
         },
@@ -466,7 +466,7 @@
         },
         "type": "object",
         "required": ["origin", "destination", "calculationMethod", "carbonFootprint"],
-        "title": "MonthlyFootprint"
+        "title": "Monthly footprint"
       },
       "NotFound": {
         "properties": {

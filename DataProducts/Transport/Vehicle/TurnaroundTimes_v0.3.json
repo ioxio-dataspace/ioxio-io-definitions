@@ -3,7 +3,7 @@
   "info": {
     "title": "Vehicle turnaround times",
     "description": "Turnaround times of vehicles within a facility.",
-    "version": "0.3.2"
+    "version": "0.3.3"
   },
   "paths": {
     "/Transport/Vehicle/TurnaroundTimes_v0.3": {
@@ -475,7 +475,7 @@
         },
         "type": "object",
         "required": ["vehicleId", "entryTime"],
-        "title": "TurnaroundTime"
+        "title": "Turnaround time"
       },
       "TurnaroundTimeRequest": {
         "properties": {
@@ -503,7 +503,7 @@
         },
         "type": "object",
         "required": ["locationId", "startTime", "endTime"],
-        "title": "TurnaroundTimeRequest"
+        "title": "Turnaround time request"
       },
       "TurnaroundTimeResponse": {
         "properties": {
@@ -518,7 +518,7 @@
         },
         "type": "object",
         "required": ["turnaroundTimes"],
-        "title": "TurnaroundTimeResponse"
+        "title": "Turnaround time response"
       },
       "Unauthorized": {
         "properties": {

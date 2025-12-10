@@ -1,7 +1,7 @@
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class Location(CamelCaseModel):
@@ -24,12 +24,14 @@ class Location(CamelCaseModel):
     country: str = Field(
         ...,
         title="Country",
-        description="The country code in Alpha-2 format.",
+        description="The country code in ISO 3166-1 alpha-2 format.",
         pattern=r"^[A-Z]{2}$",
         min_length=2,
         max_length=2,
         examples=["DE"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class MonthlyFootprint(CamelCaseModel):
@@ -84,6 +86,8 @@ class MonthlyFootprint(CamelCaseModel):
         examples=[25.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Monthly footprint")
+
 
 class Request(CamelCaseModel):
     id: str = Field(
@@ -102,6 +106,8 @@ class Request(CamelCaseModel):
         examples=["2025-08"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     monthly_footprints: list[MonthlyFootprint] = Field(
@@ -110,9 +116,11 @@ class Response(CamelCaseModel):
         description="A list of monthly carbon footprints for transport chains.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.1",
+    version="0.1.2",
     title="Monthly carbon footprint for logistics transport chains",
     description="Monthly logistics carbon footprint for a cargo owner compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
     tags=["Logistics", "Carbon footprint", "Emissions"],

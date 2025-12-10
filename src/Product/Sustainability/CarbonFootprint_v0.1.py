@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class QueryLevel(str, Enum):
@@ -33,6 +33,8 @@ class Request(CamelCaseModel):
         examples=["batch-12345"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     material_footprint: Optional[float] = Field(
@@ -50,13 +52,15 @@ class Response(CamelCaseModel):
     logistics_footprint: Optional[float] = Field(
         None,
         title="Logistics footprint (kg of CO2e)",
-        description="The carbon footprint generated from the upstream logisitics of delivering the product materials to manufacturing calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
+        description="The carbon footprint generated from the upstream logistics of delivering the product materials to manufacturing calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
         examples=[0.3],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Product carbon footprint",
     description="The carbon footprint of manufacturing a product.",

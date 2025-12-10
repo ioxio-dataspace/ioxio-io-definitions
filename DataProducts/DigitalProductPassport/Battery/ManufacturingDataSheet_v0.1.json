@@ -3,7 +3,7 @@
   "info": {
     "title": "Battery manufacturing data sheet",
     "description": "Manufacturing data sheet as required by Battery Passport specification of the European Commission's Battery Act (2023/1542).",
-    "version": "0.1.6"
+    "version": "0.1.7"
   },
   "paths": {
     "/DigitalProductPassport/Battery/ManufacturingDataSheet_v0.1": {
@@ -351,7 +351,7 @@
           }
         },
         "type": "object",
-        "title": "ExpectedLifetime"
+        "title": "Expected lifetime"
       },
       "Forbidden": {
         "properties": {
@@ -450,7 +450,7 @@
         },
         "type": "object",
         "required": ["requirementConformity"],
-        "title": "LegalConformity"
+        "title": "Legal conformity"
       },
       "ManufacturerInformation": {
         "properties": {
@@ -521,7 +521,7 @@
               }
             ],
             "title": "Country",
-            "description": "The country code of the manufacturer's headquarters location in Alpha-3 format.",
+            "description": "The country code of the manufacturer's headquarters location in ISO 3166-1 alpha-3 format.",
             "examples": ["USA"]
           },
           "website": {
@@ -555,7 +555,7 @@
           }
         },
         "type": "object",
-        "title": "ManufacturerInformation"
+        "title": "Manufacturer information"
       },
       "ManufacturingDataSheetRequest": {
         "properties": {
@@ -569,14 +569,14 @@
           "id": {
             "type": "string",
             "maxLength": 40,
-            "title": "Id",
+            "title": "ID",
             "description": "The unique identifier of the product.",
             "examples": ["660e8400-e29b-41d4-a716-446655440000"]
           }
         },
         "type": "object",
         "required": ["product", "id"],
-        "title": "ManufacturingDataSheetRequest"
+        "title": "Manufacturing data sheet request"
       },
       "ManufacturingDataSheetResponse": {
         "properties": {
@@ -722,7 +722,7 @@
             ],
             "title": "Resistance (Ω)",
             "description": "The internal resistance of the battery pack in ohms.",
-            "examples": [0]
+            "examples": [0.1]
           },
           "roundTripEfficiency": {
             "anyOf": [
@@ -838,7 +838,7 @@
         },
         "type": "object",
         "required": ["recycledContent", "renewableContent", "extinguishingAgents"],
-        "title": "ManufacturingDataSheetResponse"
+        "title": "Manufacturing data sheet response"
       },
       "ManufacturingLocation": {
         "properties": {
@@ -853,7 +853,7 @@
               }
             ],
             "title": "Country",
-            "description": "The country code of the battery manufacturing location in Alpha-3 format.",
+            "description": "The country code of the battery manufacturing location in ISO 3166-1 alpha-3 format.",
             "examples": ["DEU"]
           },
           "city": {
@@ -872,7 +872,7 @@
           }
         },
         "type": "object",
-        "title": "ManufacturingLocation"
+        "title": "Manufacturing location"
       },
       "MaterialComposition": {
         "properties": {
@@ -906,7 +906,7 @@
         },
         "type": "object",
         "required": ["chemistry", "hazardousSubstances", "criticalRawMaterials"],
-        "title": "MaterialComposition"
+        "title": "Material composition"
       },
       "NotFound": {
         "properties": {
@@ -982,7 +982,7 @@
           }
         },
         "type": "object",
-        "title": "RecycledContent"
+        "title": "Recycled content"
       },
       "RenewableContent": {
         "properties": {
@@ -1015,7 +1015,7 @@
           }
         },
         "type": "object",
-        "title": "RenewableContent"
+        "title": "Renewable content"
       },
       "RoundTripEfficiency": {
         "properties": {
@@ -1047,7 +1047,7 @@
           }
         },
         "type": "object",
-        "title": "RoundTripEfficiency"
+        "title": "Round trip efficiency"
       },
       "ServiceUnavailable": {
         "properties": {
@@ -1104,7 +1104,7 @@
           }
         },
         "type": "object",
-        "title": "TemperatureRange"
+        "title": "Temperature range"
       },
       "Unauthorized": {
         "properties": {
@@ -1199,7 +1199,7 @@
           }
         },
         "type": "object",
-        "title": "VoltageLevels"
+        "title": "Voltage levels"
       }
     }
   },
