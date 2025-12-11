@@ -2,7 +2,7 @@ import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class WeatherRequest(CamelCaseModel):
@@ -12,7 +12,7 @@ class WeatherRequest(CamelCaseModel):
         description="The latitude coordinate of the desired location in degrees.",
         ge=-90.0,
         le=90.0,
-        examples=[60.192059],
+        examples=[60.192],
     )
     lon: float = Field(
         ...,
@@ -20,7 +20,7 @@ class WeatherRequest(CamelCaseModel):
         description="The longitude coordinate of the desired location in degrees.",
         ge=-180.0,
         le=180.0,
-        examples=[24.945831],
+        examples=[24.945],
     )
     when: Optional[datetime.datetime] = Field(
         None,
@@ -30,6 +30,8 @@ class WeatherRequest(CamelCaseModel):
             datetime.datetime(2023, 4, 12, 23, 20, 50, tzinfo=datetime.timezone.utc)
         ],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Weather request")
 
 
 class WeatherResponse(CamelCaseModel):
@@ -46,14 +48,14 @@ class WeatherResponse(CamelCaseModel):
         description="Current relative air humidity percentage.",
         ge=0.0,
         le=100.0,
-        examples=[72],
+        examples=[72.0],
     )
     pressure: Optional[float] = Field(
         None,
         title="Pressure (hPa)",
         description="Current air pressure in hectopascals.",
         ge=0.0,
-        examples=[1007],
+        examples=[1007.0],
     )
     wind_speed: Optional[float] = Field(
         None,
@@ -87,9 +89,11 @@ class WeatherResponse(CamelCaseModel):
         examples=[320.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Weather response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Weather in metric units",
     description="Weather information for a given location, either current "

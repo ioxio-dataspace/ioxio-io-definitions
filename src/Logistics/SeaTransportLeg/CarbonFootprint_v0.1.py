@@ -2,7 +2,7 @@ from datetime import date
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class Location(CamelCaseModel):
@@ -25,10 +25,12 @@ class Location(CamelCaseModel):
     country: Optional[str] = Field(
         None,
         title="Country",
-        description="The country code in Alpha-2 format.",
+        description="The country code in ISO 3166-1 alpha-2 format.",
         pattern=r"^[A-Z]{2}$",
         examples=["DE"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class Request(CamelCaseModel):
@@ -63,6 +65,8 @@ class Request(CamelCaseModel):
         examples=[date.fromisoformat("2025-02-06")],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     origin: Location = Field(
@@ -95,7 +99,7 @@ class Response(CamelCaseModel):
         None,
         title="Distance (km)",
         description="The distance of the transport chain in kilometers.",
-        examples=[484],
+        examples=[484.1],
     )
     fossil_share: Optional[float] = Field(
         None,
@@ -122,9 +126,11 @@ class Response(CamelCaseModel):
         examples=[25.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Carbon footprint for a sea transport leg",
     description="Carbon footprint for a sea transport leg within a transport chain of a cargo compliant with GHG protocol Scope 3 transport emissions guidance and ISO 14083 standard.",
     tags=["Logistics", "Emissions"],

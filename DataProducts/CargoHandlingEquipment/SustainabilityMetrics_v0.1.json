@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment sustainability metrics",
     "description": "The power source consumption for the sustainability evaluation of the cargo handling equipment operations.",
-    "version": "0.1.3"
+    "version": "0.1.4"
   },
   "paths": {
     "/CargoHandlingEquipment/SustainabilityMetrics_v0.1": {
@@ -448,7 +448,7 @@
         },
         "type": "object",
         "required": ["id", "startTime", "endTime"],
-        "title": "SustainabilityRequest"
+        "title": "Sustainability request"
       },
       "SustainabilityResponse": {
         "properties": {
@@ -496,7 +496,7 @@
           }
         },
         "type": "object",
-        "title": "SustainabilityResponse"
+        "title": "Sustainability response"
       },
       "Unauthorized": {
         "properties": {

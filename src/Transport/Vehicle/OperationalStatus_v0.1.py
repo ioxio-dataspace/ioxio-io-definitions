@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class Location(CamelCaseModel):
@@ -12,7 +12,7 @@ class Location(CamelCaseModel):
         description="The latitude coordinate in decimal degrees.",
         gte=-90,
         lte=90,
-        examples=[60.192059],
+        examples=[60.192],
     )
     longitude: float = Field(
         ...,
@@ -20,8 +20,10 @@ class Location(CamelCaseModel):
         description="The longitude coordinate in decimal degrees.",
         gte=-180,
         lte=180,
-        examples=[24.945831],
+        examples=[24.945],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class OperationalStatusRequest(CamelCaseModel):
@@ -38,6 +40,8 @@ class OperationalStatusRequest(CamelCaseModel):
         description="Request the vehicle's status information at or before this given time, in RFC 3339 format. If empty, provide latest value.",
         examples=[datetime.fromisoformat("2023-04-12T23:20:50Z")],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Operational status request")
 
 
 class OperationalStatusResponse(CamelCaseModel):
@@ -75,9 +79,11 @@ class OperationalStatusResponse(CamelCaseModel):
         description="The location in GPS coordinates.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational status response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
     strict_validation=False,
     title="Transport vehicle operational status",
     description="General operational status data of a transport vehicle.",

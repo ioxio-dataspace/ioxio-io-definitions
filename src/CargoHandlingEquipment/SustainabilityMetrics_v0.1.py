@@ -2,7 +2,7 @@ import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class SustainabilityResponse(CamelCaseModel):
@@ -28,6 +28,8 @@ class SustainabilityResponse(CamelCaseModel):
         ge=0.0,
         examples=[560.0],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Sustainability response")
 
 
 class SustainabilityRequest(CamelCaseModel):
@@ -55,9 +57,11 @@ class SustainabilityRequest(CamelCaseModel):
         ],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Sustainability request")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Cargo handling equipment sustainability metrics",
     description="The power source consumption for the sustainability evaluation of the "

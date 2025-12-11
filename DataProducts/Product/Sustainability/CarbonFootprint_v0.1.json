@@ -3,7 +3,7 @@
   "info": {
     "title": "Product carbon footprint",
     "description": "The carbon footprint of manufacturing a product.",
-    "version": "0.1.3"
+    "version": "0.1.4"
   },
   "paths": {
     "/Product/Sustainability/CarbonFootprint_v0.1": {
@@ -464,7 +464,7 @@
               }
             ],
             "title": "Logistics footprint (kg of CO2e)",
-            "description": "The carbon footprint generated from the upstream logisitics of delivering the product materials to manufacturing calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
+            "description": "The carbon footprint generated from the upstream logistics of delivering the product materials to manufacturing calculated as kilograms of carbon dioxide equivalents using Product Category Rule (PCR) methods.",
             "examples": [0.3]
           }
         },

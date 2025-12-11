@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class CargoType(str, Enum):
@@ -17,7 +17,7 @@ class CargoItem(CamelCaseModel):
         None,
         title="Weight (kg)",
         description="The weight of the cargo item in kilograms.",
-        examples=[2000],
+        examples=[2000.0],
     )
     volume: Optional[float] = Field(
         None,
@@ -44,6 +44,8 @@ class CargoItem(CamelCaseModel):
         examples=[1.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Cargo item")
+
 
 class CargoMetricsRequest(CamelCaseModel):
     waybill_number: str = Field(
@@ -53,6 +55,8 @@ class CargoMetricsRequest(CamelCaseModel):
         max_length=128,
         examples=["5308956234"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Cargo metrics request")
 
 
 class CargoMetricsResponse(CamelCaseModel):
@@ -66,13 +70,13 @@ class CargoMetricsResponse(CamelCaseModel):
         None,
         title="Weight (kg)",
         description="The weight of the cargo within the delivery in kilograms.",
-        examples=[20000],
+        examples=[20000.0],
     )
     volume: Optional[float] = Field(
         None,
         title="Volume (m^3)",
         description="The volume of the cargo within the delivery in cubic meters.",
-        examples=[50],
+        examples=[50.0],
     )
     cargo_units: Optional[int] = Field(
         None,
@@ -86,9 +90,11 @@ class CargoMetricsResponse(CamelCaseModel):
         description="The details of the cargo items within the delivery.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Cargo metrics response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.2",
+    version="0.1.3",
     strict_validation=False,
     title="Cargo metrics",
     description="The key metrics of the transported cargo",

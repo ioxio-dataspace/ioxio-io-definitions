@@ -3,7 +3,7 @@
   "info": {
     "title": "Cargo handling equipment operational status",
     "description": "General operational status data of a cargo handling equipment operating in a port.",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "paths": {
     "/CargoHandlingEquipment/OperationalStatus_v0.2": {
@@ -359,7 +359,7 @@
             "minimum": -90.0,
             "title": "Latitude (°)",
             "description": "The latitude coordinate in decimal degrees.",
-            "examples": [60.192059]
+            "examples": [60.192]
           },
           "longitude": {
             "type": "number",
@@ -367,7 +367,7 @@
             "minimum": -180.0,
             "title": "Longitude (°)",
             "description": "The longitude coordinate in decimal degrees.",
-            "examples": [24.945831]
+            "examples": [24.945]
           }
         },
         "type": "object",
@@ -426,7 +426,7 @@
         },
         "type": "object",
         "required": ["id"],
-        "title": "OperationalStatusRequest"
+        "title": "Operational status request"
       },
       "OperationalStatusResponse": {
         "properties": {
@@ -523,7 +523,7 @@
         },
         "type": "object",
         "required": ["operationalState"],
-        "title": "OperationalStatusResponse"
+        "title": "Operational status response"
       },
       "RateLimitExceeded": {
         "properties": {

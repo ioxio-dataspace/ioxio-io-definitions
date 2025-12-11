@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component traceability information",
     "description": "The traceability information of a metal component.",
-    "version": "0.3.3"
+    "version": "0.3.4"
   },
   "paths": {
     "/Product/MetalComponent/Traceability_v0.3": {
@@ -293,7 +293,7 @@
           }
         },
         "type": "object",
-        "title": "CompanyIdentification"
+        "title": "Company identification"
       },
       "CompanyIdentifierScheme": {
         "type": "string",
@@ -318,10 +318,10 @@
           },
           "subComponentDeclaration": {
             "items": {
-              "$ref": "#/components/schemas/SubComponent"
+              "$ref": "#/components/schemas/Subcomponent"
             },
             "type": "array",
-            "title": "Sub component declaration",
+            "title": "Subcomponent declaration",
             "description": "List of declared subcomponents used in the component assembly."
           },
           "purchaseOrder": {
@@ -425,7 +425,7 @@
         },
         "type": "object",
         "required": ["subComponentDeclaration", "blanks"],
-        "title": "ComponentIdentification"
+        "title": "Component identification"
       },
       "DataSourceError": {
         "properties": {
@@ -568,7 +568,7 @@
             ],
             "title": "Name",
             "description": "The registered trade name of the manufacturer company.",
-            "examples": ["Company xyz"]
+            "examples": ["Example LLC"]
           },
           "identification": {
             "$ref": "#/components/schemas/CompanyIdentification",
@@ -603,12 +603,12 @@
             ],
             "title": "Contact email",
             "description": "The designated email contact for inquiries related to component manufacturing.",
-            "examples": ["contact@company.com"]
+            "examples": ["contact@example.com"]
           }
         },
         "type": "object",
         "required": ["identification"],
-        "title": "ManufacturerInformation"
+        "title": "Manufacturer information"
       },
       "NotFound": {
         "properties": {
@@ -650,7 +650,7 @@
           }
         },
         "type": "object",
-        "title": "ProcessIdentification"
+        "title": "Process identification"
       },
       "QueryLevel": {
         "type": "string",
@@ -740,17 +740,14 @@
           },
           "componentIdentification": {
             "$ref": "#/components/schemas/ComponentIdentification",
-            "title": "Component identification",
             "description": "The identifiers related to the component."
           },
           "manufacturerInformation": {
             "$ref": "#/components/schemas/ManufacturerInformation",
-            "title": "Manufacturer information",
             "description": "The details of the component manufacturer."
           },
           "processIdentification": {
-            "$ref": "#/components/schemas/ProcessIdentification",
-            "title": "Process identification"
+            "$ref": "#/components/schemas/ProcessIdentification"
           }
         },
         "type": "object",
@@ -782,7 +779,7 @@
         "title": "ServiceUnavailable",
         "description": "This response is reserved by Product Gateway."
       },
-      "SubComponent": {
+      "Subcomponent": {
         "properties": {
           "name": {
             "anyOf": [
@@ -816,7 +813,7 @@
           }
         },
         "type": "object",
-        "title": "SubComponent"
+        "title": "Subcomponent"
       },
       "Unauthorized": {
         "properties": {

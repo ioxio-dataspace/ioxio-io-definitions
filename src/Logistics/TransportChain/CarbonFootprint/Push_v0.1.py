@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Literal, Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class IdType(str, Enum):
@@ -39,12 +39,14 @@ class Location(CamelCaseModel):
     country: str = Field(
         ...,
         title="Country",
-        description="The country code in Alpha-2 format.",
+        description="The country code in ISO 3166-1 alpha-2 format.",
         pattern=r"^[A-Z]{2}$",
         min_length=2,
         max_length=2,
         examples=["DE"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class Request(CamelCaseModel):
@@ -92,7 +94,7 @@ class Request(CamelCaseModel):
         None,
         title="Distance (km)",
         description="The distance of the transport chain in kilometers.",
-        examples=[484],
+        examples=[484.1],
     )
     leg_count: Optional[int] = Field(
         None,
@@ -131,6 +133,8 @@ class Request(CamelCaseModel):
         examples=[25.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     status: Literal["ok"] = Field(
@@ -140,9 +144,11 @@ class Response(CamelCaseModel):
         examples=["ok"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.0",
+    version="0.1.1",
     title="Total carbon footprint for a transport chain",
     description="Total carbon footprint for a transport chain compliant with GHG protocol Scope 3 transport emissions based on ISO 14083 standard.",
     tags=["Logistics"],

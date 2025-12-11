@@ -3,7 +3,7 @@
   "info": {
     "title": "Metal component measurement report",
     "description": "The quality measurement report for metal components.",
-    "version": "0.3.2"
+    "version": "0.3.3"
   },
   "paths": {
     "/Product/MetalComponent/MeasurementReport_v0.3": {
@@ -289,7 +289,7 @@
           }
         },
         "type": "object",
-        "title": "ComponentIdentification"
+        "title": "Component identification"
       },
       "CustomerInformation": {
         "properties": {
@@ -306,7 +306,7 @@
             ],
             "title": "Name",
             "description": "The name of the customer that has issued the component order.",
-            "examples": ["Company xyz"]
+            "examples": ["Example LLC"]
           },
           "department": {
             "anyOf": [
@@ -321,11 +321,11 @@
             ],
             "title": "Department",
             "description": "The responsible department of the customer that has issued the component order.",
-            "examples": ["Department xyz"]
+            "examples": ["Department Name"]
           }
         },
         "type": "object",
-        "title": "CustomerInformation"
+        "title": "Customer information"
       },
       "DataSourceError": {
         "properties": {
@@ -472,7 +472,7 @@
           }
         },
         "type": "object",
-        "title": "MeasurementEquipment"
+        "title": "Measurement equipment"
       },
       "MeasurementResult": {
         "properties": {
@@ -571,7 +571,7 @@
           }
         },
         "type": "object",
-        "title": "MeasurementResult"
+        "title": "Measurement result"
       },
       "MeasurementSetup": {
         "properties": {
@@ -646,7 +646,7 @@
               }
             ],
             "title": "Batch size",
-            "description": "The entire size of the batch that was manufactured under the same id.",
+            "description": "The entire size of the batch that was manufactured under the same ID.",
             "examples": [100]
           },
           "measuredItems": {
@@ -698,7 +698,7 @@
         },
         "type": "object",
         "required": ["measurementEquipment"],
-        "title": "MeasurementSetup"
+        "title": "Measurement setup"
       },
       "NotFound": {
         "properties": {
@@ -781,17 +781,14 @@
         "properties": {
           "componentIdentification": {
             "$ref": "#/components/schemas/ComponentIdentification",
-            "title": "Component identification",
             "description": "The identifiers related to the component."
           },
           "customerInformation": {
             "$ref": "#/components/schemas/CustomerInformation",
-            "title": "Customer information",
             "description": "The details of the customer issuing the order for the component."
           },
           "measurementSetup": {
             "$ref": "#/components/schemas/MeasurementSetup",
-            "title": "Measurement setup",
             "description": "The details describing the quality measurement setup."
           },
           "measurementResults": {

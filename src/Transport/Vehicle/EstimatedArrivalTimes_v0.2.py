@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class EstimatedArrival(CamelCaseModel):
@@ -42,6 +42,8 @@ class EstimatedArrival(CamelCaseModel):
         examples=[["DGT1234567", "FTP7654321"]],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Estimated arrival")
+
 
 class Request(CamelCaseModel):
     location_id: str = Field(
@@ -65,6 +67,8 @@ class Request(CamelCaseModel):
         examples=[datetime.fromisoformat("2023-05-12T23:20:50Z")],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     estimated_arrivals: list[EstimatedArrival] = Field(
@@ -73,9 +77,11 @@ class Response(CamelCaseModel):
         description="Estimated arrival times.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.2.3",
+    version="0.2.4",
     strict_validation=False,
     title="Estimated arrival times",
     description="Estimated arrival times of vehicles within a transport location.",

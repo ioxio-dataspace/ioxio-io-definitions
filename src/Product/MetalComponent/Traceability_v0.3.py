@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class QueryLevel(str, Enum):
@@ -17,7 +17,7 @@ class CompanyIdentifierScheme(str, Enum):
     DUNS = "duns"
 
 
-class SubComponent(CamelCaseModel):
+class Subcomponent(CamelCaseModel):
     name: Optional[str] = Field(
         None,
         title="Name",
@@ -34,6 +34,8 @@ class SubComponent(CamelCaseModel):
         max_length=20,
         examples=["batch-2024-ssbolt-0037"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Subcomponent")
 
 
 class Blank(CamelCaseModel):
@@ -54,6 +56,8 @@ class Blank(CamelCaseModel):
         examples=["forging billet"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Blank")
+
 
 class CompanyIdentification(CamelCaseModel):
     identifier_scheme: Optional[CompanyIdentifierScheme] = Field(
@@ -71,6 +75,8 @@ class CompanyIdentification(CamelCaseModel):
         examples=["1234567890123"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Company identification")
+
 
 class ProcessIdentification(CamelCaseModel):
     identifier: Optional[str] = Field(
@@ -82,6 +88,8 @@ class ProcessIdentification(CamelCaseModel):
         examples=["procset-metal-2024-0458"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Process identification")
+
 
 class ComponentIdentification(CamelCaseModel):
     name: Optional[str] = Field(
@@ -91,9 +99,10 @@ class ComponentIdentification(CamelCaseModel):
         min_length=0,
         max_length=150,
     )
-    sub_component_declaration: list[SubComponent] = Field(
+    # TODO: subcomponent_declaration
+    sub_component_declaration: list[Subcomponent] = Field(
         ...,
-        title="Sub component declaration",
+        title="Subcomponent declaration",
         description="List of declared subcomponents used in the component assembly.",
     )
     purchase_order: Optional[str] = Field(
@@ -150,6 +159,8 @@ class ComponentIdentification(CamelCaseModel):
         examples=["Rev A"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Component identification")
+
 
 class ManufacturerInformation(CamelCaseModel):
     name: Optional[str] = Field(
@@ -158,7 +169,7 @@ class ManufacturerInformation(CamelCaseModel):
         description="The registered trade name of the manufacturer company.",
         min_length=0,
         max_length=40,
-        examples=["Company xyz"],
+        examples=["Example LLC"],
     )
     identification: CompanyIdentification = Field(
         ...,
@@ -179,8 +190,10 @@ class ManufacturerInformation(CamelCaseModel):
         description="The designated email contact for inquiries related to component manufacturing.",
         min_length=0,
         max_length=40,
-        examples=["contact@company.com"],
+        examples=["contact@example.com"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Manufacturer information")
 
 
 class Request(CamelCaseModel):
@@ -206,6 +219,8 @@ class Request(CamelCaseModel):
         max_length=40,
         examples=["batch-12345"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Request")
 
 
 class Response(CamelCaseModel):
@@ -237,9 +252,11 @@ class Response(CamelCaseModel):
         description=None,
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.3.3",
+    version="0.3.4",
     strict_validation=False,
     title="Metal component traceability information",
     description="The traceability information of a metal component.",

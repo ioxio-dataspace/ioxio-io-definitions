@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class OperationalState(str, Enum):
@@ -20,7 +20,7 @@ class Location(CamelCaseModel):
         description="The latitude coordinate in decimal degrees.",
         ge=-90.0,
         le=90.0,
-        examples=[60.192059],
+        examples=[60.192],
     )
     longitude: float = Field(
         ...,
@@ -28,8 +28,10 @@ class Location(CamelCaseModel):
         description="The longitude coordinate in decimal degrees.",
         ge=-180.0,
         le=180.0,
-        examples=[24.945831],
+        examples=[24.945],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class OperationalStatusResponse(CamelCaseModel):
@@ -83,6 +85,8 @@ class OperationalStatusResponse(CamelCaseModel):
         description="The location in GPS coordinates.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational status response")
+
 
 class OperationalStatusRequest(CamelCaseModel):
     id: str = Field(
@@ -101,9 +105,11 @@ class OperationalStatusRequest(CamelCaseModel):
         ],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Operational status request")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.2.3",
+    version="0.2.4",
     strict_validation=False,
     title="Cargo handling equipment operational status",
     description="General operational status data of a cargo handling equipment "

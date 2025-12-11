@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class QueryLevel(str, Enum):
@@ -46,6 +46,8 @@ class ComponentIdentification(CamelCaseModel):
         examples=["xy00012345687"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Component identification")
+
 
 class CustomerInformation(CamelCaseModel):
     name: Optional[str] = Field(
@@ -54,7 +56,7 @@ class CustomerInformation(CamelCaseModel):
         description="The name of the customer that has issued the component order.",
         min_length=0,
         max_length=250,
-        examples=["Company xyz"],
+        examples=["Example LLC"],
     )
     department: Optional[str] = Field(
         None,
@@ -62,8 +64,10 @@ class CustomerInformation(CamelCaseModel):
         description="The responsible department of the customer that has issued the component order.",
         min_length=0,
         max_length=250,
-        examples=["Department xyz"],
+        examples=["Department Name"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Customer information")
 
 
 class MeasurementResult(CamelCaseModel):
@@ -112,6 +116,8 @@ class MeasurementResult(CamelCaseModel):
         examples=[True],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Measurement result")
+
 
 class MeasurementEquipment(CamelCaseModel):
     machine_serial_number: Optional[str] = Field(
@@ -122,6 +128,8 @@ class MeasurementEquipment(CamelCaseModel):
         max_length=40,
         examples=["mfg-model-xxxx-yyyy"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Measurement equipment")
 
 
 class MeasurementSetup(CamelCaseModel):
@@ -160,7 +168,7 @@ class MeasurementSetup(CamelCaseModel):
     batch_size: Optional[int] = Field(
         None,
         title="Batch size",
-        description="The entire size of the batch that was manufactured under the same id.",
+        description="The entire size of the batch that was manufactured under the same ID.",
         examples=[100],
     )
     measured_items: Optional[int] = Field(
@@ -185,6 +193,8 @@ class MeasurementSetup(CamelCaseModel):
         title="Measurement equipment",
         description="The identifiers of the equipment used to measure the component.",
     )
+
+    model_config: ConfigDict = ConfigDict(title="Measurement setup")
 
 
 class Request(CamelCaseModel):
@@ -211,6 +221,8 @@ class Request(CamelCaseModel):
         examples=["batch-12345"],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Request")
+
 
 class Response(CamelCaseModel):
     component_identification: ComponentIdentification = Field(
@@ -234,9 +246,11 @@ class Response(CamelCaseModel):
         description="The results of the quality measurements.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.3.2",
+    version="0.3.3",
     strict_validation=False,
     title="Metal component measurement report",
     description="The quality measurement report for metal components.",

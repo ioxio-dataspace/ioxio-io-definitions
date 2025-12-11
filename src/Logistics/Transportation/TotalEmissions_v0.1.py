@@ -3,7 +3,7 @@ from enum import Enum
 from typing import Optional, Set
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class IdType(str, Enum):
@@ -30,10 +30,12 @@ class Location(CamelCaseModel):
     country: str = Field(
         ...,
         title="Country",
-        description="The country code in Alpha-2 format.",
+        description="The country code in ISO 3166-1 alpha-2 format.",
         pattern=r"^[A-Z]{2}$",
         examples=["DE"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Location")
 
 
 class Request(CamelCaseModel):
@@ -50,6 +52,8 @@ class Request(CamelCaseModel):
         max_length=30,
         examples=["29771_01"],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Request")
 
 
 class Response(CamelCaseModel):
@@ -82,7 +86,7 @@ class Response(CamelCaseModel):
         None,
         title="Distance (km)",
         description="The distance of the transport chain in kilometers.",
-        examples=[484],
+        examples=[484.1],
     )
     leg_count: Optional[int] = Field(
         None,
@@ -121,9 +125,11 @@ class Response(CamelCaseModel):
         examples=[25.0],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     deprecated=True,
     title="Total emissions for a transport chain",

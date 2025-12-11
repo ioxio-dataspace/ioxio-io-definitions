@@ -2,7 +2,7 @@ import datetime
 from typing import List, Optional
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class TurnaroundTime(CamelCaseModel):
@@ -44,6 +44,8 @@ class TurnaroundTime(CamelCaseModel):
         examples=[3600],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Turnaround time")
+
 
 class TurnaroundTimeRequest(CamelCaseModel):
     location_id: str = Field(
@@ -73,6 +75,8 @@ class TurnaroundTimeRequest(CamelCaseModel):
         ],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Turnaround time request")
+
 
 class TurnaroundTimeResponse(CamelCaseModel):
     turnaround_times: List[TurnaroundTime] = Field(
@@ -81,9 +85,11 @@ class TurnaroundTimeResponse(CamelCaseModel):
         description="The list of turnaround times of vehicles within the facility.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Turnaround time response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.3.2",
+    version="0.3.3",
     strict_validation=False,
     title="Vehicle turnaround times",
     description="Turnaround times of vehicles within a facility.",

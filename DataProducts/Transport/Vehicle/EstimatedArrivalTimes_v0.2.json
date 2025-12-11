@@ -3,7 +3,7 @@
   "info": {
     "title": "Estimated arrival times",
     "description": "Estimated arrival times of vehicles within a transport location.",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "paths": {
     "/Transport/Vehicle/EstimatedArrivalTimes_v0.2": {
@@ -352,7 +352,7 @@
         },
         "type": "object",
         "required": ["vehicleId", "estimatedArrival", "waybills"],
-        "title": "EstimatedArrival"
+        "title": "Estimated arrival"
       },
       "Forbidden": {
         "properties": {

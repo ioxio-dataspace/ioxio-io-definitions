@@ -2,7 +2,7 @@ import datetime
 from typing import List
 
 from definition_tooling.converter import CamelCaseModel, DataProductDefinition
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 
 class EnergyPriceRequest(CamelCaseModel):
@@ -15,7 +15,7 @@ class EnergyPriceRequest(CamelCaseModel):
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
-        description="Start time of the requested time period, in RFC 3339.",
+        description="Start time of the requested time period, in RFC 3339 format.",
         examples=[
             datetime.datetime(
                 2024,
@@ -31,7 +31,7 @@ class EnergyPriceRequest(CamelCaseModel):
     end_time: datetime.datetime = Field(
         ...,
         title="End time",
-        description="End time of the requested time period, in RFC 3339.",
+        description="End time of the requested time period, in RFC 3339 format.",
         examples=[
             datetime.datetime(
                 2024,
@@ -45,6 +45,8 @@ class EnergyPriceRequest(CamelCaseModel):
         ],
     )
 
+    model_config: ConfigDict = ConfigDict(title="Energy price request")
+
 
 class PeriodPrice(CamelCaseModel):
     price: float = Field(
@@ -56,7 +58,7 @@ class PeriodPrice(CamelCaseModel):
     start_time: datetime.datetime = Field(
         ...,
         title="Start time",
-        description="Start time of the pricing period, in RFC 3339.",
+        description="Start time of the pricing period, in RFC 3339 format.",
         examples=[
             datetime.datetime(
                 2024,
@@ -69,6 +71,8 @@ class PeriodPrice(CamelCaseModel):
             )
         ],
     )
+
+    model_config: ConfigDict = ConfigDict(title="Period price")
 
 
 class EnergyPriceResponse(CamelCaseModel):
@@ -85,9 +89,11 @@ class EnergyPriceResponse(CamelCaseModel):
         description="List of the prices for the given time period.",
     )
 
+    model_config: ConfigDict = ConfigDict(title="Energy price response")
+
 
 DEFINITION = DataProductDefinition(
-    version="0.1.3",
+    version="0.1.4",
     strict_validation=False,
     title="Electricity market price",
     description="Electricity price per MWh.",
