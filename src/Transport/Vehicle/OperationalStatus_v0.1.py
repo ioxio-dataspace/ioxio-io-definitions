@@ -12,7 +12,7 @@ class Location(CamelCaseModel):
         description="The latitude coordinate in decimal degrees.",
         gte=-90,
         lte=90,
-        examples=[60.192059],
+        examples=[60.192],
     )
     longitude: float = Field(
         ...,
@@ -20,7 +20,7 @@ class Location(CamelCaseModel):
         description="The longitude coordinate in decimal degrees.",
         gte=-180,
         lte=180,
-        examples=[24.945831],
+        examples=[24.945],
     )
 
     model_config: ConfigDict = ConfigDict(title="Location")

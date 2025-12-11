@@ -12,7 +12,7 @@ class WeatherRequest(CamelCaseModel):
         description="The latitude coordinate of the desired location in degrees.",
         ge=-90.0,
         le=90.0,
-        examples=[60.192059],
+        examples=[60.192],
     )
     lon: float = Field(
         ...,
@@ -20,7 +20,7 @@ class WeatherRequest(CamelCaseModel):
         description="The longitude coordinate of the desired location in degrees.",
         ge=-180.0,
         le=180.0,
-        examples=[24.945831],
+        examples=[24.945],
     )
     when: Optional[datetime.datetime] = Field(
         None,

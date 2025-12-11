@@ -359,7 +359,7 @@
             "minimum": -90.0,
             "title": "Latitude (°)",
             "description": "The latitude coordinate in decimal degrees.",
-            "examples": [60.192059]
+            "examples": [60.192]
           },
           "longitude": {
             "type": "number",
@@ -367,7 +367,7 @@
             "minimum": -180.0,
             "title": "Longitude (°)",
             "description": "The longitude coordinate in decimal degrees.",
-            "examples": [24.945831]
+            "examples": [24.945]
           }
         },
         "type": "object",

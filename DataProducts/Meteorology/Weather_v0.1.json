@@ -473,7 +473,7 @@
             "minimum": -90.0,
             "title": "Latitude (°)",
             "description": "The latitude coordinate of the desired location in degrees.",
-            "examples": [60.192059]
+            "examples": [60.192]
           },
           "lon": {
             "type": "number",
@@ -481,7 +481,7 @@
             "minimum": -180.0,
             "title": "Longitude (°)",
             "description": "The longitude coordinate of the desired location in degrees.",
-            "examples": [24.945831]
+            "examples": [24.945]
           },
           "when": {
             "anyOf": [
