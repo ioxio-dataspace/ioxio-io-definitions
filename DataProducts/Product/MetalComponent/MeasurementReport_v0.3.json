@@ -321,7 +321,7 @@
             ],
             "title": "Department",
             "description": "The responsible department of the customer that has issued the component order.",
-            "examples": ["Department xyz"]
+            "examples": ["Department Name"]
           }
         },
         "type": "object",

@@ -64,7 +64,7 @@ class CustomerInformation(CamelCaseModel):
         description="The responsible department of the customer that has issued the component order.",
         min_length=0,
         max_length=250,
-        examples=["Department xyz"],
+        examples=["Department Name"],
     )
 
     model_config: ConfigDict = ConfigDict(title="Customer information")
